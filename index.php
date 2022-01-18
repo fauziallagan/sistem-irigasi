@@ -222,7 +222,7 @@ include 'data.php';
                                                 <div class="nav-link-icon"><i class="fas fa-users"></i></div>Organization Details</a>
                                         </nav>
                                     </div>
-                                    <a class="nav-link" href="./input.php"><div class="nav-link-icon"><i class="fas fa-compass"></i></div>
+                                    <a class="nav-link" href="./calibration.php"><div class="nav-link-icon"><i class="fas fa-compass"></i></div>
                                     Calibration
                                      </a>
                                     <!-- Nested Sidenav Accordion (Pages -> Error)-->
@@ -544,7 +544,7 @@ $(document).ready(function() {
         [ 22.0, '#dd2222', 0, 0 ],
         [ 24.0, '#ffa500', 0, 0 ],
         [ 25.0, '#378618', 0, 0 ],
-        [28.0, '#666666', 0,0]
+        [28.1, '#666666', 0,0]
       ]
     },
     pointer: {

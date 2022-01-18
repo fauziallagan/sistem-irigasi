@@ -14,7 +14,8 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.28.0/feather.min.js" crossorigin="anonymous"></script>
     </head>
     <body class="nav-fixed">
-        <nav class="topnav navbar navbar-expand shadow justify-content-between justify-content-sm-start navbar-light bg-white" id="sidenavAccordion">            <!-- Sidenav Toggle Button-->
+    <nav class="topnav navbar navbar-expand shadow justify-content-between justify-content-sm-start navbar-light bg-white" id="sidenavAccordion">
+            <!-- Sidenav Toggle Button-->
             <button class="btn btn-icon btn-transparent-dark order-1 order-lg-0 me-2 ms-lg-2 me-lg-0" id="sidebarToggle"><i data-feather="menu"></i></button>
             <!-- Navbar Brand-->
             <!-- * * Tip * * You can use text or an image for your navbar brand.-->
@@ -142,7 +143,7 @@
                             <div class="sidenav-menu-heading">Menu</div>
                             <!-- Sidenav Accordion (Dashboard)-->
                             <a class="nav-link"  href="index.php" >
-                                <div class="nav-link-icon"><i data-feather="activity"></i></div>
+                                <div class="nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                                 
                                 Dashboards
                             
@@ -195,9 +196,8 @@
                                                 <div class="nav-link-icon"><i class="fas fa-users"></i></div>Organization Details</a>
                                         </nav>
                                     </div>
-                                    <a class="nav-link" href="./input.php"><div class="nav-link-icon"><i class="fas fa-chart-line"></i></div>
-                                     Input 
-                                     </a>
+                                    <a class="nav-link" href="./calibration.php"><div class="nav-link-icon"><i class="fas fa-compass"></i></div>
+                                    Calibration
                     <!-- Sidenav Footer-->
                     <div class="sidenav-footer">
                         <div class="sidenav-footer-content">
@@ -215,8 +215,8 @@
                                 <div class="row align-items-center justify-content-between">
                                     <div class="col-auto mt-4">
                                         <h1 class="page-header-title">
-                                            <div class="page-header-icon"><i data-feather="filter"></i></div>
-                                            Tables
+                                            <div class="page-header-icon"><i class="fas fa-compass"></i></div>
+                                            Calibration
                                         </h1>
                                         <div class="page-header-subtitle">An extension of the Simple DataTables library, customized for SB Admin Pro</div>
                                     </div>

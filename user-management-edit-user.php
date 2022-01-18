@@ -142,7 +142,7 @@
                             <div class="sidenav-menu-heading">Menu</div>
                             <!-- Sidenav Accordion (Dashboard)-->
                             <a class="nav-link"  href="index.php" >
-                                <div class="nav-link-icon"><i data-feather="activity"></i></div>
+                                <div class="nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                                 
                                 Dashboards
                             
