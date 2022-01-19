@@ -481,9 +481,9 @@ include 'data.php';
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js" crossorigin="anonymous"></script>
         <script src="assets/demo/chart-suhu.js"></script>
         <script src="assets/demo/chart-tilt.js"></script>
-        <!-- <script src="assets/demo/tegangan.js"></script>
+        <script src="assets/demo/tegangan.js"></script>
         <script src="assets/demo/chartaki.js"></script>
-        <script src="assets/demo/chartregulator.js"></script> -->
+        <script src="assets/demo/chartregulator.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
         <script src="js/datatables/datatables-simple-demo.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/litepicker/dist/bundle.js" crossorigin="anonymous"></script>
