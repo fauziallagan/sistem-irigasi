@@ -40,7 +40,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $nama = saring($_POST["nama"]);
     // check if nama only contains letters and whitespace
     if (!preg_match("/^[a-zA-Z ]*$/",$nama)) {
-      $s_info .= "\n Nama hanya boleh mengandung huruf.";
+      $s_info = "\n Nama hanya boleh mengandung huruf.";
 	  $e_tot += 1;
     }
   }
@@ -52,25 +52,25 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $username = saring($_POST["username"]);
     // check if name only contains letters and whitespace
     if (!preg_match("/^[a-zA-Z0-9 ]*$/",$username)) {
-      $s_info .= "\n Username hanya boleh mengandung huruf dan angka.";
+      $s_info = "\n Username hanya boleh mengandung huruf dan angka.";
 	  $e_tot += 1;
     }
   }
 
   if (empty($_POST["email"])) {
-    $s_danger .= "\n Email harus diisi!";
+    $s_danger = "\n Email harus diisi!";
 	$e_tot += 1;
   } else {
     $email = saring($_POST["email"]);
     // check if e-mail address is well-formed
     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-      $s_danger .= "\n Email tidak benar.";
+      $s_danger = "\n Email tidak benar.";
 	  $e_tot += 1;
     }
   }
   
   if ((empty($_POST["password"])) && (empty($_POST["password2"]))) {
-    $s_danger .= "\n Password harus diisi!";
+    $s_danger = "\n Password harus diisi!";
 	$e_tot += 1;
   } else {
     $password = saring($_POST["password"]);
@@ -78,13 +78,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	if ($password === $password2) {
 		$paswd = password_hash($password, PASSWORD_BCRYPT, ["cost" => 12]);
 	} else {
-		$s_danger .= "\n Ulangi password anda yang sama!";
+		$s_danger = "\n Ulangi password anda yang sama!";
 		$e_tot += 1;
 	}
   }
-  
 
-  
   if ($e_tot == 0) {
 	try {
 		$conn = new PDO("mysql:host=$servername;dbname=$dbname", $usernamedb, $passworddb);
@@ -133,48 +131,7 @@ $conn = null;
                     <div class="container-xl px-4">
                         <div class="row justify-content-center">
                             <!-- Alert -->
-<?php 
-if ($s_success !== "") { 
-?>
-<div class="alert alert-success alert-dismissible fade show" role="alert">
-   <?php echo $s_success; ?>
-  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-    <span aria-hidden="true">&times;</span>
-  </button>
-</div>
-<?php 
-}
-if ($s_info !== "") {
-?>
-<div class="alert alert-info alert-dismissible fade show" role="alert">
-   <?php echo $s_info; ?>
-  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-    <span aria-hidden="true">&times;</span>
-  </button>
-</div>
-<?php 
-}
-if ($s_warning !== "") {
-?>
-<div class="alert alert-warning alert-dismissible fade show" role="alert">
-   <?php echo $s_warning; ?>
-  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-    <span aria-hidden="true">&times;</span>
-  </button>
-</div>
-<?php 
-}
-if ($s_error !== "") {
-?>
-<div class="alert alert-danger alert-dismissible fade show" role="alert">
-   <?php echo $s_error; ?>
-  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-    <span aria-hidden="true">&times;</span>
-  </button>
-</div>
-<?php 
-}
-?>
+
 <!-- End -->
                             <div class="col-lg-7">
                                 <!-- Basic registration form-->
