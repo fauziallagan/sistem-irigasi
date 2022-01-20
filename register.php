@@ -97,6 +97,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 		$stmt->bindValue(':pass', $paswd);
 		$stmt->bindValue(':email', $email);
 		$stmt->bindValue(':nama', $nama);
+        // $stmt->bindParam(':kategori', $_REQUEST['kategori']);
+        // $stmt->bindParam(':username', $_REQUEST['username']);
+        // $stmt->bindParam(':pass', $_REQUEST['pass']);
+        // $stmt->bindParam(':email', $_REQUEST['email']);
+        // $stmt->bindParam(':nama', $_REQUEST['nama']);
 		$stmt->execute();
 
 		$s_success = "\n Akun berhasil didaftarkan, silakan login.";
@@ -145,7 +150,7 @@ $conn = null;
                                                 <div class="col-md-12">
                                                     <!-- Form Group (first name)-->
                                                     <div class="mb-12">
-                                                        <label class="small mb-1" for="inputFirstName">Name</label>
+                                                        <label class="small mb-1" for="nama">Name</label>
                                                         <input class="form-control" name = "nama" id="inputFirstName" type="text" placeholder="Enter first name" />
                                                     </div>
                                                 </div>
@@ -155,7 +160,7 @@ $conn = null;
                                                 <div class="col-md-12">
                                                     <!-- Form Group (first name)-->
                                                     <div class="mb-12">
-                                                        <label class="small mb-1" for="inputFirstName">Username</label>
+                                                        <label class="small mb-1" for="username">Username</label>
                                                         <input class="form-control" name="username" id="inputFirstName" type="text" placeholder="Enter first name" />
                                                     </div>
                                                 </div>
@@ -163,7 +168,7 @@ $conn = null;
                                             <br>
                                             <!-- Form Group (email address)            -->
                                             <div class="mb-3">
-                                                <label class="small mb-1" for="inputEmailAddress">Email</label>
+                                                <label class="small mb-1" for="email">Email</label>
                                                 <input class="form-control" name="email" id="inputEmailAddress" type="email" aria-describedby="emailHelp" placeholder="Enter email address" />
                                             </div>
                                             <br>
@@ -172,15 +177,15 @@ $conn = null;
                                                 <div class="col-md-6">
                                                     <!-- Form Group (password)-->
                                                     <div class="mb-3">
-                                                        <label class="small mb-1" for="inputPassword">Password</label>
-                                                        <input class="form-control" name = "password" id="inputPassword" type="password" placeholder="Enter password" />
+                                                        <label class="small mb-1" for="password">Password</label>
+                                                        <input class="form-control" name = "pass" id="inputPassword" type="password" placeholder="Enter password" />
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <!-- Form Group (confirm password)-->
                                                     <div class="mb-3">
-                                                        <label class="small mb-1" for="inputConfirmPassword">Confirm Password</label>
-                                                        <input class="form-control" name="password2" id="inputConfirmPassword" type="password" placeholder="Confirm password" />
+                                                        <label class="small mb-1" for="password2">Confirm Password</label>
+                                                        <input class="form-control" name="pass" id="inputConfirmPassword" type="password" placeholder="Confirm password" />
                                                     </div>
                                                 </div>
                                             </div>
