@@ -1,16 +1,49 @@
 <?php
-include 'data.php';
-// include 'connection.php';
-// $mysqli = new mysqli($servername,$usernamedb,$passworddb,$dbname);
-// // Check connection
-// if ($mysqli -> connect_errno) {
-//   echo "Failed to connect to MySQL: " . $mysqli -> connect_error;
-//   exit();
-// }
-// $sql = "SELECT a1,a2,a3  FROM input";
-// $result = mysqli_query($mysqli,$sql);
-// $row = mysqli_fetch_assoc($result);
+session_start();
+require_once "connection.php";
 
+
+if (empty($_SESSION["role"])) {
+	$_SESSION["info"] = "Anda harus login terlebih dahulu.";
+	header("Location: login.php"); 
+	exit();
+}
+else {
+    $role = $_SESSION["role"];
+	$nama = $_SESSION["nama"];
+	if (empty($_SESSION["error"])) {
+		$s_error = "";
+	} else {
+		$s_error = $_SESSION["error"];
+		$_SESSION["error"] = "";
+	}
+	if (empty($_SESSION["warning"])) {
+		$s_warning = "";
+	} else {
+		$s_warning = $_SESSION["warning"];
+		$_SESSION["warning"] = "";
+	}
+	if (empty($_SESSION["info"])) {
+		$s_info = "";
+	} else {
+		$s_info = $_SESSION["info"];
+		$_SESSION["info"] = "";
+	}
+	if (empty($_SESSION["success"])) {
+		$s_success = "";
+	} else {
+		$s_success = $_SESSION["success"];
+		$_SESSION["success"] = "";
+	}
+    
+    // Create connection
+    $conn = new mysqli($servername, $usernamedb, $passworddb, $dbname);
+    // Check connection
+    if ($conn->connect_error) {
+        die("Database Connection failed: " . $conn->connect_error);
+        echo "Silahkan kontak administrator server";
+    }
+}
 
 ?>
 <!DOCTYPE html>
