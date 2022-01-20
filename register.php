@@ -28,73 +28,90 @@ if (empty($_SESSION["success"])) {
 }
 
 $e_tot = 0;
-if($_SERVER["REQUEST_METHOD"]== "POST"){
-    $kategori = "Admin";
-    
-    if(empty($_POST["nama"])){
-        // $s_danger .= "Nama Tidak boleh Kosong!";
-        $e_tot += 1;
-    }else{
-        $nama = saring($_POST["nama"]);
-        if(!preg_match("/^[a-zA-Z ]*$/", $nama)){
-            $s_info .= "\n Nama Hanya boleh Mengandung huruf.";
-            $e_tot +=1;
-        }
-    }
-    if(empty($_POST["username"])){
-        // $s_danger .= "Username Tidak boleh kosong!";
-        $e_tot += 1;
-    }else{
-        $username = saring($_POST["username"]);
-        if(!preg_match("/^[a-zA-Z0-9 ]*$/", $username)){
-            $s_info .= "\n Username hanya boleh mengandung huruf dan angka.";
-            $e_tot += 1;
-        }
-    }
-    if(empty($_POST["email"])){
-        // $s_danger .= "\n Email harus Diisi!";
-        $e_tot += 1;
-    }else{
-        $email = saring($_POST["email"]);
-        if(!filter_var($email, FILTER_VALIDATE_EMAIL)){
-            $s_danger .= "\n Email tidak benar";
-            $e_tot += 1;
-        }
-    }
-    if((empty($_POST["password"])) && (empty($_POST["password2"]))){
-        // $s_danger .= "\n Password harus diisi!";
-        $e_tot += 1;
-    }else{
-        $password = saring($_POST["password"]);
-        $password2 = saring($_POST["password2"]);
-        if($password === $password2){
-            $pass = password_hash($password, PASSWORD_BCRYPT, ["cost"=>12]);
-        }else{
-            // $s_danger .= "\n Password yang anda Masukkan Tidak Cocok!";
-            $e_tot += 1;
-        }
-    }
-    if($e_tot == 0){
-        try{
-            $conn = new PDO("mysql:host=$servername;dbname=$dbname", $usernamedb, $passworddb);
-            $conn->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
-            $db = $conn->prepare("INSERT INTO pengguna (kategori, username, pass, email, nama) VALUES(:kategori, :username, :pass,:email,:nama)");
-            $db->bindValue(':kategori', $kategori);
-            $db->bindValue(':username', $username);
-            $db->bindValue(':pass', $password2);
-            $db->bindValue(':email', $email);
-            $db->bindValue(':nama', $nama);
-            $db->execute();
-            $s_success = "\n Akun berhasil dibuat!, Silahkan Login!";
-        }
-        catch(PDOException $e){
-            $s_danger = "\n".$e -> getMessage();
-        }
-    }
 
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+  $kategori = "Admin";
+	
+  if (empty($_POST["nama"])) {
+    $s_danger .= "Nama tidak boleh kosong!";
+	$e_tot += 1;
+  } else {
+    $nama = saring($_POST["nama"]);
+    // check if nama only contains letters and whitespace
+    if (!preg_match("/^[a-zA-Z ]*$/",$nama)) {
+      $s_info .= "\n Nama hanya boleh mengandung huruf.";
+	  $e_tot += 1;
+    }
+  }
+
+  if (empty($_POST["username"])) {
+    $s_danger .= "Username tidak boleh kosong!";
+	$e_tot += 1;
+  } else {
+    $username = saring($_POST["username"]);
+    // check if name only contains letters and whitespace
+    if (!preg_match("/^[a-zA-Z0-9 ]*$/",$username)) {
+      $s_info .= "\n Username hanya boleh mengandung huruf dan angka.";
+	  $e_tot += 1;
+    }
+  }
+
+  if (empty($_POST["email"])) {
+    $s_danger .= "\n Email harus diisi!";
+	$e_tot += 1;
+  } else {
+    $email = saring($_POST["email"]);
+    // check if e-mail address is well-formed
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+      $s_danger .= "\n Email tidak benar.";
+	  $e_tot += 1;
+    }
+  }
+  
+  if ((empty($_POST["password"])) && (empty($_POST["password2"]))) {
+    $s_danger .= "\n Password harus diisi!";
+	$e_tot += 1;
+  } else {
+    $password = saring($_POST["password"]);
+	$password2 = saring($_POST["password2"]);
+	if ($password === $password2) {
+		$paswd = password_hash($password, PASSWORD_BCRYPT, ["cost" => 12]);
+	} else {
+		$s_danger .= "\n Ulangi password anda yang sama!";
+		$e_tot += 1;
+	}
+  }
+  
+  //if (empty($_POST["terms"])) {
+  //  $s_danger .= "\n Terms and policy harus disetujui!";
+  //  $e_tot += 1;
+  //}
+  
+  if ($e_tot == 0) {
+	try {
+		$conn = new PDO("mysql:host=$servername;dbname=$dbname", $usernamedb, $passworddb);
+		// set the PDO error mode to exception
+		$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+		// prepare sql and bind parameters
+		$stmt = $conn->prepare("INSERT INTO pengguna (kategori, username, paswd, email, nama)
+		VALUES (:kategori, :username, :paswd, :email, :nama)");
+		$stmt->bindValue(':kategori', $kategori);
+		$stmt->bindValue(':username', $username);
+		$stmt->bindValue(':paswd', $paswd);
+		$stmt->bindValue(':email', $email);
+		$stmt->bindValue(':nama', $nama);
+		$stmt->execute();
+
+		$s_success = "\n Akun berhasil didaftarkan, silakan login.";
+	}
+	catch(PDOException $e) {
+		$s_danger = "\n " . $e->getMessage();
+	}
+  }
 }
-$conn = null;
 
+$conn = null;
 ?>
 <!DOCTYPE html>
 <html lang="en">

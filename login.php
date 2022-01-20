@@ -1,6 +1,7 @@
 <?php 
 session_start();
 require_once "connection.php";
+
 if(empty($_SESSION["error"])){
     $s_error = "";
 }else{
@@ -80,7 +81,7 @@ if ($e_tot ==0){
         $s_error = "\n" . $e -> getMessage();
     }
 }
-$conn = null;
+
 
 ?>
 <!DOCTYPE html>
