@@ -83,10 +83,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	}
   }
   
-  //if (empty($_POST["terms"])) {
-  //  $s_danger .= "\n Terms and policy harus disetujui!";
-  //  $e_tot += 1;
-  //}
+
   
   if ($e_tot == 0) {
 	try {
@@ -135,6 +132,50 @@ $conn = null;
                 <main>
                     <div class="container-xl px-4">
                         <div class="row justify-content-center">
+                            <!-- Alert -->
+<?php 
+if ($s_success !== "") { 
+?>
+<div class="alert alert-success alert-dismissible fade show" role="alert">
+   <?php echo $s_success; ?>
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<?php 
+}
+if ($s_info !== "") {
+?>
+<div class="alert alert-info alert-dismissible fade show" role="alert">
+   <?php echo $s_info; ?>
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<?php 
+}
+if ($s_warning !== "") {
+?>
+<div class="alert alert-warning alert-dismissible fade show" role="alert">
+   <?php echo $s_warning; ?>
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<?php 
+}
+if ($s_error !== "") {
+?>
+<div class="alert alert-danger alert-dismissible fade show" role="alert">
+   <?php echo $s_error; ?>
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<?php 
+}
+?>
+<!-- End -->
                             <div class="col-lg-7">
                                 <!-- Basic registration form-->
                                 <div class="card shadow-lg border-0 rounded-lg mt-5">
@@ -188,7 +229,7 @@ $conn = null;
                                             </div>
                                             <br>
                                             <!-- Form Group (create account submit)-->
-                                            <button class="btn btn-primary btn-block" type="submit" href="login.php">Create Account</button>
+                                            <button class="btn btn-primary btn-block" type="submit">Create Account</button>
                                         </form>
                                     </div>
                                     <div class="card-footer text-center">

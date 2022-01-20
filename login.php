@@ -69,8 +69,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 		$s_error = "\n " . $e->getMessage();
 	}
   }
-  
-  
 }
 $conn = null;
 
