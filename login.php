@@ -1,3 +1,88 @@
+<?php 
+session_start();
+require_once "connection.php";
+if(empty($_SESSION["error"])){
+    $s_error = "";
+}else{
+    $s_error = $_SESSION["error"];
+    $_SESSION["error"] = "";
+}
+if(empty($_SESSION["warning"])){
+    $s_warning = "";
+}else{
+    $s_warning = $_SESSION["warning"];
+    $_SESSION["warning"] = "";
+}
+if(empty($_SESSION["info"])){
+    $s_info = "";
+}else {
+    $s_info = $_SESSION["info"];
+   $_SESSION["info"] = "";
+}
+if(empty($_SESSION["success"])){
+    $s_success = "";
+}else {
+    $s_success = $_SESSION["success"];
+    $_SESSION["success"] = "";
+}
+$e_tot = 0;
+
+if(!empty($_SESSION["info"])){
+    $s_info = $_SESSION["info"];
+    $_SESSION["info"] = "";
+}
+if(empty($_POST["username"])){
+    $s_error .= "Username harus diisi!";
+    $e_tot += 1;
+}else{
+    $username = saring($_POST["username"]);
+}
+if(empty($_POST["password"])){
+    $s_error .= "\n Password Harus Diisi";
+    $e_tot +=1;
+}else{
+    $password = saring($_POST["password"]);
+}
+if(empty($_POST["ingat"])){
+    $ingat = 0;
+}
+else{
+    $ingat = 1;
+}
+if ($e_tot ==0){
+    try{
+        $conn = new PDO("mysql:host=$servername;$dbname=$dbname", $usernamedb, $passworddb);
+        // Set PDO Exception
+        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $db = $conn->prepare("SELECT kategori, username, pass,nama,FROM pengguna WHERE username=:username");
+        $db->bindValue(':username', $username);
+        $db->execute();
+        $row = $db->fetch(PDO::FETCH_ASSOC);
+        if($row === false){
+            $s_error .= "\n Username Anda Salah!";
+        }else{
+            $kategori = $row['kategori'];
+            $username = $row['username'];
+            $nama = $row['nama'];
+            $password_data = $row['pass'];
+            if(password_verify($password, $password_data)){
+                $_SESSION["role"] = $kategori;
+                $_SESSION["nama"] = $nama;
+                header("Location: index.php");
+                $conn = null;
+                exit();
+            }else{
+                $s_error .= "Password Anda Salah!";
+            }
+        }
+    }
+    catch(PDOException $e){
+        $s_error = "\n" . $e -> getMessage();
+    }
+}
+$conn = null;
+
+?>
 <!DOCTYPE html>
 <html lang="en">
     <head>

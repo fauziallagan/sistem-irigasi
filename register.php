@@ -1,3 +1,101 @@
+<?php 
+session_start();
+require_once "connection.php";
+
+if (empty($_SESSION["error"])) {
+	$s_error = "";
+} else {
+	$s_error = $_SESSION["error"];
+	$_SESSION["error"] = "";
+}
+if (empty($_SESSION["warning"])) {
+	$s_warning = "";
+} else {
+	$s_warning = $_SESSION["warning"];
+	$_SESSION["warning"] = "";
+}
+if (empty($_SESSION["info"])) {
+	$s_info = "";
+} else {
+	$s_info = $_SESSION["info"];
+	$_SESSION["info"] = "";
+}
+if (empty($_SESSION["success"])) {
+	$s_success = "";
+} else {
+	$s_success = $_SESSION["success"];
+	$_SESSION["success"] = "";
+}
+
+$e_tot = 0;
+if($_SERVER["REQUEST_METHOD"]== "POST"){
+    $kategori = "Admin";
+    
+    if(empty($_POST["nama"])){
+        // $s_danger .= "Nama Tidak boleh Kosong!";
+        $e_tot += 1;
+    }else{
+        $nama = saring($_POST["nama"]);
+        if(!preg_match("/^[a-zA-Z ]*$/", $nama)){
+            $s_info .= "\n Nama Hanya boleh Mengandung huruf.";
+            $e_tot +=1;
+        }
+    }
+    if(empty($_POST["username"])){
+        // $s_danger .= "Username Tidak boleh kosong!";
+        $e_tot += 1;
+    }else{
+        $username = saring($_POST["username"]);
+        if(!preg_match("/^[a-zA-Z0-9 ]*$/", $username)){
+            $s_info .= "\n Username hanya boleh mengandung huruf dan angka.";
+            $e_tot += 1;
+        }
+    }
+    if(empty($_POST["email"])){
+        // $s_danger .= "\n Email harus Diisi!";
+        $e_tot += 1;
+    }else{
+        $email = saring($_POST["email"]);
+        if(!filter_var($email, FILTER_VALIDATE_EMAIL)){
+            $s_danger .= "\n Email tidak benar";
+            $e_tot += 1;
+        }
+    }
+    if((empty($_POST["password"])) && (empty($_POST["password2"]))){
+        // $s_danger .= "\n Password harus diisi!";
+        $e_tot += 1;
+    }else{
+        $password = saring($_POST["password"]);
+        $password2 = saring($_POST["password2"]);
+        if($password === $password2){
+            $pass = password_hash($password, PASSWORD_BCRYPT, ["cost"=>12]);
+        }else{
+            // $s_danger .= "\n Password yang anda Masukkan Tidak Cocok!";
+            $e_tot += 1;
+        }
+    }
+    if($e_tot == 0){
+        try{
+            $conn = new PDO("mysql:host=$servername;dbname=$dbname", $usernamedb, $passworddb);
+            $conn->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
+            $db = $conn->prepare("INSERT INTO pengguna (kategori, username, pass, email, nama) VALUES(:kategori, :username, :pass,:email,:nama)");
+            $db->bindValue(':kategori', $kategori);
+            $db->bindValue(':username', $username);
+            $db->bindValue(':pass', $password2);
+            $db->bindValue(':email', $email);
+            $db->bindValue(':nama', $nama);
+            $db->execute();
+            $s_success = "\n Akun berhasil dibuat!, Silahkan Login!";
+        }
+        catch(PDOException $e){
+            $s_danger = "\n".$e -> getMessage();
+        }
+    }
+
+}
+$conn = null;
+
+?>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -13,6 +111,48 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.28.0/feather.min.js" crossorigin="anonymous"></script>
     </head>
     <body class="bg-primary">
+    <?php 
+if ($s_success !== "") { 
+?>
+<div class="alert alert-success alert-dismissible fade show" role="alert">
+   <?php echo $s_success; ?>
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<?php 
+}
+if ($s_info !== "") {
+?>
+<div class="alert alert-info alert-dismissible fade show" role="alert">
+   <?php echo $s_info; ?>
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<?php 
+}
+if ($s_warning !== "") {
+?>
+<div class="alert alert-warning alert-dismissible fade show" role="alert">
+   <?php echo $s_warning; ?>
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<?php 
+}
+if ($s_error !== "") {
+?>
+<div class="alert alert-danger alert-dismissible fade show" role="alert">
+   <?php echo $s_error; ?>
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<?php 
+}
+?>
         <div id="layoutAuthentication">
             <div id="layoutAuthentication_content">
                 <main>
@@ -24,48 +164,54 @@
                                     <div class="card-header justify-content-center"><h3 class="fw-light my-4">Create Account</h3></div>
                                     <div class="card-body">
                                         <!-- Registration form-->
-                                        <form>
+                                        <form action="register.php" method="post">
                                             <!-- Form Row-->
                                             <div class="row gx-3">
-                                                <div class="col-md-6">
+                                                <div class="col-md-12">
                                                     <!-- Form Group (first name)-->
-                                                    <div class="mb-3">
-                                                        <label class="small mb-1" for="inputFirstName">First Name</label>
-                                                        <input class="form-control" id="inputFirstName" type="text" placeholder="Enter first name" />
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <!-- Form Group (last name)-->
-                                                    <div class="mb-3">
-                                                        <label class="small mb-1" for="inputLastName">Last Name</label>
-                                                        <input class="form-control" id="inputLastName" type="text" placeholder="Enter last name" />
+                                                    <div class="mb-12">
+                                                        <label class="small mb-1" for="inputFirstName">Name</label>
+                                                        <input class="form-control" name = "nama" id="inputFirstName" type="text" placeholder="Enter first name" />
                                                     </div>
                                                 </div>
                                             </div>
+                                            <br>
+                                            <div class="row gx-3">
+                                                <div class="col-md-12">
+                                                    <!-- Form Group (first name)-->
+                                                    <div class="mb-12">
+                                                        <label class="small mb-1" for="inputFirstName">Username</label>
+                                                        <input class="form-control" name="username" id="inputFirstName" type="text" placeholder="Enter first name" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <br>
                                             <!-- Form Group (email address)            -->
                                             <div class="mb-3">
                                                 <label class="small mb-1" for="inputEmailAddress">Email</label>
-                                                <input class="form-control" id="inputEmailAddress" type="email" aria-describedby="emailHelp" placeholder="Enter email address" />
+                                                <input class="form-control" name="email" id="inputEmailAddress" type="email" aria-describedby="emailHelp" placeholder="Enter email address" />
                                             </div>
+                                            <br>
                                             <!-- Form Row    -->
                                             <div class="row gx-3">
                                                 <div class="col-md-6">
                                                     <!-- Form Group (password)-->
                                                     <div class="mb-3">
                                                         <label class="small mb-1" for="inputPassword">Password</label>
-                                                        <input class="form-control" id="inputPassword" type="password" placeholder="Enter password" />
+                                                        <input class="form-control" name = "password" id="inputPassword" type="password" placeholder="Enter password" />
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <!-- Form Group (confirm password)-->
                                                     <div class="mb-3">
                                                         <label class="small mb-1" for="inputConfirmPassword">Confirm Password</label>
-                                                        <input class="form-control" id="inputConfirmPassword" type="password" placeholder="Confirm password" />
+                                                        <input class="form-control" name="password2" id="inputConfirmPassword" type="password" placeholder="Confirm password" />
                                                     </div>
                                                 </div>
                                             </div>
+                                            <br>
                                             <!-- Form Group (create account submit)-->
-                                            <a class="btn btn-primary btn-block" href="login.php">Create Account</a>
+                                            <button class="btn btn-primary btn-block" type="submit" href="login.php">Create Account</button>
                                         </form>
                                     </div>
                                     <div class="card-footer text-center">
