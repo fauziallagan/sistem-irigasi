@@ -6,20 +6,20 @@ require_once "connection.php";
 $e_tot = 0;
 
 if (!empty($_SESSION["info"])) {
-    $s_info .= $_SESSION["info"];
+    $s_info = $_SESSION["info"];
 	$_SESSION["info"] = "";
 }
 if ($_SERVER["REQUEST_METHOD"] == "POST") {	
 	
   if (empty($_POST["username"])) {
-    $s_error .= "Username tidak boleh kosong!";
+    $s_error = "Username tidak boleh kosong!";
 	$e_tot += 1;
   } else {
     $username = saring($_POST["username"]);
   }
   
   if (empty($_POST["password"])) {
-    $s_error .= "\n Password harus diisi!";
+    $s_error = "\n Password harus diisi!";
 	$e_tot += 1;
   } else {
     $password = saring($_POST["password"]);
