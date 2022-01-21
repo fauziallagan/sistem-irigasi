@@ -115,6 +115,48 @@ $conn = null;
         <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.28.0/feather.min.js" crossorigin="anonymous"></script>
     </head>
     <body class="bg-primary">
+    <?php 
+if ($s_success !== "") { 
+?>
+<div class="alert alert-success alert-dismissible fade show" role="alert">
+   <?php echo $s_success; ?>
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<?php 
+}
+if ($s_info !== "") {
+?>
+<div class="alert alert-info alert-dismissible fade show" role="alert">
+   <?php echo $s_info; ?>
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<?php 
+}
+if ($s_warning !== "") {
+?>
+<div class="alert alert-warning alert-dismissible fade show" role="alert">
+   <?php echo $s_warning; ?>
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<?php 
+}
+if ($s_error !== "") {
+?>
+<div class="alert alert-danger alert-dismissible fade show" role="alert">
+   <?php echo $s_error; ?>
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<?php 
+}
+?>
         <div id="layoutAuthentication">
             <div id="layoutAuthentication_content">
                 <main>
@@ -126,16 +168,16 @@ $conn = null;
                                     <div class="card-header justify-content-center"><h3 class="fw-light my-4">Login</h3></div>
                                     <div class="card-body">
                                         <!-- Login form-->
-                                        <form>
+                                        <form method="post" action="">
                                             <!-- Form Group (email address)-->
                                             <div class="mb-3">
                                                 <label class="small mb-1" for="inputEmailAddress">Email</label>
-                                                <input class="form-control" id="inputEmailAddress" type="email" placeholder="Enter email address" />
+                                                <input class="form-control" id="inputEmailAddress" type="text" placeholder="Enter email address" name="username" />
                                             </div>
                                             <!-- Form Group (password)-->
                                             <div class="mb-3">
                                                 <label class="small mb-1" for="inputPassword">Password</label>
-                                                <input class="form-control" id="inputPassword" type="password" placeholder="Enter password" />
+                                                <input class="form-control" id="inputPassword" type="password" placeholder="Enter password" name="password" />
                                             </div>
                                             <!-- Form Group (remember password checkbox)-->
                                             <div class="mb-3">
@@ -147,7 +189,7 @@ $conn = null;
                                             <!-- Form Group (login box)-->
                                             <div class="d-flex align-items-center justify-content-between mt-4 mb-0">
                                                 <a class="small" href="forgot.php">Forgot Password?</a>
-                                                <a class="btn btn-primary" href="index.php">Login</a>
+                                                <button class="btn btn-primary" type="submit">Login</button>
                                             </div>
                                         </form>
                                     </div>

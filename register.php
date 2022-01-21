@@ -131,7 +131,48 @@ $conn = null;
         <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.28.0/feather.min.js" crossorigin="anonymous"></script>
     </head>
     <body class="bg-primary">
-   
+    <?php 
+if ($s_success !== "") { 
+?>
+<div class="alert alert-success alert-dismissible fade show" role="alert">
+   <?php echo $s_success; ?>
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<?php 
+}
+if ($s_info !== "") {
+?>
+<div class="alert alert-info alert-dismissible fade show" role="alert">
+   <?php echo $s_info; ?>
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<?php 
+}
+if ($s_warning !== "") {
+?>
+<div class="alert alert-warning alert-dismissible fade show" role="alert">
+   <?php echo $s_warning; ?>
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<?php 
+}
+if ($s_error !== "") {
+?>
+<div class="alert alert-danger alert-dismissible fade show" role="alert">
+   <?php echo $s_error; ?>
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<?php 
+}
+?>
         <div id="layoutAuthentication">
             <div id="layoutAuthentication_content">
                 <main>

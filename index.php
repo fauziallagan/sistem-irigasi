@@ -1,6 +1,7 @@
 <?php
 session_start();
 require_once "connection.php";
+require_once "data.php";
 
 
 if (empty($_SESSION["role"])) {
@@ -159,8 +160,8 @@ else {
                         <h6 class="dropdown-header d-flex align-items-center">
                             <img class="dropdown-user-img" src="assets/img/illustrations/profiles/profile-1.png" />
                             <div class="dropdown-user-details">
-                                <div class="dropdown-user-details-name">User</div>
-                                <div class="dropdown-user-details-email">User@example.com</div>
+                                <div class="dropdown-user-details-name">name</div>
+                                <div class="dropdown-user-details-email">user@example.com</div>
                             </div>
                         </h6>
                         <div class="dropdown-divider"></div>
@@ -168,7 +169,7 @@ else {
                             <div class="dropdown-item-icon"><i data-feather="settings"></i></div>
                             Account
                         </a>
-                        <a class="dropdown-item" href="#!">
+                        <a class="dropdown-item" href="login.php">
                             <div class="dropdown-item-icon"><i data-feather="log-out"></i></div>
                             Logout
                         </a>
@@ -262,7 +263,7 @@ else {
                     <!-- Sidenav Footer-->
                     <div class="sidenav-footer">
                         <div class="sidenav-footer-content">
-                            <div class="sidenav-footer-subtitle">Logged in as:</div>
+                            <div class="sidenav-footer-subtitle">Logged in as: </div>
                             
                             <div class="sidenav-footer-title">User</div>
                         </div>
