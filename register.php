@@ -46,7 +46,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   }
 
   if (empty($_POST["username"])) {
-    $s_danger .= "Username tidak boleh kosong!";
+    $s_danger = "Username tidak boleh kosong!";
 	$e_tot += 1;
   } else {
     $username = saring($_POST["username"]);
@@ -90,11 +90,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 		$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
 		// prepare sql and bind parameters
-		$stmt = $conn->prepare("INSERT INTO pengguna (kategori, username, pass, email, nama)
-		VALUES (:kategori, :username, :pass, :email, :nama)");
+		$stmt = $conn->prepare("INSERT INTO pengguna (kategori, username, paswd, email, nama)
+		VALUES (:kategori, :username, :paswd, :email, :nama)");
 		$stmt->bindValue(':kategori', $kategori);
 		$stmt->bindValue(':username', $username);
-		$stmt->bindValue(':pass', $paswd);
+		$stmt->bindValue(':paswd', $paswd);
 		$stmt->bindValue(':email', $email);
 		$stmt->bindValue(':nama', $nama);
         // $stmt->bindParam(':kategori', $_REQUEST['kategori']);
@@ -130,14 +130,14 @@ $conn = null;
         <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.28.0/feather.min.js" crossorigin="anonymous"></script>
     </head>
     <body class="bg-primary">
+   
         <div id="layoutAuthentication">
             <div id="layoutAuthentication_content">
                 <main>
                     <div class="container-xl px-4">
                         <div class="row justify-content-center">
                             <!-- Alert -->
-
-<!-- End -->
+                            <!-- End -->
                             <div class="col-lg-7">
                                 <!-- Basic registration form-->
                                 <div class="card shadow-lg border-0 rounded-lg mt-5">
@@ -178,14 +178,14 @@ $conn = null;
                                                     <!-- Form Group (password)-->
                                                     <div class="mb-3">
                                                         <label class="small mb-1" for="password">Password</label>
-                                                        <input class="form-control" name = "pass" id="inputPassword" type="password" placeholder="Enter password" />
+                                                        <input class="form-control" name = "password" id="inputPassword" type="password" placeholder="Enter password" />
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <!-- Form Group (confirm password)-->
                                                     <div class="mb-3">
                                                         <label class="small mb-1" for="password2">Confirm Password</label>
-                                                        <input class="form-control" name="pass" id="inputConfirmPassword" type="password" placeholder="Confirm password" />
+                                                        <input class="form-control" name="password2" id="inputConfirmPassword" type="password" placeholder="Confirm password" />
                                                     </div>
                                                 </div>
                                             </div>

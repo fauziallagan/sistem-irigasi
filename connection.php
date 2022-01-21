@@ -10,4 +10,5 @@ function saring($data) {
   $data = htmlspecialchars($data);
   return $data;
 }
+
 ?>
