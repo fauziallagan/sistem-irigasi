@@ -12,6 +12,7 @@ if (empty($_SESSION["role"])) {
 else {
     $role = $_SESSION["role"];
 	$nama = $_SESSION["nama"];
+    $email = $_SESSION["email"];
 	if (empty($_SESSION["error"])) {
 		$s_error = "";
 	} else {
@@ -38,14 +39,16 @@ else {
 	}
 }
     
-    // Create connection
-    $conn = new mysqli($servername, $usernamedb, $passworddb, $dbname);
-    // Check connection
-    if ($conn->connect_error) {
-        die("Database Connection failed: " . $conn->connect_error);
-        echo "Silahkan kontak administrator server";
-    }
-	
+$conn = new PDO("mysql:host=$servername;dbname=$dbname", $usernamedb, $passworddb);
+// set the PDO error mode to exception
+$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+// prepare sql and bind parameters
+$db = $conn->prepare("SELECT * FROM pengguna");
+
+$db->execute();
+
+$row = $db->fetch(PDO::FETCH_ASSOC);	
 ?> 
 <!DOCTYPE html>
 <html lang="en">
@@ -160,8 +163,8 @@ else {
                         <h6 class="dropdown-header d-flex align-items-center">
                             <img class="dropdown-user-img" src="assets/img/illustrations/profiles/profile-1.png" />
                             <div class="dropdown-user-details">
-                                <div class="dropdown-user-details-name">name</div>
-                                <div class="dropdown-user-details-email">user@example.com</div>
+                                <div class="dropdown-user-details-name">Halo, <?php echo $nama; ?></div>
+                                <div class="dropdown-user-details-email"><?php echo $email; ?></div>
                             </div>
                         </h6>
                         <div class="dropdown-divider"></div>
@@ -265,7 +268,7 @@ else {
                         <div class="sidenav-footer-content">
                             <div class="sidenav-footer-subtitle">Logged in as: </div>
                             
-                            <div class="sidenav-footer-title">User</div>
+                            <div class="sidenav-footer-title"><?php echo $role; ?></div>
                         </div>
                     </div>
                 </nav>
@@ -379,7 +382,7 @@ else {
                             <div class="col-lg-4 xl-4 mb-4">
                                 <div class="card card-header-actions h-100">
                                     <div class="card-header">
-                                            Aki
+                                            Accu
                                         <div class="dropdown no-caret">
                                                 <button class="btn btn-transparent-dark btn-icon dropdown-toggle" id="areaChartDropdownExample" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="text-gray-500" data-feather="more-vertical"></i></button>
                                             <div class="dropdown-menu dropdown-menu-end animated--fade-in-up" aria-labelledby="areaChartDropdownExample">

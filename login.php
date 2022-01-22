@@ -45,7 +45,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   }
   
   if (empty($_POST["password"])) {
-    $s_error .= "\n Password harus diisi!";
+  $s_error .= "\n Password harus diisi!";
 	$e_tot += 1;
   } else {
     $password = saring($_POST["password"]);
@@ -77,12 +77,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 			$s_error .= "\n Username salah!";
 		} else{
 			$data_kategori = $row['kategori'];
+      $data_email = $row['email'];
 			$data_username = $row['username'];
 			$data_nama = $row['nama'];
 			$data_password = $row['paswd'];
 			if (password_verify($password, $data_password)) {
 				$_SESSION["role"] = $data_kategori;
 				$_SESSION["nama"] = $data_nama;
+        $_SESSION["email"] = $data_email;
 				header("Location: index.php"); 
 				$conn = null;
 				exit();
@@ -118,11 +120,10 @@ $conn = null;
     <?php 
 if ($s_success !== "") { 
 ?>
-<div class="alert alert-success alert-dismissible fade show" role="alert">
-   <?php echo $s_success; ?>
-  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-    <span aria-hidden="true">&times;</span>
-  </button>
+   <div class="alert alert-warning alert-dismissible fade show" role="alert">
+   <?php echo $s_success; header("Location: index.php"); ?>
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
 </div>
 <?php 
 }
@@ -171,8 +172,8 @@ if ($s_error !== "") {
                                         <form method="post" action="">
                                             <!-- Form Group (email address)-->
                                             <div class="mb-3">
-                                                <label class="small mb-1" for="inputEmailAddress">Email</label>
-                                                <input class="form-control" id="inputEmailAddress" type="text" placeholder="Enter email address" name="username" />
+                                                <label class="small mb-1" for="inputEmailAddress">Username</label>
+                                                <input class="form-control" id="inputEmailAddress" type="text" placeholder="Enter Username" name="username" />
                                             </div>
                                             <!-- Form Group (password)-->
                                             <div class="mb-3">

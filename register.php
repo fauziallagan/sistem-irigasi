@@ -33,8 +33,8 @@ if (empty($_SESSION["success"])) {
 $e_tot = 0;
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-  $kategori = "Admin";
-	
+  $adminRole = "Admin"; // edited!
+  $userRole = "User";
   if (empty($_POST["nama"])) {
     $s_danger .= "Nama tidak boleh kosong!";
 	$e_tot += 1;
@@ -99,7 +99,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 		// prepare sql and bind parameters
 		$stmt = $conn->prepare("INSERT INTO pengguna (kategori, username, paswd, email, nama)
 		VALUES (:kategori, :username, :paswd, :email, :nama)");
-		$stmt->bindValue(':kategori', $kategori);
+		$stmt->bindValue(':kategori', $adminRole);
 		$stmt->bindValue(':username', $username);
 		$stmt->bindValue(':paswd', $paswd);
 		$stmt->bindValue(':email', $email);
@@ -135,7 +135,7 @@ $conn = null;
 if ($s_success !== "") { 
 ?>
 <div class="alert alert-success alert-dismissible fade show" role="alert">
-   <?php echo $s_success; ?>
+   <?php echo $s_success; header("Location: login.php");  ?>
   <button type="button" class="close" data-dismiss="alert" aria-label="Close">
     <span aria-hidden="true">&times;</span>
   </button>
@@ -144,10 +144,9 @@ if ($s_success !== "") {
 }
 if ($s_info !== "") {
 ?>
-<div class="alert alert-info alert-dismissible fade show" role="alert">
+   <div class="alert alert-warning alert-dismissible fade show" role="alert">
    <?php echo $s_info; ?>
-  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-    <span aria-hidden="true">&times;</span>
+   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
   </button>
 </div>
 <?php 
