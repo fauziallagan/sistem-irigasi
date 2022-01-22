@@ -99,8 +99,8 @@
                         <h6 class="dropdown-header d-flex align-items-center">
                             <img class="dropdown-user-img" src="assets/img/illustrations/profiles/profile-1.png" />
                             <div class="dropdown-user-details">
-                                <div class="dropdown-user-details-name">User</div>
-                                <div class="dropdown-user-details-email">User@example.com</div>
+                            <div class="dropdown-user-details-name">Halo, <?php echo $nama; ?></div>
+                                <div class="dropdown-user-details-email"><?php echo $email; ?></div>
                             </div>
                         </h6>
                         <div class="dropdown-divider"></div>

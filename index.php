@@ -39,16 +39,6 @@ else {
 	}
 }
     
-$conn = new PDO("mysql:host=$servername;dbname=$dbname", $usernamedb, $passworddb);
-// set the PDO error mode to exception
-$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
-// prepare sql and bind parameters
-$db = $conn->prepare("SELECT * FROM pengguna");
-
-$db->execute();
-
-$row = $db->fetch(PDO::FETCH_ASSOC);	
 ?> 
 <!DOCTYPE html>
 <html lang="en">

@@ -1,3 +1,6 @@
+<?php
+
+?>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -103,6 +106,7 @@
                             <div class="dropdown-user-details">
                                 <div class="dropdown-user-details-name">User</div>
                                 <div class="dropdown-user-details-email">User@example.com</div>
+                                
                             </div>
                         </h6>
                         <div class="dropdown-divider"></div>
