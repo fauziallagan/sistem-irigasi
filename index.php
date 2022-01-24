@@ -302,13 +302,13 @@ else {
                                     <div class="card-header">
                                             Suhu
                                         <div class="dropdown no-caret">
-                                                <button class="btn btn-transparent-dark btn-icon dropdown-toggle" id="areaChartDropdownExample" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="text-gray-500" data-feather="more-vertical"></i></button>
+                                                <!-- <button class="btn btn-transparent-dark btn-icon dropdown-toggle" id="areaChartDropdownExample" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="text-gray-500" data-feather="more-vertical"></i></button>
                                             <div class="dropdown-menu dropdown-menu-end animated--fade-in-up" aria-labelledby="areaChartDropdownExample">
                                                     <a class="dropdown-item" href="#!">Last 12 Months</a>
                                                     <a class="dropdown-item" href="#!">Last 30 Days</a>
                                                     <a class="dropdown-item" href="#!">Last 7 Days</a>
                                                     <a class="dropdown-item" href="#!">This Month</a>
-                                            </div>
+                                            </div> -->
                                             </div>
                                         </div>
                                         <div class="card-body">
@@ -325,13 +325,13 @@ else {
                                     <div class="card-header">
                                             Tilt
                                         <div class="dropdown no-caret">
-                                                <button class="btn btn-transparent-dark btn-icon dropdown-toggle" id="areaChartDropdownExample" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="text-gray-500" data-feather="more-vertical"></i></button>
+                                                <!-- <button class="btn btn-transparent-dark btn-icon dropdown-toggle" id="areaChartDropdownExample" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="text-gray-500" data-feather="more-vertical"></i></button>
                                             <div class="dropdown-menu dropdown-menu-end animated--fade-in-up" aria-labelledby="areaChartDropdownExample">
                                                     <a class="dropdown-item" href="#!">Last 12 Months</a>
                                                     <a class="dropdown-item" href="#!">Last 30 Days</a>
                                                     <a class="dropdown-item" href="#!">Last 7 Days</a>
                                                     <a class="dropdown-item" href="#!">This Month</a>
-                                            </div>
+                                            </div> -->
                                             </div>
                                         </div>
                                         <div class="card-body">
@@ -351,13 +351,13 @@ else {
                                     <div class="card-header">
                                             Tegangan
                                         <div class="dropdown no-caret">
-                                                <button class="btn btn-transparent-dark btn-icon dropdown-toggle" id="areaChartDropdownExample" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="text-gray-500" data-feather="more-vertical"></i></button>
+                                                <!-- <button class="btn btn-transparent-dark btn-icon dropdown-toggle" id="areaChartDropdownExample" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="text-gray-500" data-feather="more-vertical"></i></button>
                                             <div class="dropdown-menu dropdown-menu-end animated--fade-in-up" aria-labelledby="areaChartDropdownExample">
                                                     <a class="dropdown-item" href="#!">Last 12 Months</a>
                                                     <a class="dropdown-item" href="#!">Last 30 Days</a>
                                                     <a class="dropdown-item" href="#!">Last 7 Days</a>
                                                     <a class="dropdown-item" href="#!">This Month</a>
-                                            </div>
+                                            </div> -->
                                             </div>
                                         </div>
                                         <div class="card-body">
@@ -374,13 +374,13 @@ else {
                                     <div class="card-header">
                                             Accu
                                         <div class="dropdown no-caret">
-                                                <button class="btn btn-transparent-dark btn-icon dropdown-toggle" id="areaChartDropdownExample" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="text-gray-500" data-feather="more-vertical"></i></button>
+                                                <!-- <button class="btn btn-transparent-dark btn-icon dropdown-toggle" id="areaChartDropdownExample" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="text-gray-500" data-feather="more-vertical"></i></button>
                                             <div class="dropdown-menu dropdown-menu-end animated--fade-in-up" aria-labelledby="areaChartDropdownExample">
                                                     <a class="dropdown-item" href="#!">Last 12 Months</a>
                                                     <a class="dropdown-item" href="#!">Last 30 Days</a>
                                                     <a class="dropdown-item" href="#!">Last 7 Days</a>
                                                     <a class="dropdown-item" href="#!">This Month</a>
-                                            </div>
+                                            </div> -->
                                             </div>
                                         </div>
                                         <div class="card-body">
@@ -397,13 +397,13 @@ else {
                                     <div class="card-header">
                                             Regulator
                                         <div class="dropdown no-caret">
-                                                <button class="btn btn-transparent-dark btn-icon dropdown-toggle" id="areaChartDropdownExample" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="text-gray-500" data-feather="more-vertical"></i></button>
+                                                <!-- <button class="btn btn-transparent-dark btn-icon dropdown-toggle" id="areaChartDropdownExample" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="text-gray-500" data-feather="more-vertical"></i></button>
                                             <div class="dropdown-menu dropdown-menu-end animated--fade-in-up" aria-labelledby="areaChartDropdownExample">
                                                     <a class="dropdown-item" href="#!">Last 12 Months</a>
                                                     <a class="dropdown-item" href="#!">Last 30 Days</a>
                                                     <a class="dropdown-item" href="#!">Last 7 Days</a>
                                                     <a class="dropdown-item" href="#!">This Month</a>
-                                            </div>
+                                            </div> -->
                                             </div>
                                         </div>
                                         <div class="card-body">
