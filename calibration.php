@@ -2,11 +2,10 @@
 require_once "connection.php";
 
 session_start();
-
-
     $role = $_SESSION["role"];
 	$nama = $_SESSION["nama"];
     $email = $_SESSION["email"];
+
 	if (empty($_SESSION["error"])) {
 		$s_error = "";
 	} else {
@@ -31,7 +30,38 @@ session_start();
 		$s_success = $_SESSION["success"];
 		$_SESSION["success"] = "";
 	}
-    
+if($_SERVER["REQUEST_METHOD"]== "POST"){
+
+        $id_mesin = $_POST["id_mesin"];
+        $pin = $_POST["pin"];
+        $tipe = $_POST["tipe"];
+        $teganganMax = $_POST["tegangan_max"];
+        $nilai = $_POST["nilai"];
+    if(empty($_POST["tegangan_terukur"])){
+        $s_error .= "Tegangan Invalid!";
+    }else{
+        $teganganTerukur = saring($_POST["tegangan_terukur"]);
+    }
+
+
+
+    try{
+        $conn = new PDO("mysql:host=$servername;dbname=$dbname", $usernamedb, $passworddb);
+        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $db = $conn->prepare("INSERT INTO kalibrasi (id_mesin, pin, tipe, nilai, tegangan_max,tegangan_terukur ) VALUES('$id_mesin', '$pin', '$tipe', '$nilai', '$tegangan_max', '$tegangan_terukur')");
+        $db->bindValue(':id_mesin', $id_mesin);
+        $db->bindValue(':pin', $pin);
+        $db->bindValue(':tipe', $tipe);
+        $db->bindValue(':tegangan_max', $teganganMax);
+        $db->bindValue(':nilai', $nilai);
+        $db->bindValue(':tegangan_terukur', $teganganTerukur);
+        $db->execute();
+        $s_success = "Done!";
+    }
+    catch(PDOException $e){
+        $s_error = "\n " . $e->getMessage();
+    } 
+}
 ?> 
 <!DOCTYPE html>
 <html lang="en">
@@ -49,7 +79,6 @@ session_start();
         <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.28.0/feather.min.js" crossorigin="anonymous"></script>
     </head>
     <body class="nav-fixed">
-
     <nav class="topnav navbar navbar-expand shadow justify-content-between justify-content-sm-start navbar-light bg-white" id="sidenavAccordion">              
             <!-- Sidenav Toggle Button-->
             <button class="btn btn-icon btn-transparent-dark order-1 order-lg-0 me-2 ms-lg-2 me-lg-0" id="sidebarToggle"><i data-feather="menu"></i></button>
@@ -66,6 +95,38 @@ session_start();
                     <div class="input-group-text"><i data-feather="search"></i></div>
                 </div>
             </form>
+            <?php 
+      if ($s_success !== "") { ?>
+        <div class="alert-success alert-redirect d-flex align-items-center" role="alert" id="alert">
+          <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Success:"><use xlink:href="#check-circle-fill"/></svg>
+          <div>
+            <?php echo $s_success; ?>
+            
+            </div>
+          </div>
+          <?php }
+          if ($s_info !== "") { ?>
+          <div class="alert alert-warning alert-notif alert-dismissible fade show" role="alert"id="alert">
+            <?php echo $s_info; ?>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
+        </div>
+        <?php } if ($s_warning !== "") { ?>
+          <div class="alert alert-warning alert-notif d-flex align-items-center" role="alert"id="alert">
+          <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Warning:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+          <div>
+            <?php echo $s_warning; ?>
+          </div>
+        </div>
+          <?php } if ($s_error !== "") { ?>
+            <div class="alert alert-danger  alert-notif d-flex align-items-center" role="alert"id="alert">
+              <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+              <div>
+                 <?php 
+                   echo $s_error; ?>
+                </div>
+            </div>
+            <?php }?>
             <!-- Navbar Items-->
             <ul class="navbar-nav align-items-center ms-auto">
                 <!-- Documentation Dropdown-->
@@ -269,68 +330,50 @@ session_start();
                                 <table id="datatablesSimple">
                                     <thead>
                                         <tr>
-                                            <th>No</th>
+                                            <!-- <th>No</th> -->
                                             <th>ID_Mesin</th>
                                             <th>Pin</th>
                                             <th>Type</th>
                                             <th>Tegangan Max</th>
                                             <th>Nilai Analog</th>
                                             <th>Tegangan Terukur</th>
-                                            <th>Faktor Kalibrasi</th>
+
                                             <th>Konfigurasi</th>
                                         </tr>
                                     </thead>
                                     <tfoot>
                                         <tr>
-                                            <th>No</th>
+                                            <!-- <th>No</th> -->
                                             <th>ID_Mesin</th>
                                             <th>Type</th>
                                             <th>Pin</th>
                                             <th>Tegangan Max</th>
                                             <th>Nilai Analog</th>
                                             <th>Tegangan Terukur</th>
-                                            <th>Faktor Kalibrasi</th>
+
                                             <th>Konfigurasi</th>
                                         </tr>
                                     </tfoot>
                                     <tbody>
                                         <tr>
-                                            <td>1</td>
-                                            <td>PDM001</td>
-                                            <td>Analog</td>
-                                            <td>A1</td>
-                                            <td>24 V</td>
-                                            <td>765</td>
-                                            <td>
+                                            <!-- <td name="id">1</td> -->
+                                            <form  method="POST" action="calibration.php">
+                                                <td name="id_mesin">PDM001</td>
+                                                <td name="tipe">Analog</td>
+                                                <td name="pin">A1</td>
+                                                <td name="teganganMax">24 V</td>
+                                                <td name="nilai">765</td>
+                                                <td>
                                                 <div class="input-group mb-3">
-                                                <input type="text"class="form-control" placeholder="Masukan Nilai Tegangan!">
-                                            </div></td>
-                                            <td>0.02679</td> <!-- Faktor Kalibrasi -->
-                                            <td> 
-                                            <button class="btn btn-datatable btn-icon btn-transparent-dark me-2"><i class="fas fa-pencil-alt"></i></button>
-                                            <button class="btn btn-datatable btn-icon btn-transparent-dark"><i class="fas fa-save"></i></button>
-                                       
-                                            </td>
+                                                    <input type="text"class="form-control" placeholder="Masukan Nilai Tegangan!" name="teganganTerukur" required>
+                                                </div>
+                                                </td>
+                                              
+                                                <!-- Faktor Kalibrasi -->
+                                                <td> <button class="btn btn-outline-success" type="submit"><i class="fas fa-save"></i> Save</button>
+                                                </td>
+                                            </form>
                                         </tr>
-                                            <td>2</td>
-                                            <td>PDM002</td>
-                                            <td>Analog</td>
-                                            <td>A2</td>
-                                            <td>5 V</td>
-                                            <td>1023</td>
-                                            <td>
-                                            <div class="input-group mb-1">
-                                                <input type="text" class="form-control" placeholder="Masukan Nilai Tegangan!">
-                                            </div></td>
-                                            <td></td> <!-- Faktor Kalibrasi -->
-                                            <td>
-                                            <button class="btn btn-datatable btn-icon btn-transparent-dark me-2"><i class="fas fa-pencil-alt"></i></button>
-                                            <button class="btn btn-datatable btn-icon btn-transparent-dark"><i class="fas fa-save"></i></button>
-                                          
-                                     
-                                            </td>
-                                        </tr>
-                 
                                     </tbody>
                                 </table>
                             </div>
