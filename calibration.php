@@ -1,6 +1,38 @@
 <?php
+require_once "connection.php";
 
-?>
+session_start();
+
+
+    $role = $_SESSION["role"];
+	$nama = $_SESSION["nama"];
+    $email = $_SESSION["email"];
+	if (empty($_SESSION["error"])) {
+		$s_error = "";
+	} else {
+		$s_error = $_SESSION["error"];
+		$_SESSION["error"] = "";
+	}
+	if (empty($_SESSION["warning"])) {
+		$s_warning = "";
+	} else {
+		$s_warning = $_SESSION["warning"];
+		$_SESSION["warning"] = "";
+	}
+	if (empty($_SESSION["info"])) {
+		$s_info = "";
+	} else {
+		$s_info = $_SESSION["info"];
+		$_SESSION["info"] = "";
+	}
+	if (empty($_SESSION["success"])) {
+		$s_success = "";
+	} else {
+		$s_success = $_SESSION["success"];
+		$_SESSION["success"] = "";
+	}
+    
+?> 
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -104,8 +136,8 @@
                         <h6 class="dropdown-header d-flex align-items-center">
                             <img class="dropdown-user-img" src="assets/img/illustrations/profiles/profile-1.png" />
                             <div class="dropdown-user-details">
-                                <div class="dropdown-user-details-name">User</div>
-                                <div class="dropdown-user-details-email">User@example.com</div>
+                                <div class="dropdown-user-details-name"><?php echo $nama;?></div>
+                                <div class="dropdown-user-details-email"><?php echo $email; ?></div>
                                 
                             </div>
                         </h6>
@@ -114,7 +146,7 @@
                             <div class="dropdown-item-icon"><i data-feather="settings"></i></div>
                             Account
                         </a>
-                        <a class="dropdown-item" href="#!">
+                        <a class="dropdown-item" href="login.php">
                             <div class="dropdown-item-icon"><i data-feather="log-out"></i></div>
                             Logout
                         </a>
@@ -207,7 +239,7 @@
                     <div class="sidenav-footer">
                         <div class="sidenav-footer-content">
                             <div class="sidenav-footer-subtitle">Logged in as:</div>
-                            <div class="sidenav-footer-title">User</div>
+                            <div class="sidenav-footer-title"><?php echo $role; ?></div>
                         </div>
                     </div>
                 </nav>

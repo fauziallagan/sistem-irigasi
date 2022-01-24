@@ -36,7 +36,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   $adminRole = "Admin"; // edited!
   $userRole = "User";
   if (empty($_POST["nama"])) {
-    $s_danger .= "Nama tidak boleh kosong!";
+    $s_error = "Nama tidak boleh kosong!";
 	$e_tot += 1;
   } else {
     $nama = saring($_POST["nama"]);
@@ -48,31 +48,31 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   }
 
   if (empty($_POST["username"])) {
-    $s_danger .= "Username tidak boleh kosong!";
+    $s_error .= "Username tidak boleh kosong!";
 	$e_tot += 1;
   } else {
     $username = saring($_POST["username"]);
     // check if name only contains letters and whitespace
     if (!preg_match("/^[a-zA-Z0-9 ]*$/",$username)) {
-      $s_info .= "\n Username hanya boleh mengandung huruf dan angka.";
+      $s_info = "\n Username hanya boleh mengandung huruf dan angka.";
 	  $e_tot += 1;
     }
   }
 
   if (empty($_POST["email"])) {
-    $s_danger .= "\n Email harus diisi!";
+    $s_error .= "\n Email harus diisi!";
 	$e_tot += 1;
   } else {
     $email = saring($_POST["email"]);
     // check if e-mail address is well-formed
     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-      $s_danger .= "\n Email tidak benar.";
+      $s_error .= "\n Email tidak benar.";
 	  $e_tot += 1;
     }
   }
   
   if ((empty($_POST["password"])) && (empty($_POST["password2"]))) {
-    $s_danger .= "\n Password harus diisi!";
+    $s_error .= "\n Password harus diisi!";
 	$e_tot += 1;
   } else {
     $password = saring($_POST["password"]);
@@ -80,15 +80,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	if ($password === $password2) {
 		$paswd = password_hash($password, PASSWORD_BCRYPT, ["cost" => 12]);
 	} else {
-		$s_danger .= "\n Ulangi password anda yang sama!";
+		$s_error .= "\n Ulangi password anda yang sama!";
 		$e_tot += 1;
 	}
   }
-  
-  //if (empty($_POST["terms"])) {
-  //  $s_danger .= "\n Terms and policy harus disetujui!";
-  //  $e_tot += 1;
-  //}
+
   
   if ($e_tot == 0) {
 	try {
@@ -109,7 +105,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 		$s_success = "\n Akun berhasil didaftarkan, silakan login.";
 	}
 	catch(PDOException $e) {
-		$s_danger = "\n " . $e->getMessage();
+		$s_error = "\n " . $e->getMessage();
 	}
   }
 }
@@ -128,57 +124,62 @@ $conn = null;
         <link href="css/styles.css" rel="stylesheet" />
         <link rel="icon" type="image/x-icon" href="assets/img/favicon.png" />
         <script data-search-pseudo-elements defer src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.28.0/feather.min.js" crossorigin="anonymous"></script>
     </head>
     <body class="bg-primary">
-    <?php 
-if ($s_success !== "") { 
-?>
-<div class="alert alert-success alert-dismissible fade show" role="alert">
-   <?php echo $s_success; header("Location: login.php");  ?>
-  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-    <span aria-hidden="true">&times;</span>
-  </button>
-</div>
-<?php 
-}
-if ($s_info !== "") {
-?>
-   <div class="alert alert-warning alert-dismissible fade show" role="alert">
-   <?php echo $s_info; ?>
-   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-  </button>
-</div>
-<?php 
-}
-if ($s_warning !== "") {
-?>
-<div class="alert alert-warning alert-dismissible fade show" role="alert">
-   <?php echo $s_warning; ?>
-  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-    <span aria-hidden="true">&times;</span>
-  </button>
-</div>
-<?php 
-}
-if ($s_error !== "") {
-?>
-<div class="alert alert-danger alert-dismissible fade show" role="alert">
-   <?php echo $s_error; ?>
-  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-    <span aria-hidden="true">&times;</span>
-  </button>
-</div>
-<?php 
-}
-?>
+      <!-- SVG Sample  -->
+      <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="check-circle-fill" fill="currentColor" viewBox="0 0 16 16">
+    <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/>
+  </symbol>
+  <symbol id="info-fill" fill="currentColor" viewBox="0 0 16 16">
+    <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm.93-9.412-1 4.705c-.07.34.029.533.304.533.194 0 .487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703 0-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381 2.29-.287zM8 5.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"/>
+  </symbol>
+  <symbol id="exclamation-triangle-fill" fill="currentColor" viewBox="0 0 16 16">
+    <path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
+  </symbol>
+</svg>
+      <!-- End -->
+      <!-- Alert -->
+      <?php 
+      if ($s_success !== "") { ?>
+        <div class="alert-success alert-redirect d-flex align-items-center" role="alert" id="alert">
+          <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Success:"><use xlink:href="#check-circle-fill"/></svg>
+          <div>
+            <?php echo $s_success; ?>
+            
+            </div>
+          </div>
+          <?php }
+          if ($s_info !== "") { ?>
+          <div class="alert alert-warning alert-notif alert-dismissible fade show" role="alert"id="alert">
+            <?php echo $s_info; ?>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
+        </div>
+        <?php } if ($s_warning !== "") { ?>
+          <div class="alert alert-warning alert-notif d-flex align-items-center" role="alert"id="alert">
+          <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Warning:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+          <div>
+            <?php echo $s_warning; ?>
+          </div>
+        </div>
+          <?php } if ($s_error !== "") { ?>
+            <div class="alert alert-danger  alert-notif d-flex align-items-center" role="alert"id="alert">
+              <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+              <div>
+                 <?php 
+                   echo $s_error; ?>
+                </div>
+            </div>
+            <?php }?>
         <div id="layoutAuthentication">
             <div id="layoutAuthentication_content">
                 <main>
                     <div class="container-xl px-4">
                         <div class="row justify-content-center">
                             <!-- Alert -->
-                            <!-- End -->
                             <div class="col-lg-7">
                                 <!-- Basic registration form-->
                                 <div class="card shadow-lg border-0 rounded-lg mt-5">
@@ -192,7 +193,7 @@ if ($s_error !== "") {
                                                     <!-- Form Group (first name)-->
                                                     <div class="mb-12">
                                                         <label class="small mb-1" for="nama">Name</label>
-                                                        <input class="form-control" name = "nama" id="inputFirstName" type="text" placeholder="Enter first name" />
+                                                        <input class="form-control" name = "nama" id="name" type="text" placeholder="Enter first name" />
                                                     </div>
                                                 </div>
                                             </div>
@@ -202,7 +203,7 @@ if ($s_error !== "") {
                                                     <!-- Form Group (first name)-->
                                                     <div class="mb-12">
                                                         <label class="small mb-1" for="username">Username</label>
-                                                        <input class="form-control" name="username" id="inputFirstName" type="text" placeholder="Enter first name" />
+                                                        <input class="form-control" name="username" id="username" type="text" placeholder="Enter first name" />
                                                     </div>
                                                 </div>
                                             </div>
@@ -261,5 +262,14 @@ if ($s_error !== "") {
         </div>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
         <script src="js/scripts.js"></script>
+        <script src="js/index.js" ></script>
+        
+        <script>
+        window.setTimeout(function() {
+          $(".alert").fadeTo(500, 0).slideUp(500, function(){
+            $(this).remove(); 
+          });
+          }, 2000);
+          </script>
     </body>
 </html>

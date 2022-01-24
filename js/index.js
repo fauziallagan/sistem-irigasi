@@ -13,3 +13,15 @@ function dateTime(){
     date4.innerHTML=text;
     date5.innerHTML=text;
 }
+
+window.setTimeout(function() {
+    $(".alert-notif").fadeTo(500, 0).slideUp(500, function(){
+        $(this).remove(); 
+    });
+}, 2000);
+
+window.setTimeout(function(){
+    $(".alert-redirect").fadeTo(500,0).slideUp(500, function(){
+        window.location.replace("login.php");
+    });
+}, 2000)

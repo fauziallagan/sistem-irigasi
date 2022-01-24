@@ -1,8 +1,8 @@
 <?php
 $servername = "localhost";
-$usernamedb = "pdam";
-$passworddb = "Aez*27km!zz";
-$dbname = "pdm"; 
+$usernamedb = "root";
+$passworddb = "";
+$dbname = "testing"; 
 
 function saring($data) {
   $data = trim($data);
