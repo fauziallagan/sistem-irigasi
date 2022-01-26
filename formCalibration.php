@@ -1,9 +1,11 @@
 <?php
-require_once "data.php";
+
 session_start();
-$nama = $_SESSION['nama'];
-$role = $_SESSION['role'];
-$email = $_SESSION['email'];
+require_once "data.php";
+$role = $_SESSION["role"];
+$nama = $_SESSION["nama"];
+$email = $_SESSION["email"];
+
 
 require_once "connection.php";
 
@@ -37,11 +39,15 @@ $e_tot = 0;
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
-    $tegangan_terukur = saring($_POST["tegangan_terukur"]);
+ 
     $id_mesin = saring($_POST["id_mesin"]);
-    $nilai_analog = saring($_POST["nilai_analog"]);
+    // check if nama only contains letters and whitespace
+
     $pin = saring($_POST["pin"]);
+
     $tegangan_max = saring($_POST["tegangan_max"]);
+	$nilai_analog = saring($_POST["nilai_analog"]);
+    $tegangan_terukur = saring($_POST["tegangan_terukur"]);
 
   if ($e_tot == 0) {
 	try {
@@ -50,17 +56,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 		$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
 		// prepare sql and bind parameters
-        $stmt = $conn->prepare("INSERT INTO kalibrasi (id_mesin, pin, tegangan_max, nilai_analog, tegangan_terukur)
+		$stmt = $conn->prepare("INSERT INTO kalibrasi (id_mesin, pin, tegangan_max, nilai_analog, tegangan_terukur)
 		VALUES (:id_mesin, :pin, :tegangan_max, :nilai_analog, :tegangan_terukur)");
 		$stmt->bindValue(':id_mesin', $id_mesin);
 		$stmt->bindValue(':pin', $pin);
+
 		$stmt->bindValue(':tegangan_max', $tegangan_max);
 		$stmt->bindValue(':nilai_analog', $nilai_analog);
 		$stmt->bindValue(':tegangan_terukur', $tegangan_terukur);
 		$stmt->execute();
 
 		$s_success = "\n Data Berhasil Di Masukkan.";
-        
 	}
 	catch(PDOException $e) {
 		$s_error = "\n " . $e->getMessage();
@@ -86,6 +92,52 @@ $conn = null;
         <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.28.0/feather.min.js" crossorigin="anonymous"></script>
     </head>
     <body class="nav-fixed">
+        <!-- SVG Alert -->
+        <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+        <symbol id="check-circle-fill" fill="currentColor" viewBox="0 0 16 16">
+        <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/>
+        </symbol>
+        <symbol id="info-fill" fill="currentColor" viewBox="0 0 16 16">
+        <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm.93-9.412-1 4.705c-.07.34.029.533.304.533.194 0 .487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703 0-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381 2.29-.287zM8 5.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"/>
+        </symbol>
+        <symbol id="exclamation-triangle-fill" fill="currentColor" viewBox="0 0 16 16">
+        <path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
+        </symbol>
+        </svg>
+        <!-- End -->
+         <!-- Alert -->
+      <?php 
+      if ($s_success !== "") { ?>
+        <div class="alert-success alert-redirect d-flex align-items-center" role="alert" id="alert">
+          <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Success:"><use xlink:href="#check-circle-fill"/></svg>
+          <div>
+            <?php echo $s_success; ?>
+            
+            </div>
+          </div>
+          <?php }
+          if ($s_info !== "") { ?>
+          <div class="alert alert-warning alert-notif alert-dismissible fade show" role="alert"id="alert">
+            <?php echo $s_info; ?>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
+        </div>
+        <?php } if ($s_warning !== "") { ?>
+          <div class="alert alert-warning alert-notif d-flex align-items-center" role="alert"id="alert">
+          <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Warning:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+          <div>
+            <?php echo $s_warning; ?>
+          </div>
+        </div>
+          <?php } if ($s_error !== "") { ?>
+            <div class="alert alert-danger  alert-notif d-flex align-items-center" role="alert"id="alert">
+              <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+              <div>
+                 <?php 
+                   echo $s_error; ?>
+                </div>
+            </div>
+            <?php }?>
     <nav class="topnav navbar navbar-expand shadow justify-content-between justify-content-sm-start navbar-light bg-white" id="sidenavAccordion">              
             <!-- Sidenav Toggle Button-->
             <button class="btn btn-icon btn-transparent-dark order-1 order-lg-0 me-2 ms-lg-2 me-lg-0" id="sidebarToggle"><i data-feather="menu"></i></button>
@@ -102,27 +154,12 @@ $conn = null;
                     <div class="input-group-text"><i data-feather="search"></i></div>
                 </div>
             </form>
-      <!-- SVG Alert -->
-      <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
-        <symbol id="check-circle-fill" fill="currentColor" viewBox="0 0 16 16">
-        <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/>
-        </symbol>
-        <symbol id="info-fill" fill="currentColor" viewBox="0 0 16 16">
-        <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm.93-9.412-1 4.705c-.07.34.029.533.304.533.194 0 .487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703 0-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381 2.29-.287zM8 5.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"/>
-        </symbol>
-        <symbol id="exclamation-triangle-fill" fill="currentColor" viewBox="0 0 16 16">
-        <path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
-        </symbol>
-        </svg>
-        <!-- End -->
-         <!-- Alert -->
-      <?php 
+            <?php 
       if ($s_success !== "") { ?>
-        <div class=" alert alert-success alert-notif d-flex align-items-center" role="alert" id="alert">
+        <div class="alert-success alert-redirect d-flex align-items-center" role="alert" id="alert">
           <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Success:"><use xlink:href="#check-circle-fill"/></svg>
           <div>
             <?php echo $s_success; ?>
-            
             </div>
           </div>
           <?php }
@@ -267,7 +304,7 @@ $conn = null;
                                 Dashboards
                             
                             </a>
-                            <a class="nav-link" href="tables.php"><div class="nav-link-icon"><i class="fas fa-chart-line"></i></div>
+                            <a class="nav-link" href="./tables.php"><div class="nav-link-icon"><i class="fas fa-chart-line"></i></div>
                                 Log Data 
                             </a>
                       
@@ -315,7 +352,7 @@ $conn = null;
                                                 <div class="nav-link-icon"><i class="fas fa-users"></i></div>Organization Details</a>
                                         </nav>
                                     </div>
-                                    <a class="nav-link" href="calibration.php"><div class="nav-link-icon"><i class="fas fa-compass"></i></div>
+                                    <a class="nav-link" href="./calibration.php"><div class="nav-link-icon"><i class="fas fa-compass"></i></div>
                                     Calibration </a>
                     <!-- Sidenav Footer-->
                     <div class="sidenav-footer">
@@ -327,7 +364,6 @@ $conn = null;
                 </nav>
             </div>
             <div id="layoutSidenav_content">
-                
                 <main>
                     <header class="page-header page-header-dark bg-gradient-primary-to-secondary pb-10">
                         <div class="container-xl px-4">
@@ -338,8 +374,7 @@ $conn = null;
                                             <div class="page-header-icon"><i class="fas fa-compass"></i></div>
                                             Calibration
                                         </h1>
-                                        <div class="page-header-subtitle"> <?php echo $calibration_content;?>
-                                        </div>
+                                        <div class="page-header-subtitle"><?php echo $calibration_content;?></div>
                                     </div>
                                 </div>
                             </div>
@@ -348,56 +383,64 @@ $conn = null;
                     <!-- Main page content-->
                     <div class="container-xl px-4 mt-n10">
                         <div class="card mb-4">
-                            <div class="card-header mb-4">Table Calibration
-                            </div>
-                                <div class="card-body">
-                           
-                                <table id="datatablesSimple">
-                                    <thead>
-                                        <tr>
-                                            <!-- <th>No</th> -->
-                                            <th>ID_Mesin</th>
-                                            <th>Pin</th>
-                                            <th>Type</th>
-                                            <th>Tegangan Max</th>
-                                            <th>Nilai Analog</th>
-                                            <th>Tegangan Terukur</th>
-                                            <th>Faktor Kalibrasi</th>
-                                            <th>Action</th>
-                                        </tr>
-                                    </thead>
-                                    <tfoot>
-                                        <tr>
-                                            <!-- <th>No</th> -->
-                                            <th>ID_Mesin</th>
-                                            <th>Type</th>
-                                            <th>Pin</th>
-                                            <th>Tegangan Max</th>
-                                            <th>Nilai Analog</th>
-                                            <th>Tegangan Terukur</th>
-                                            <th>Faktor Kalibrasi</th>
-                                            <th>Action</th>
-                                        </tr>
-                                    </tfoot>
-                                    <tbody>
-                                        <tr>
-                                            <!-- <td name="id">1</td> -->
-                                            <form  method="GET" action="formCalibration.php">
-                                                <td name="id_mesin">-</td>
-                                                <td name="tipe">-</td>
-                                                <td name="pin">-</td>
-                                                <td name="teganganMax">-</td>
-                                                <td name="nilai">-</td>
-                                                <td name="teganganTerukur">-</td>
-                                                <!-- Faktor Kalibrasi -->
-                                                <td name="faltor_kalibrasi">-</td>
-                                                <td> <a href="formCalibration.php"> <button class="btn btn-success mb-3">Calibrasi</button></a></td>
-                                            </form>
-                                        </tr>
-                                    </tbody>
-                                </table>
+                            <div class="card-header">Table Calibration</div>
+                            <div class="card-body">
+                            <form action="calibration.php" method="post">
+                                            <!-- Form Row-->
+                                            <div class="row gx-3">
+                                                <div class="col-md-12">
+                                                    <!-- Form Group (first name)-->
+                                                    <div class="mb-12">
+                                                        <label class="small mb-1" for="nama">ID Mesin</label>
+                                                        <input class="form-control" name = "id_mesin" id="id_mesin" type="text" placeholder="Masukkan ID mesin!. Example : PDM000" required/>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <br>
+                                            <div class="row gx-3">
+                                                <div class="col-md-12">
+                                                    <!-- Form Group (first name)-->
+                                                    <div class="mb-12">
+                                                        <label class="small mb-1" for="pin">Pin</label>
+                                                        <input class="form-control" name="pin" id="pin" type="text" placeholder="Masukkan Pin!. Example : A1" required/>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <br>
+                                           
+                                            <!-- Form Group (email address)            -->
+                                            <div class="mb-3">
+                                                <label class="small mb-1" for="email">Tegangan Maksimal</label>
+                                                <input class="form-control" name="tegangan_max" id="tegangan_max" type="text" placeholder="Masukkan Tegangan Maksimal!. Example : 24" required />
+                                            </div>
+                                            <br>
+                                            <!-- Form Row    -->
+                                            <div class="row gx-3">
+                                                <div class="col-md-6">
+                                                    <!-- Form Group (password)-->
+                                                    <div class="mb-3">
+                                                        <label class="small mb-1" for="nilai_analog">Nilai Analog</label>
+                                                        <input class="form-control" name = "nilai_analog" id="nilai_analog" type="text" placeholder="Masukkan Nilai Analog!. Example : 1023" required/>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <!-- Form Group (confirm password)-->
+                                                    <div class="mb-3">
+                                                        <label class="small mb-1" for="tegangan Terukur">Tegangan Terukur</label>
+                                                        <input class="form-control" name="tegangan_terukur" id="tegangan_terukur" type="text" placeholder="Masukkan Tegangan Terukur!. Example : 20.5" required/>
+                                                    </div>
+                                                </div>
+                                                
+                                            </div>
+                                            <br>
+                                            <!-- Form Group (create account submit)-->
+                                            <button class="btn btn-primary btn-block" type="submit">Save</button>
+                                            <button class="btn btn-danger btn-block" type="cancel" onclick="history.back()">Batal</button>
+                                        </form>
                             </div>
                         </div>
+                      
+                    </div>
                 </main>
                 <footer class="footer-admin mt-auto footer-light">
                     <div class="container-xl px-4">
@@ -418,6 +461,5 @@ $conn = null;
         <script src="js/scripts.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
         <script src="js/datatables/datatables-simple-demo.js"></script>
-        <script src="https://code.jquery.com/jquery-latest.js" type="text/javascript" charset="utf-8"></script>
     </body>
 </html>
