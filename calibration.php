@@ -66,9 +66,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 		$s_error = "\n " . $e->getMessage();
 	}
   }
+} 
+// Koneksi ke database kalibrasi
+try{
+    $pdo = new PDO("mysql:host=$servername; dbname=$dbname", $usernamedb, $passworddb);
+    $sql = 'SELECT * FROM kalibrasi'; 
+    $row = $pdo->query($sql);
+    $row->setFetchMode(PDO::FETCH_ASSOC);
+} catch(PDOException $e){
+    die("Connection to Database Failed!. Please Check Database Connection!!" . $e->getMessage());
 }
-
-$conn = null;
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -338,7 +345,8 @@ $conn = null;
                                             <div class="page-header-icon"><i class="fas fa-compass"></i></div>
                                             Calibration
                                         </h1>
-                                        <div class="page-header-subtitle"> <?php echo $calibration_content;?>
+                                        <div class="page-header-subtitle"><?php echo $calibration_content; ?> <br>
+                                            <!-- <a href="formCalibration.php"> <button class="btn btn-success mb-3">Calibrasi</button></a> -->
                                         </div>
                                     </div>
                                 </div>
@@ -358,11 +366,9 @@ $conn = null;
                                             <!-- <th>No</th> -->
                                             <th>ID_Mesin</th>
                                             <th>Pin</th>
-                                            <th>Type</th>
                                             <th>Tegangan Max</th>
                                             <th>Nilai Analog</th>
                                             <th>Tegangan Terukur</th>
-                                            <th>Faktor Kalibrasi</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
@@ -370,30 +376,25 @@ $conn = null;
                                         <tr>
                                             <!-- <th>No</th> -->
                                             <th>ID_Mesin</th>
-                                            <th>Type</th>
+
                                             <th>Pin</th>
                                             <th>Tegangan Max</th>
                                             <th>Nilai Analog</th>
                                             <th>Tegangan Terukur</th>
-                                            <th>Faktor Kalibrasi</th>
                                             <th>Action</th>
                                         </tr>
                                     </tfoot>
                                     <tbody>
-                                        <tr>
-                                            <!-- <td name="id">1</td> -->
-                                            <form  method="GET" action="formCalibration.php">
-                                                <td name="id_mesin">-</td>
-                                                <td name="tipe">-</td>
-                                                <td name="pin">-</td>
-                                                <td name="teganganMax">-</td>
-                                                <td name="nilai">-</td>
-                                                <td name="teganganTerukur">-</td>
-                                                <!-- Faktor Kalibrasi -->
-                                                <td name="faltor_kalibrasi">-</td>
-                                                <td> <a href="formCalibration.php"> <button class="btn btn-success mb-3">Calibrasi</button></a></td>
-                                            </form>
-                                        </tr>
+                                        <?php while($rows = $row->fetch()):?>
+                                            <tr>
+                                                <td><?php echo htmlspecialchars($rows["id_mesin"])?></td>
+                                                <td><?php echo htmlspecialchars($rows["pin"])?></td>
+                                                <td><?php echo htmlspecialchars($rows["nilai_analog"])?></td>
+                                                <td><?php echo htmlspecialchars($rows["tegangan_max"])?></td>
+                                                <td><?php echo htmlspecialchars($rows["tegangan_terukur"])?></td>
+                                                <td><a href="formCalibration.php"> <button class="btn btn-success mb-3">Calibrasi</button></a></td>
+                                            </tr>
+                                        <?php endwhile; ?>
                                     </tbody>
                                 </table>
                             </div>
