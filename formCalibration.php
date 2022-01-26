@@ -2,9 +2,44 @@
 
 session_start();
 require_once "data.php";
-$role = $_SESSION["role"];
-$nama = $_SESSION["nama"];
-$email = $_SESSION["email"];
+
+require_once "connection.php";
+
+
+if (empty($_SESSION["role"])) {
+	$_SESSION["info"] = "Anda harus login terlebih dahulu.";
+	header("Location: login.php"); 
+	exit();
+}
+else {
+    $role = $_SESSION["role"];
+	$nama = $_SESSION["nama"];
+    $email = $_SESSION["email"];
+	if (empty($_SESSION["error"])) {
+		$s_error = "";
+	} else {
+		$s_error = $_SESSION["error"];
+		$_SESSION["error"] = "";
+	}
+	if (empty($_SESSION["warning"])) {
+		$s_warning = "";
+	} else {
+		$s_warning = $_SESSION["warning"];
+		$_SESSION["warning"] = "";
+	}
+	if (empty($_SESSION["info"])) {
+		$s_info = "";
+	} else {
+		$s_info = $_SESSION["info"];
+		$_SESSION["info"] = "";
+	}
+	if (empty($_SESSION["success"])) {
+		$s_success = "";
+	} else {
+		$s_success = $_SESSION["success"];
+		$_SESSION["success"] = "";
+	}
+}
 
 
 require_once "connection.php";
@@ -156,7 +191,7 @@ $conn = null;
             </form>
             <?php 
       if ($s_success !== "") { ?>
-        <div class="alert-success alert-redirect d-flex align-items-center" role="alert" id="alert">
+        <div class="alert-success d-flex align-items-center" role="alert" id="alert">
           <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Success:"><use xlink:href="#check-circle-fill"/></svg>
           <div>
             <?php echo $s_success; ?>

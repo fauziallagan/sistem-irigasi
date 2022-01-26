@@ -1,7 +1,7 @@
 <?php
+require_once "data.php";
 session_start();
 require_once "connection.php";
-require_once "data.php";
 
 
 if (empty($_SESSION["role"])) {
