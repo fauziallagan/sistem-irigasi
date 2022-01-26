@@ -76,7 +76,7 @@ else {
             <!-- * * Tip * * You can use text or an image for your navbar brand.-->
             <!-- * * * * * * When using an image, we recommend the SVG format.-->
             <!-- * * * * * * Dimensions: Maximum height: 32px, maximum width: 240px-->
-            <a class="navbar-brand pe-3 ps-4 ps-lg-2" href="index.php">PdM</a>
+            <a class="navbar-brand pe-3 ps-4 ps-lg-2" href="./index.php">PdM</a>
             <!-- Navbar Search Input-->
             <!-- * * Note: * * Visible only on and above the lg breakpoint-->
             <form class="form-inline me-auto d-none d-lg-block me-3">
@@ -162,7 +162,7 @@ else {
                             <div class="dropdown-item-icon"><i data-feather="settings"></i></div>
                             Account
                         </a>
-                        <a class="dropdown-item" href="login.php">
+                        <a class="dropdown-item" href="logout.php">
                             <div class="dropdown-item-icon"><i data-feather="log-out"></i></div>
                             Logout
                         </a>
@@ -249,7 +249,7 @@ else {
                                                 <div class="nav-link-icon"><i class="fas fa-users"></i></div>Organization Details</a>
                                         </nav>
                                     </div>
-                                    <a class="nav-link" href="./calibration.php"><div class="nav-link-icon"><i class="fas fa-compass"></i></div>
+                                    <a class="nav-link" href="calibration.php"><div class="nav-link-icon"><i class="fas fa-compass"></i></div>
                                     Calibration
                                      </a>
                                     <!-- Nested Sidenav Accordion (Pages -> Error)-->
