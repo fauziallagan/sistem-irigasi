@@ -144,7 +144,7 @@ $conn = null;
       <!-- Alert -->
       <?php 
       if ($s_success !== "") { ?>
-        <div class="alert-success alert-redirect d-flex align-items-center" role="alert" id="alert">
+        <div class="alert alert-success alert-redirect d-flex align-items-center" role="alert" id="alert">
           <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Success:"><use xlink:href="#check-circle-fill"/></svg>
           <div>
             <?php echo $s_success; ?>
