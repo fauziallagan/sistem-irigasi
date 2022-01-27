@@ -2,32 +2,41 @@
 require_once "connection.php";
 
 session_start();
-$role = $_SESSION["role"];
-$nama = $_SESSION["nama"];
-$email = $_SESSION["email"];
-if (empty($_SESSION["error"])) {
-    $s_error = "";
-} else {
-    $s_error = $_SESSION["error"];
-    $_SESSION["error"] = "";
+
+
+if (empty($_SESSION["role"])) {
+	$_SESSION["info"] = "Anda harus login terlebih dahulu.";
+	header("Location: login.php"); 
+	exit();
 }
-if (empty($_SESSION["warning"])) {
-    $s_warning = "";
-} else {
-    $s_warning = $_SESSION["warning"];
-    $_SESSION["warning"] = "";
-}
-if (empty($_SESSION["info"])) {
-    $s_info = "";
-} else {
-    $s_info = $_SESSION["info"];
-    $_SESSION["info"] = "";
-}
-if (empty($_SESSION["success"])) {
-    $s_success = "";
-} else {
-    $s_success = $_SESSION["success"];
-    $_SESSION["success"] = "";
+else {
+    $role = $_SESSION["role"];
+	$nama = $_SESSION["nama"];
+    $email = $_SESSION["email"];
+	if (empty($_SESSION["error"])) {
+		$s_error = "";
+	} else {
+		$s_error = $_SESSION["error"];
+		$_SESSION["error"] = "";
+	}
+	if (empty($_SESSION["warning"])) {
+		$s_warning = "";
+	} else {
+		$s_warning = $_SESSION["warning"];
+		$_SESSION["warning"] = "";
+	}
+	if (empty($_SESSION["info"])) {
+		$s_info = "";
+	} else {
+		$s_info = $_SESSION["info"];
+		$_SESSION["info"] = "";
+	}
+	if (empty($_SESSION["success"])) {
+		$s_success = "";
+	} else {
+		$s_success = $_SESSION["success"];
+		$_SESSION["success"] = "";
+	}
 }
 ?>
 <!DOCTYPE html>
@@ -137,7 +146,7 @@ if (empty($_SESSION["success"])) {
                             </div>
                         </h6>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#!">
+                        <a class="dropdown-item" href="account-profile.php">
                             <div class="dropdown-item-icon"><i data-feather="settings"></i></div>
                             Account
                         </a>
@@ -203,6 +212,9 @@ if (empty($_SESSION["success"])) {
                                        
                                 </nav>
                             </div>
+                            <a class="nav-link" href="calibration.php"><div class="nav-link-icon"><i class="fas fa-compass"></i></div>
+                                    Calibration
+                                     </a>
                          
                             
                             <!-- Sidenav Heading (Custom)-->
@@ -224,8 +236,7 @@ if (empty($_SESSION["success"])) {
                                                 <div class="nav-link-icon"><i class="fas fa-user-plus"></i></div>Add User</a>
                                             <a class="nav-link" href="user-management-groups-list.php">
                                                 <div class="nav-link-icon"><i class="fas fa-user-friends"></i></div>Groups List</a>
-                                            <a class="nav-link" href="user-management-org-details.php">
-                                                <div class="nav-link-icon"><i class="fas fa-users"></i></div>Organization Details</a>
+                                           
                                         </nav>
                                     </div>
                     <!-- Sidenav Footer-->

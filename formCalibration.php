@@ -2,7 +2,6 @@
 
 session_start();
 require_once "data.php";
-
 require_once "connection.php";
 
 if (empty($_SESSION["role"])) {
@@ -265,7 +264,7 @@ $conn = null;
                             </div>
                         </h6>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#!">
+                        <a class="dropdown-item" href="account-profile.php">
                             <div class="dropdown-item-icon"><i data-feather="settings"></i></div>
                             Account
                         </a>

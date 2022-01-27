@@ -158,7 +158,7 @@ else {
                             </div>
                         </h6>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#!">
+                        <a class="dropdown-item" href="account-profile.php">
                             <div class="dropdown-item-icon"><i data-feather="settings"></i></div>
                             Account
                         </a>
@@ -228,9 +228,8 @@ else {
                             
                             <!-- Sidenav Heading (Custom)-->
                             <div class="sidenav-menu-heading">Admin</div>
-                            <!-- Sidenav Accordion (Pages)-->
 
-                                    <!-- Nested Sidenav Accordion (Pages -> Authentication)-->
+                                    <!-- Nested Sidenav Accordion (Pages -> Admin)-->
                                     <a class="nav-link collapsed" href="javascript:void(0);" data-bs-toggle="collapse" data-bs-target="#appsCollapseUserManagement" aria-expanded="false" aria-controls="appsCollapseUserManagement">
                                         <div class="nav-link-icon"><i data-feather="settings"></i></div> User Management
                                         <div class="sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
@@ -245,14 +244,13 @@ else {
                                                 <div class="nav-link-icon"><i class="fas fa-user-plus"></i></div>Add User</a>
                                             <a class="nav-link" href="user-management-groups-list.php">
                                                 <div class="nav-link-icon"><i class="fas fa-user-friends"></i></div>Groups List</a>
-                                            <a class="nav-link" href="user-management-org-details.php">
-                                                <div class="nav-link-icon"><i class="fas fa-users"></i></div>Organization Details</a>
+                                            
                                         </nav>
                                     </div>
                                     <a class="nav-link" href="calibration.php"><div class="nav-link-icon"><i class="fas fa-compass"></i></div>
                                     Calibration
                                      </a>
-                                    <!-- Nested Sidenav Accordion (Pages -> Error)-->
+
                     <!-- Sidenav Footer-->
                     <div class="sidenav-footer">
                         <div class="sidenav-footer-content">
@@ -458,12 +456,15 @@ else {
                                             <i class="feather-xl text-white-50" data-feather="user"></i>
                                         </div>
                                     </div>
-                                   
                                 </div>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col-lg-6 col-xl-6 mb-6">
+                       
+                      </div>
+                    <br>
+                    <div class="container">
+                      <div class="row">
+                      <div class="col-lg-6 col-xl-6 mb-6">
                                 <div class="card bg-primary text-white h-100">
                                     <div class="card-body">
                                         <div class="d-flex justify-content-between align-items-center">
@@ -476,6 +477,7 @@ else {
                                     </div>
                                 </div>
                             </div>
+                            <br>
                             <div class="col-lg-6 col-xl-6 mb-6">
                                 <div class="card bg-warning text-white h-100">
                                     <div class="card-body">
@@ -486,14 +488,12 @@ else {
                                             </div>
                                             <i class="feather-xl text-white-50" data-feather="target"></i>
                                         </div>
-                                    </div>
-                                   
+                                    </div>     
                                 </div>
                             </div>
                         </div>
                       </div>
-                    <br>
-
+            <br>
         <script src="assets/demo/jquery.min.js"></script>
         <script src="assets/demo/jquery.js"></script>
         <script src="js/index.js"></script>
