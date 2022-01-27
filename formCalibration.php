@@ -5,7 +5,6 @@ require_once "data.php";
 
 require_once "connection.php";
 
-
 if (empty($_SESSION["role"])) {
 	$_SESSION["info"] = "Anda harus login terlebih dahulu.";
 	header("Location: login.php"); 
@@ -40,36 +39,6 @@ else {
 		$_SESSION["success"] = "";
 	}
 }
-
-
-require_once "connection.php";
-
-//space kosong
-if (empty($_SESSION["error"])) {
-	$s_error = "";
-} else {
-	$s_error = $_SESSION["error"];
-	$_SESSION["error"] = "";
-}
-if (empty($_SESSION["warning"])) {
-	$s_warning = "";
-} else {
-	$s_warning = $_SESSION["warning"];
-	$_SESSION["warning"] = "";
-}
-if (empty($_SESSION["info"])) {
-	$s_info = "";
-} else {
-	$s_info = $_SESSION["info"];
-	$_SESSION["info"] = "";
-}
-if (empty($_SESSION["success"])) {
-	$s_success = "";
-} else {
-	$s_success = $_SESSION["success"];
-	$_SESSION["success"] = "";
-}
-
 $e_tot = 0;
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
