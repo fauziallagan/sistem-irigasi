@@ -359,11 +359,11 @@ else {
                                             </div>
                                         </div>
                                         <div class="card-body">
-                                        <div class="card-center">
-                                        <div  id="tegangan"></div>
+                                            <div class="card-center">
+                                                <div id="tegangan">
+                                                </div>
                                             </div>
-                                            
-                                    </div>
+                                        </div>
                                     <div class="card-footer small text-muted">Updated  : <span id="date1"></span></div>
                                 </div>
                             </div>
