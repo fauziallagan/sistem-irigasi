@@ -42,15 +42,13 @@ $e_tot = 0;
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
- 
+    $tipe = saring($_POST["tipe"]);
     $id_mesin = saring($_POST["id_mesin"]);
-    // check if nama only contains letters and whitespace
-
     $pin = saring($_POST["pin"]);
-
     $tegangan_max = saring($_POST["tegangan_max"]);
 	$nilai_analog = saring($_POST["nilai_analog"]);
     $tegangan_terukur = saring($_POST["tegangan_terukur"]);
+
 
   if ($e_tot == 0) {
 	try {
@@ -59,11 +57,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 		$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
 		// prepare sql and bind parameters
-		$stmt = $conn->prepare("INSERT INTO kalibrasi (id_mesin, pin, tegangan_max, nilai_analog, tegangan_terukur)
-		VALUES (:id_mesin, :pin, :tegangan_max, :nilai_analog, :tegangan_terukur)");
+		$stmt = $conn->prepare("INSERT INTO kalibrasi (id_mesin, pin, tipe, tegangan_max, nilai_analog, tegangan_terukur)
+		VALUES (:id_mesin, :pin, :tipe, :tegangan_max, :nilai_analog, :tegangan_terukur)");
 		$stmt->bindValue(':id_mesin', $id_mesin);
 		$stmt->bindValue(':pin', $pin);
-
+        // $stmt->bindValue(':tipe', $tipe);
 		$stmt->bindValue(':tegangan_max', $tegangan_max);
 		$stmt->bindValue(':nilai_analog', $nilai_analog);
 		$stmt->bindValue(':tegangan_terukur', $tegangan_terukur);
@@ -391,43 +389,50 @@ $conn = null;
                             <form action="calibration.php" method="post">
                                             <!-- Form Row-->
                                             <div class="row gx-3">
-                                                <div class="col-md-12">
-                                                    <!-- Form Group (first name)-->
-                                                    <div class="mb-12">
+                                                <div class="col-md-6">
+                                                    <!-- Section 1 -->
+                                                    <div class="mb-6">
                                                         <label class="small mb-1" for="nama">ID Mesin</label>
                                                         <input class="form-control" name = "id_mesin" id="id_mesin" type="text" placeholder="Masukkan ID mesin!. Example : PDM000" required/>
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <br>
-                                            <div class="row gx-3">
-                                                <div class="col-md-12">
-                                                    <!-- Form Group (first name)-->
-                                                    <div class="mb-12">
+
+                                                <div class="col-md-6">
+                                                    <div class="mb-6">
                                                         <label class="small mb-1" for="pin">Pin</label>
                                                         <input class="form-control" name="pin" id="pin" type="text" placeholder="Masukkan Pin!. Example : A1" required/>
                                                     </div>
                                                 </div>
                                             </div>
                                             <br>
-                                           
-                                            <!-- Form Group (email address)            -->
-                                            <div class="mb-3">
-                                                <label class="small mb-1" for="email">Tegangan Maksimal</label>
-                                                <input class="form-control" name="tegangan_max" id="tegangan_max" type="text" placeholder="Masukkan Tegangan Maksimal!. Example : 24" required />
-                                            </div>
-                                            <br>
-                                            <!-- Form Row    -->
+                                               <!-- Section 2 -->
                                             <div class="row gx-3">
                                                 <div class="col-md-6">
-                                                    <!-- Form Group (password)-->
+                                                    <label class="small mb-1" for="tipe">Type</label>
+                                                        <select class="form-select" aria-label="Default select example">
+                                                            <option selected>Silahkan Pilih Tipe :</option>
+                                                            <option value="1" name="digital">Digital</option>
+                                                            <option value="2" name="analog">Analog</option>
+                                                        </select>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="mb-3">
+                                                        <label class="small mb-1" for="email">Tegangan Maksimal</label>
+                                                        <input class="form-control" name="tegangan_max" id="tegangan_max" type="text" placeholder="Masukkan Tegangan Maksimal!. Example : 24" required />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <br>
+                                                 <!-- Section 3 -->
+                                            <div class="row gx-3">
+                                                <div class="col-md-6">
                                                     <div class="mb-3">
                                                         <label class="small mb-1" for="nilai_analog">Nilai Analog</label>
                                                         <input class="form-control" name = "nilai_analog" id="nilai_analog" type="text" placeholder="Masukkan Nilai Analog!. Example : 1023" required/>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
-                                                    <!-- Form Group (confirm password)-->
+                                                  
                                                     <div class="mb-3">
                                                         <label class="small mb-1" for="tegangan Terukur">Tegangan Terukur</label>
                                                         <input class="form-control" name="tegangan_terukur" id="tegangan_terukur" type="text" placeholder="Masukkan Tegangan Terukur!. Example : 20.5" required/>
@@ -437,8 +442,8 @@ $conn = null;
                                             </div>
                                             <br>
                                             <!-- Form Group (create account submit)-->
-                                            <button class="btn btn-primary btn-block" type="submit">Save</button>
-                                            <button class="btn btn-danger btn-block" type="cancel" onclick="history.back()">Batal</button>
+                                            <button class="btn btn-primary btn-block lift rounded-pill " type="submit">Save</button>
+                                            <button class="btn btn-danger btn-block lift rounded-pill " type="cancel" onclick="history.back()">Batal</button>
                                         </form>
                             </div>
                         </div>
