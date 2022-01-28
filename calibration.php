@@ -1,6 +1,6 @@
 <?php
-require_once "data.php";
 session_start();
+require_once "data.php";
 require_once "connection.php";
 
 if (empty($_SESSION["role"])) {
@@ -350,8 +350,14 @@ try{
                                             <div class="page-header-icon"><i class="fas fa-compass"></i></div>
                                             Calibration
                                         </h1>
-                                        <div class="page-header-subtitle"><?php echo $calibration_content; ?> <br>
-                                            <!-- <a href="formCalibration.php"> <button class="btn btn-success mb-3">Calibrasi</button></a> -->
+                                        <div class="page-header-subtitle"><?php echo $calibration_content; ?><br><br>
+                                          <div class="container">
+                                              <div class="row">
+                                                  <div class="col-md-1 offset-md-11">
+                                                  <a href="formCalibration.php" class="btn rounded-pill btn-success btn-lg lift">Calibrasi</a>
+                                                  </div>
+                                              </div>
+                                          </div>
                                         </div>
                                     </div>
                                 </div>
@@ -360,17 +366,20 @@ try{
                     </header>
                     <!-- Main page content-->
                     <div class="container-xl px-4 mt-n10">
-                        <div class="card mb-4">
-                            <div class="card-header mb-4">Table Calibration
-                            </div>
-                                <div class="card-body">
-                           
-                                <table id="datatablesSimple">
+                        <div class="card lg-4">
+                            <div class="col-lg-12">
+                                <div class="card-header lg-6">Table Calibration
+                                </div>
+                            
+                                    <div class="card-body">
+                            
+                                    <table id="datatablesSimple">
                                     <thead>
                                         <tr>
                                             <!-- <th>No</th> -->
                                             <th>ID_Mesin</th>
                                             <th>Pin</th>
+                                            <th>Type</th>
                                             <th>Tegangan Max</th>
                                             <th>Nilai Analog</th>
                                             <th>Tegangan Terukur</th>
@@ -381,8 +390,8 @@ try{
                                         <tr>
                                             <!-- <th>No</th> -->
                                             <th>ID_Mesin</th>
-
                                             <th>Pin</th>
+                                            <th>Type</th>
                                             <th>Tegangan Max</th>
                                             <th>Nilai Analog</th>
                                             <th>Tegangan Terukur</th>
@@ -394,10 +403,11 @@ try{
                                             <tr>
                                                 <td><?php echo htmlspecialchars($rows["id_mesin"])?></td>
                                                 <td><?php echo htmlspecialchars($rows["pin"])?></td>
-                                                <td><?php echo htmlspecialchars($rows["nilai_analog"])?></td>
+                                                <td><?php echo htmlspecialchars($rows["tipe"])?></td>
                                                 <td><?php echo htmlspecialchars($rows["tegangan_max"])?></td>
+                                                <td><?php echo htmlspecialchars($rows["nilai_analog"])?></td>
                                                 <td><?php echo htmlspecialchars($rows["tegangan_terukur"])?></td>
-                                                <td><a href="formCalibration.php"> <button class="btn btn-success mb-3">Calibrasi</button></a></td>
+                                                <td><a href="#" class="rounded-pill btn btn-outline-danger mb-3 lift">Hapus</a></td>
                                             </tr>
                                         <?php endwhile; ?>
                                     </tbody>
