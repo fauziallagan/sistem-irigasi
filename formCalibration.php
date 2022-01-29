@@ -48,7 +48,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $tegangan_max = saring($_POST["tegangan_max"]);
 	$nilai_analog = saring($_POST["nilai_analog"]);
     $tegangan_terukur = saring($_POST["tegangan_terukur"]);
-
+    $faktor_kalibrasi = $tegangan_max / $nilai_analog;
 
   if ($e_tot == 0) {
 	try {
@@ -57,7 +57,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 		$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
 		// prepare sql and bind parameters
-		$stmt = $conn->prepare("INSERT INTO kalibrasi (id_mesin, pin, tipe, tegangan_max, nilai_analog, tegangan_terukur)
+		$stmt = $conn->prepare("INSERT INTO kalibrasi (id_mesin, pin, tipe, tegangan_max, nilai_analog, tegangan_terukur, faktor_kalibrasi)
 		VALUES (:id_mesin, :pin, :tipe, :tegangan_max, :nilai_analog, :tegangan_terukur)");
 		$stmt->bindValue(':id_mesin', $id_mesin);
 		$stmt->bindValue(':pin', $pin);
