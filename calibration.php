@@ -70,6 +70,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	catch(PDOException $e) {
 		$s_error = "\n " . $e->getMessage();
 	}
+    
   }
 } 
 // Koneksi ke database kalibrasi
@@ -383,6 +384,7 @@ try{
                                             <th>Tegangan Max</th>
                                             <th>Nilai Analog</th>
                                             <th>Tegangan Terukur</th>
+                                            <th>Faktor Kalibrasi</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
@@ -395,11 +397,13 @@ try{
                                             <th>Tegangan Max</th>
                                             <th>Nilai Analog</th>
                                             <th>Tegangan Terukur</th>
+                                            <th>Faktor Kalibrasi</th>
                                             <th>Action</th>
                                         </tr>
                                     </tfoot>
                                     <tbody>
                                         <?php while($rows = $row->fetch()):?>
+                                            <?php $result = $rows["tegangan_terukur"] / $rows["nilai_analog"] ?>
                                             <tr>
                                                 <td><?php echo htmlspecialchars($rows["id_mesin"])?></td>
                                                 <td><?php echo htmlspecialchars($rows["pin"])?></td>
@@ -407,6 +411,7 @@ try{
                                                 <td><?php echo htmlspecialchars($rows["tegangan_max"])?></td>
                                                 <td><?php echo htmlspecialchars($rows["nilai_analog"])?></td>
                                                 <td><?php echo htmlspecialchars($rows["tegangan_terukur"])?></td>
+                                                <td><?php echo htmlspecialchars(round($result,3));?></td>
                                                 <td><a href="#" class="rounded-pill btn btn-outline-danger mb-3 lift">Hapus</a></td>
                                             </tr>
                                         <?php endwhile; ?>
