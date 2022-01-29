@@ -38,7 +38,40 @@ else {
 		$_SESSION["success"] = "";
 	}
 }
-    
+
+// Eksperiment Gauge
+try{
+    $pdo = new PDO("mysql:host=$servername; dbname=$dbname", $usernamedb, $passworddb);
+    $sql = 'SELECT nilai_analog, tegangan_terukur FROM kalibrasi'; 
+    $row = $pdo->query($sql);
+    $row->setFetchMode(PDO::FETCH_ASSOC);
+} catch(PDOException $e){
+    die("Connection to Database Failed!. Please Check Database Connection!!" . $e->getMessage());
+}
+while($rows = $row->fetch()){
+    $digital = $rows['tegangan_terukur'] / $rows['nilai_analog'];
+}
+
+try{
+    $pdo_input = new PDO("mysql:host=$servername; dbname=$dbname", $usernamedb, $passworddb);
+    $sql_input = 'SELECT a1, a2, a3, a4, a5, a6, a7, a8  FROM input'; 
+    $row_input = $pdo_input->query($sql_input);
+    $row_input->setFetchMode(PDO::FETCH_ASSOC);
+} catch(PDOException $e){
+    die("Connection to Database Failed!. Please Check Database Connection!!" . $e->getMessage());
+}
+
+while($rows_input = $row_input->fetch()){
+   $analog1 = $rows_input['a1'];
+   $analog2 = $rows_input['a2'];
+   $analog3 = $rows_input['a3'];
+   $analog4 = $rows_input['a4'];
+   $analog5 = $rows_input['a5'];
+   $analog6 = $rows_input['a6'];
+   $analog7 = $rows_input['a7'];
+   $analog8 = $rows_input['a8'];
+}
+
 ?> 
 <!DOCTYPE html>
 <html lang="en">
@@ -66,7 +99,7 @@ else {
             #tegangan { width:  20em; height: 20em; }
             #aki { width:  20em; height: 20em; }
             #regulator { width:  20em; height: 20em; }
-            </style>
+        </style>
     </head>
     <body class="nav-fixed">
         <nav class="topnav navbar navbar-expand shadow justify-content-between justify-content-sm-start navbar-light bg-white" id="sidenavAccordion">
@@ -522,7 +555,8 @@ else {
         <script>
 $(document).ready(function() {
   $('#tegangan').simpleGauge({
-    value:  <?php echo $d1 ;?>,
+    value:  <?php $tegangan = $digital * $analog6 * 3; //edited
+            echo round($tegangan,1)?>,
     min:    20,
     max:    30,
 
@@ -583,7 +617,8 @@ $(document).ready(function() {
 });
 $(document).ready(function() {
   $('#aki').simpleGauge({
-    value:  <?php echo $d2 ;?>,
+    value:  <?php $aki = $digital * $analog2 * 2; //edited
+            echo round($aki,1);?>,
     min:    16,
     max:    26,
 
@@ -643,7 +678,8 @@ $(document).ready(function() {
 });
 $(document).ready(function() {
   $('#regulator').simpleGauge({
-    value:  <?php echo $d3 ;?>,
+    value:  <?php $result = $digital * $analog1; //edited
+        echo round($result, 1);?>,
     min:    6,
     max:    16,
 
