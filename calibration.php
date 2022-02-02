@@ -42,6 +42,7 @@ $e_tot = 0;
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
+    $tipe = saring($_POST['tipe']);
     $tegangan_terukur = saring($_POST["tegangan_terukur"]);
     $id_mesin = saring($_POST["id_mesin"]);
     $nilai_analog = saring($_POST["nilai_analog"]);
@@ -55,13 +56,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 		$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
 		// prepare sql and bind parameters
-        $stmt = $conn->prepare("INSERT INTO kalibrasi (id_mesin, pin, tegangan_max, nilai_analog, tegangan_terukur)
-		VALUES (:id_mesin, :pin, :tegangan_max, :nilai_analog, :tegangan_terukur)");
+        $stmt = $conn->prepare("INSERT INTO kalibrasi (id_mesin, pin, tegangan_max, nilai_analog, tegangan_terukur, tipe)
+		VALUES (:id_mesin, :pin, :tegangan_max, :nilai_analog, :tegangan_terukur, :tipe)");
 		$stmt->bindValue(':id_mesin', $id_mesin);
 		$stmt->bindValue(':pin', $pin);
 		$stmt->bindValue(':tegangan_max', $tegangan_max);
 		$stmt->bindValue(':nilai_analog', $nilai_analog);
 		$stmt->bindValue(':tegangan_terukur', $tegangan_terukur);
+        $stmt->bindValue(':tipe', $tipe);
 		$stmt->execute();
 
 		$s_success = "\n Data Berhasil Di Masukkan.";
@@ -405,14 +407,14 @@ try{
                                         <?php while($rows = $row->fetch()):?>
                                             <?php $result = $rows["tegangan_terukur"] / $rows["nilai_analog"] ?>
                                             <tr>
-                                                <td><?php echo htmlspecialchars($rows["id_mesin"])?></td>
-                                                <td><?php echo htmlspecialchars($rows["pin"])?></td>
-                                                <td><?php echo htmlspecialchars($rows["tipe"])?></td>
+                                                <td><?php echo htmlspecialchars(strtoupper($rows["id_mesin"]))?></td>
+                                                <td><?php echo htmlspecialchars(strtoupper($rows["pin"]))?></td>
+                                                <td><?php echo htmlspecialchars(strtoupper($rows["tipe"]))?></td>
                                                 <td><?php echo htmlspecialchars($rows["tegangan_max"])?></td>
                                                 <td><?php echo htmlspecialchars($rows["nilai_analog"])?></td>
                                                 <td><?php echo htmlspecialchars($rows["tegangan_terukur"])?></td>
                                                 <td><?php echo htmlspecialchars(round($result,3));?></td>
-                                                <td><a href="#" class="rounded-pill btn btn-outline-danger mb-3 lift">Hapus</a></td>
+                                                <td><a href="hapus.php?id_mesin=<?php echo $rows['id_mesin']?>" class="rounded-pill btn btn-outline-danger mb-3 lift disabled">Hapus</a></td>
                                             </tr>
                                         <?php endwhile; ?>
                                     </tbody>

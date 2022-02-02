@@ -57,11 +57,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 		$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
 		// prepare sql and bind parameters
-		$stmt = $conn->prepare("INSERT INTO kalibrasi (id_mesin, pin, tipe, tegangan_max, nilai_analog, tegangan_terukur, faktor_kalibrasi)
-		VALUES (:id_mesin, :pin, :tipe, :tegangan_max, :nilai_analog, :tegangan_terukur)");
+		$stmt = $conn->prepare("INSERT INTO kalibrasi (id_mesin, pin, tipe, tegangan_max, nilai_analog, tegangan_terukur, tipe)
+		VALUES (:id_mesin, :pin, :tipe, :tegangan_max, :nilai_analog, :tegangan_terukur, :tipe)");
 		$stmt->bindValue(':id_mesin', $id_mesin);
 		$stmt->bindValue(':pin', $pin);
-        // $stmt->bindValue(':tipe', $tipe);
+        $stmt->bindValue(':tipe', $tipe);
 		$stmt->bindValue(':tegangan_max', $tegangan_max);
 		$stmt->bindValue(':nilai_analog', $nilai_analog);
 		$stmt->bindValue(':tegangan_terukur', $tegangan_terukur);
@@ -409,10 +409,10 @@ $conn = null;
                                             <div class="row gx-3">
                                                 <div class="col-md-6">
                                                     <label class="small mb-1" for="tipe">Type</label>
-                                                        <select class="form-select" aria-label="Default select example">
+                                                        <select class="form-select" aria-label="Default select example" name="tipe">
                                                             <option selected>Silahkan Pilih Tipe :</option>
-                                                            <option value="1" name="digital">Digital</option>
-                                                            <option value="2" name="analog">Analog</option>
+                                                            <option value="digital">Digital</option>
+                                                            <option value="analog">Analog</option>
                                                         </select>
                                                 </div>
                                                 <div class="col-md-6">
