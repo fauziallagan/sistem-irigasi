@@ -41,9 +41,8 @@ else {
 
 // Eksperimen Gauge
 try{
-    $pdo = new PDO("mysql:host=$servername; dbname=$dbname", $usernamedb, $passworddb);
     $sql = 'SELECT nilai_analog, tegangan_terukur FROM kalibrasi'; 
-    $row = $pdo->query($sql);
+    $row = $connection->query($sql);
     $row->setFetchMode(PDO::FETCH_ASSOC);
 } catch(PDOException $e){
     die("Connection to Database Failed!. Please Check Database Connection!!" . $e->getMessage());
@@ -53,9 +52,9 @@ while($rows = $row->fetch()){
 }
 
 try{
-    $pdo_input = new PDO("mysql:host=$servername; dbname=$dbname", $usernamedb, $passworddb);
+
     $sql_input = 'SELECT a1, a2, a3, a4, a5, a6, a7, a8  FROM input'; 
-    $row_input = $pdo_input->query($sql_input);
+    $row_input = $connection->query($sql_input);
     $row_input->setFetchMode(PDO::FETCH_ASSOC);
 } catch(PDOException $e){
     die("Connection to Database Failed!. Please Check Database Connection!!" . $e->getMessage());

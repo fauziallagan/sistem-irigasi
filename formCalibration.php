@@ -52,12 +52,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
   if ($e_tot == 0) {
 	try {
-		$conn = new PDO("mysql:host=$servername;dbname=$dbname", $usernamedb, $passworddb);
-		// set the PDO error mode to exception
-		$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
 		// prepare sql and bind parameters
-		$stmt = $conn->prepare("INSERT INTO kalibrasi (id_mesin, pin, tipe, tegangan_max, nilai_analog, tegangan_terukur, tipe)
+		$stmt = $connection->prepare("INSERT INTO kalibrasi (id_mesin, pin, tipe, tegangan_max, nilai_analog, tegangan_terukur, tipe)
 		VALUES (:id_mesin, :pin, :tipe, :tegangan_max, :nilai_analog, :tegangan_terukur, :tipe)");
 		$stmt->bindValue(':id_mesin', $id_mesin);
 		$stmt->bindValue(':pin', $pin);
@@ -349,8 +345,7 @@ $conn = null;
                                                 <div class="nav-link-icon"><i class="fas fa-user-plus"></i></div>Add User</a>
                                             <a class="nav-link" href="user-management-groups-list.php">
                                                 <div class="nav-link-icon"><i class="fas fa-user-friends"></i></div>Groups List</a>
-                                            <a class="nav-link" href="user-management-org-details.php">
-                                                <div class="nav-link-icon"><i class="fas fa-users"></i></div>Organization Details</a>
+                                         
                                         </nav>
                                     </div>
                                     <a class="nav-link" href="./calibration.php"><div class="nav-link-icon"><i class="fas fa-compass"></i></div>
