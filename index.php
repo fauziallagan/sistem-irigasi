@@ -39,7 +39,7 @@ else {
 	}
 }
 
-// Eksperiment Gauge
+// Eksperimen Gauge
 try{
     $pdo = new PDO("mysql:host=$servername; dbname=$dbname", $usernamedb, $passworddb);
     $sql = 'SELECT nilai_analog, tegangan_terukur FROM kalibrasi'; 
@@ -555,7 +555,7 @@ while($rows_input = $row_input->fetch()){
         <script>
 $(document).ready(function() {
   $('#tegangan').simpleGauge({
-    value:  <?php $tegangan = $digital * $analog6 * 3; //edited
+    value:  <?php $tegangan = $digital * $analog6; //edited
             echo round($tegangan,1)?>,
     min:    20,
     max:    30,
@@ -617,7 +617,7 @@ $(document).ready(function() {
 });
 $(document).ready(function() {
   $('#aki').simpleGauge({
-    value:  <?php $aki = $digital * $analog2 * 2; //edited
+    value:  <?php $aki = $digital * $analog2; //edited
             echo round($aki,1);?>,
     min:    16,
     max:    26,
