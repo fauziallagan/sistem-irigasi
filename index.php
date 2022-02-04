@@ -329,17 +329,28 @@ while($temperature_rows = $row_temperature->fetch()){
                                         <button class="btn btn-info" onclick="dateTime()" type="submit">Update</button>
                                         </div>
 									</form>
-
                                 </div>
                             </div>
                         </div>
                     </header>
                     <!-- Main page content-->
+                    <!-- Section 1 -->
                     <div class="container-xl px-4 mt-n10">
-                        <!-- Section 1 -->
-                        <div class="row">
-                                <div class="col-lg-3 col-xl-3 mb-3">
-                                    <div class="card bg-danger text-white h-100">
+                        
+                        <div class="rows">
+                        <div class="card card-collapsable">
+                            <a class="card-header" href="#collapseCardExample" data-bs-toggle="collapse" role="button" aria-expanded="true" aria-controls="collapseCardExample">Pantauan
+                                <div class="card-collapsable-arrow">
+                                    <i class="fas fa-chevron-down"></i>
+                                </div>
+                            </a>
+                            <div class="collapse show" id="collapseCardExample">
+                                <br>
+                            <div class="container">
+                                <div class="row">
+                               
+                              <div class="col-lg-3 col-xl-3 mb-3">
+                                    <div class="card bg-teal text-white h-100">
                                     <div class="card-body">
                                         <div class="d-flex justify-content-between align-items-center">
                                             <div class="me-3">
@@ -391,7 +402,7 @@ while($temperature_rows = $row_temperature->fetch()){
                                     </div>
                                 </div>
                                 <div class="col-lg-3 col-xl-3 mb-3">
-                                    <div class="card bg-purple text-white h-100">
+                                    <div class="card bg-orange text-white h-100">
                                     <div class="card-body">
                                         <div class="d-flex justify-content-between align-items-center">
                                             <div class="me-3">
@@ -408,6 +419,12 @@ while($temperature_rows = $row_temperature->fetch()){
                                     </div>
                                 </div>
                             </div>
+                        </div>
+                        </div>
+                         </div>
+                     </div>
+                                
+                            <br>
                         <!-- Section 2 -->
                         <div class="row">
                             <div class="col-lg-4 xl-4 mb-4">
