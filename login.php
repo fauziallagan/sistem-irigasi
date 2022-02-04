@@ -178,17 +178,17 @@ $conn = null;
                                             <!-- Form Group (email address)-->
                                             <div class="mb-3">
                                                 <label class="small mb-1" for="inputEmailAddress">Username</label>
-                                                <input class="form-control" id="inputEmailAddress" type="text" placeholder="Enter Username" name="username" />
+                                                <input class="form-control" id="inputEmailAddress" type="text" placeholder="Enter Username" name="username" required/>
                                             </div>
                                             <!-- Form Group (password)-->
                                             <div class="mb-3">
                                                 <label class="small mb-1" for="inputPassword">Password</label>
-                                                <input class="form-control" id="inputPassword" type="password" placeholder="Enter password" name="password" />
+                                                <input class="form-control" id="inputPassword" type="password" placeholder="Enter password" name="password"required />
                                             </div>
                                             <!-- Form Group (remember password checkbox)-->
                                             <div class="mb-3">
                                                 <div class="form-check">
-                                                    <input class="form-check-input" id="rememberPasswordCheck" type="checkbox" value="" />
+                                                    <input class="form-check-input" id="rememberPasswordCheck" type="checkbox" value=""  />
                                                     <label class="form-check-label" for="rememberPasswordCheck">Remember password</label>
                                                 </div>
                                             </div>
