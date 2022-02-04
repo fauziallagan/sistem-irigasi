@@ -71,6 +71,17 @@ while($rows_input = $row_input->fetch()){
    $analog8 = $rows_input['a8'];
 }
 
+// Eksperiment Ultrasonik
+try{
+    $sql_temperature = 'SELECT temp FROM input';
+    $row_temperature = $connection->query($sql_temperature);
+    $row_temperature->setFetchMode(PDO::FETCH_ASSOC);
+}catch(PDOException $e){
+    die("Database Failed!. Check Database Connection!!". $e->getMessage());
+}
+while($temperature_rows = $row_temperature->fetch()){
+    $temperature = $temperature_rows['temp'];
+}
 ?> 
 <!DOCTYPE html>
 <html lang="en">
@@ -282,17 +293,18 @@ while($rows_input = $row_input->fetch()){
                                     <a class="nav-link" href="calibration.php"><div class="nav-link-icon"><i class="fas fa-compass"></i></div>
                                     Calibration
                                      </a>
-
+                            </div>
+                        </div>
                     <!-- Sidenav Footer-->
                     <div class="sidenav-footer">
                         <div class="sidenav-footer-content">
                             <div class="sidenav-footer-subtitle">Logged in as: </div>
-                            
                             <div class="sidenav-footer-title"><?php echo $role; ?></div>
                         </div>
                     </div>
                 </nav>
             </div>
+        
             <div id="layoutSidenav_content">
                 <main>
                     <header class="page-header page-header-dark bg-gradient-primary-to-secondary pb-10">
@@ -325,55 +337,77 @@ while($rows_input = $row_input->fetch()){
                     <!-- Main page content-->
                     <div class="container-xl px-4 mt-n10">
                         <!-- Section 1 -->
-                        <!-- Example Charts for Dashboard Demo-->
-                        <div class="rows">
-                            <div class="col-lg-12 xl-12 mb-12">
-                                <div class="card card-header-actions h-100">
-                                    <div class="card-header">
-                                            Suhu
-                                        <div class="dropdown no-caret">
-                                                <!-- <button class="btn btn-transparent-dark btn-icon dropdown-toggle" id="areaChartDropdownExample" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="text-gray-500" data-feather="more-vertical"></i></button>
-                                            <div class="dropdown-menu dropdown-menu-end animated--fade-in-up" aria-labelledby="areaChartDropdownExample">
-                                                    <a class="dropdown-item" href="#!">Last 12 Months</a>
-                                                    <a class="dropdown-item" href="#!">Last 30 Days</a>
-                                                    <a class="dropdown-item" href="#!">Last 7 Days</a>
-                                                    <a class="dropdown-item" href="#!">This Month</a>
-                                            </div> -->
+                        <div class="row">
+                                <div class="col-lg-3 col-xl-3 mb-3">
+                                    <div class="card bg-danger text-white h-100">
+                                    <div class="card-body">
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <div class="me-3">
+                                                <div class="text-white-75 small">Suhu</div>
+                                                <div class="text-lg fw-bold"><?php echo $temperature . "&deg;"."C"?></div>
                                             </div>
+                                            <i class="feather-xl text-white-50" data-feather="thermometer"></i>
                                         </div>
-                                        <div class="card-body">
-                                            <div class="chart-area"><canvas id="myAreaChart" width="100%" height="30"></canvas>
-                                            </div>        
                                     </div>
-                                    <div class="card-footer small text-muted">Updated  : <span id="date4"></span></div>
+                                    <div class="card-footer d-flex align-items-center justify-content-between small">
+                                        <a class="text-white stretched-link" href="#!">View Update</a>
+                                        <div class="text-white"><i class="fas fa-angle-right"></i></div>
+                                    </div>
+                                    </div>
                                 </div>
-                                <br>
-                            </div>
-                        
-                            <div class="col-lg-12 xl-12 mb-12">
-                                <div class="card card-header-actions h-100">
-                                    <div class="card-header">
-                                            Tilt
-                                        <div class="dropdown no-caret">
-                                                <!-- <button class="btn btn-transparent-dark btn-icon dropdown-toggle" id="areaChartDropdownExample" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="text-gray-500" data-feather="more-vertical"></i></button>
-                                            <div class="dropdown-menu dropdown-menu-end animated--fade-in-up" aria-labelledby="areaChartDropdownExample">
-                                                    <a class="dropdown-item" href="#!">Last 12 Months</a>
-                                                    <a class="dropdown-item" href="#!">Last 30 Days</a>
-                                                    <a class="dropdown-item" href="#!">Last 7 Days</a>
-                                                    <a class="dropdown-item" href="#!">This Month</a>
-                                            </div> -->
+                                <div class="col-lg-3 col-xl-3 mb-3">
+                                    <div class="card bg-warning text-white h-100">
+                                    <div class="card-body">
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <div class="me-3">
+                                                <div class="text-white-75 lager">Kelembapan</div>
+                                                <div class="text-lg fw-bold">50%</div>
                                             </div>
+                                            <i class="feather-xl text-white-50" data-feather="wind"></i>
                                         </div>
-                                        <div class="card-body">
-                                            <div class="chart-area"><canvas id="tilt-chart" width="100%" height="30"></canvas>
-                                            </div>
                                     </div>
-                                    <div class="card-footer small text-muted">Updated  : <span id="date5"></span></div>
+                                    <div class="card-footer d-flex align-items-center justify-content-between small">
+                                        <a class="text-white stretched-link" href="#!">View Update</a>
+                                        <div class="text-white"><i class="fas fa-angle-right"></i></div>
+                                    </div>
+                                    </div>
                                 </div>
-                            </div>
-                        </div>
-                        <br>
 
+                                <div class="col-lg-3 col-xl-3 mb-3">
+                                    <div class="card bg-success text-white h-100">
+                                    <div class="card-body">
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <div class="me-3">
+                                                <div class="text-white-75 large">Input Digital</div>
+                                                <div class="text-lg fw-bold">Status : HIGH</div>
+                                            </div>
+                                            <i class="feather-xl text-white-50" data-feather="zap"></i>
+                                        </div>
+                                    </div>
+                                    <div class="card-footer d-flex align-items-center justify-content-between small">
+                                        <a class="text-white stretched-link" href="#!">View Update</a>
+                                        <div class="text-white"><i class="fas fa-angle-right"></i></div>
+                                    </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-xl-3 mb-3">
+                                    <div class="card bg-purple text-white h-100">
+                                    <div class="card-body">
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <div class="me-3">
+                                                <div class="text-white-75 small">Output Digital</div>
+                                                <div class="text-lg fw-bold">Status : LOW</div>
+                                            </div>
+                                            <i class="feather-xl text-white-50" data-feather="cpu"></i>
+                                        </div>
+                                    </div>
+                                    <div class="card-footer d-flex align-items-center justify-content-between small">
+                                        <a class="text-white stretched-link" href="#!">View Update</a>
+                                        <div class="text-white"><i class="fas fa-angle-right"></i></div>
+                                    </div>
+                                    </div>
+                                </div>
+                            </div>
                         <!-- Section 2 -->
                         <div class="row">
                             <div class="col-lg-4 xl-4 mb-4">
@@ -446,86 +480,11 @@ while($rows_input = $row_input->fetch()){
                                 </div>
                                 </div>
                             </div>
-                        </div>
-                        <br>
-                      <div class="container">
-                      <div class="row">
-                            <div class="col-lg-4 col-xl-4 mb-4">
-                                <div class="card bg-primary text-white h-100">
-                                    <div class="card-body">
-                                        <div class="d-flex justify-content-between align-items-center">
-                                            <div class="me-3">
-                                                <div class="text-white-75 large">Ultrasonik Depan</div>
-                                                <div class="text-lg fw-bold">0</div>
-                                            </div>
-                                            <i class="feather-xl text-white-50" data-feather="activity"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-xl-4 mb-4">
-                                <div class="card bg-warning text-white h-100">
-                                    <div class="card-body">
-                                        <div class="d-flex justify-content-between align-items-center">
-                                            <div class="me-3">
-                                                <div class="text-white-75 large">Ultrasonik Belakang</div>
-                                                <div class="text-lg fw-bold">0</div>
-                                            </div>
-                                            <i class="feather-xl text-white-50" data-feather="activity"></i>
-                                        </div>
-                                    </div>
-                                   
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-xl-4 mb-4">
-                                <div class="card bg-success text-white h-100">
-                                    <div class="card-body">
-                                        <div class="d-flex justify-content-between align-items-center">
-                                            <div class="me-3">
-                                                <div class="text-white-75 large">Human Detect</div>
-                                                <div class="text-lg fw-bold">0</div>
-                                            </div>
-                                            <i class="feather-xl text-white-50" data-feather="user"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                       
-                      </div>
-                    <br>
-                    <div class="container">
-                      <div class="row">
-                      <div class="col-lg-6 col-xl-6 mb-6">
-                                <div class="card bg-primary text-white h-100">
-                                    <div class="card-body">
-                                        <div class="d-flex justify-content-between align-items-center">
-                                            <div class="me-3">
-                                                <div class="text-white-75 large">Proxy Depan</div>
-                                                <div class="text-lg fw-bold">0</div>
-                                            </div>
-                                            <i class="feather-xl text-white-50" data-feather="target"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <br>
-                            <div class="col-lg-6 col-xl-6 mb-6">
-                                <div class="card bg-warning text-white h-100">
-                                    <div class="card-body">
-                                        <div class="d-flex justify-content-between align-items-center">
-                                            <div class="me-3">
-                                                <div class="text-white-75 large">Proxy Belakang</div>
-                                                <div class="text-lg fw-bold">0</div>
-                                            </div>
-                                            <i class="feather-xl text-white-50" data-feather="target"></i>
-                                        </div>
-                                    </div>     
-                                </div>
-                            </div>
-                        </div>
-                      </div>
-            <br>
+                         </div>
+                    </div>
+                </div>
+            </div>
+                
         <script src="assets/demo/jquery.min.js"></script>
         <script src="assets/demo/jquery.js"></script>
         <script src="js/index.js"></script>
