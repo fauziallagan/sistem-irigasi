@@ -131,44 +131,47 @@ $conn = null;
 </svg>
       <!-- End -->
       <!-- Alert -->
-      <?php 
-      if ($s_success !== "") { ?>
-        <div class="alert alert-success alert-notif d-flex align-items-center" role="alert" id="alert">
-          <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Success:"><use xlink:href="#check-circle-fill"/></svg>
-          <div>
-            <?php echo $s_success; ?>
-            
-            </div>
-          </div>
-          <?php }
-          if ($s_info !== "") { ?>
-          <div class="alert alert-warning alert-notif alert-dismissible fade show" role="alert"id="alert">
-            <?php echo $s_info; ?>
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-          </div>
-        </div>
-        <?php } if ($s_warning !== "") { ?>
-          <div class="alert alert-warning alert-notif d-flex align-items-center" role="alert"id="alert">
-          <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Warning:"><use xlink:href="#exclamation-triangle-fill"/></svg>
-          <div>
-            <?php echo $s_warning; ?>
-          </div>
-        </div>
-          <?php } if ($s_error !== "") { ?>
-            <div class="alert alert-danger alert-notif d-flex align-items-center" role="alert"id="alert">
-              <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
-              <div>
-                 <?php 
-                   echo $s_error; ?>
-                </div>
-            </div>
-            <?php }?>
+      
         <div id="layoutAuthentication">
             <div id="layoutAuthentication_content">
                 <main>
                     <div class="container-xl px-4">
+                      
                         <div class="row justify-content-center">
+                          
                             <div class="col-lg-5">
+                            <?php 
+                               if ($s_success !== "") { ?>
+                                 <div class="alert alert-success alert-notif d-flex align-items-center" role="alert" id="alert">
+                                   <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Success:"><use xlink:href="#check-circle-fill"/></svg>
+                                   <div>
+                                     <?php echo $s_success; ?>
+                                     
+                                     </div>
+                                   </div>
+                                   <?php }
+                                   if ($s_info !== "") { ?>
+                                   <div class="alert alert-warning alert-notif alert-dismissible fade show" role="alert"id="alert">
+                                     <?php echo $s_info; ?>
+                                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                   </div>
+                                 </div>
+                                 <?php } if ($s_warning !== "") { ?>
+                                   <div class="alert alert-warning alert-notif d-flex align-items-center" role="alert"id="alert">
+                                   <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Warning:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+                                   <div>
+                                     <?php echo $s_warning; ?>
+                                   </div>
+                                 </div>
+                                   <?php } if ($s_error !== "") { ?>
+                                     <div class="alert alert-danger alert-notif d-flex align-items-center" role="alert"id="alert">
+                                       <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+                                       <div>
+                                          <?php 
+                                            echo $s_error; ?>
+                                         </div>
+                                     </div>
+                                     <?php }?>
                                 <!-- Basic login form-->
                                 <div class="card shadow-lg border-0 rounded-lg mt-5">
                                     <div class="card-header justify-content-center"><h3 class="fw-light my-4">Login</h3></div>
