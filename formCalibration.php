@@ -5,7 +5,7 @@ require_once "data.php";
 require_once "connection.php";
 
 if (empty($_SESSION["role"])) {
-	$_SESSION["info"] = "Anda harus login terlebih dahulu.";
+	$_SESSION["info"] = "Perhatian! : Anda harus login terlebih dahulu.";
 	header("Location: login.php"); 
 	exit();
 }
@@ -388,14 +388,14 @@ $conn = null;
                                                     <!-- Section 1 -->
                                                     <div class="mb-6">
                                                         <label class="small mb-1" for="nama">ID Mesin</label>
-                                                        <input class="form-control" name = "id_mesin" id="id_mesin" type="text" placeholder="Masukkan ID mesin!. Example : PDM000" required/>
+                                                        <input class="form-control" name = "id_mesin" id="id_mesin" type="text" placeholder="Masukkan ID mesin!. Example : PDM000" required autocomplete="off"/>
                                                     </div>
                                                 </div>
 
                                                 <div class="col-md-6">
                                                     <div class="mb-6">
                                                         <label class="small mb-1" for="pin">Pin</label>
-                                                        <input class="form-control" name="pin" id="pin" type="text" placeholder="Masukkan Pin!. Example : A1" required/>
+                                                        <input class="form-control" name="pin" id="pin" type="text" placeholder="Masukkan Pin!. Example : A1" required autocomplete="off"/>
                                                     </div>
                                                 </div>
                                             </div>
@@ -413,7 +413,7 @@ $conn = null;
                                                 <div class="col-md-6">
                                                     <div class="mb-3">
                                                         <label class="small mb-1" for="email">Tegangan Maksimal</label>
-                                                        <input class="form-control" name="tegangan_max" id="tegangan_max" type="text" placeholder="Masukkan Tegangan Maksimal!. Example : 24" required />
+                                                        <input class="form-control" name="tegangan_max" id="tegangan_max" type="text" placeholder="Masukkan Tegangan Maksimal!. Example : 24" required autocomplete="off"/>
                                                     </div>
                                                 </div>
                                             </div>
@@ -423,14 +423,14 @@ $conn = null;
                                                 <div class="col-md-6">
                                                     <div class="mb-3">
                                                         <label class="small mb-1" for="nilai_analog">Nilai Analog</label>
-                                                        <input class="form-control" name = "nilai_analog" id="nilai_analog" type="text" placeholder="Masukkan Nilai Analog!. Example : 1023" required/>
+                                                        <input class="form-control" name = "nilai_analog" id="nilai_analog" type="text" placeholder="Masukkan Nilai Analog!. Example : 1023" required autocomplete="off"/>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
                                                   
                                                     <div class="mb-3">
                                                         <label class="small mb-1" for="tegangan Terukur">Tegangan Terukur</label>
-                                                        <input class="form-control" name="tegangan_terukur" id="tegangan_terukur" type="text" placeholder="Masukkan Tegangan Terukur!. Example : 20.5" required/>
+                                                        <input class="form-control" name="tegangan_terukur" id="tegangan_terukur" type="text" placeholder="Masukkan Tegangan Terukur!. Example : 20.5" required autocomplete="off"/>
                                                     </div>
                                                 </div>
                                                 
