@@ -53,8 +53,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	try {
 
 		// prepare sql and bind parameters
-        $stmt = $connection->prepare("INSERT INTO kalibrasi (id_mesin, pin, tegangan_max, nilai_analog, tegangan_terukur, tipe)
-		VALUES (:id_mesin, :pin, :tegangan_max, :nilai_analog, :tegangan_terukur, :tipe)");
+        $stmt = $connection->prepare("INSERT INTO kalibrasi (id, id_mesin, pin, tegangan_max, nilai_analog, tegangan_terukur, tipe)
+		VALUES (:id, :id_mesin, :pin, :tegangan_max, :nilai_analog, :tegangan_terukur, :tipe)");
+        $stmt->bindValue(':id', $id);
 		$stmt->bindValue(':id_mesin', $id_mesin);
 		$stmt->bindValue(':pin', $pin);
 		$stmt->bindValue(':tegangan_max', $tegangan_max);
@@ -373,7 +374,6 @@ try{
                                     <table id="datatablesSimple">
                                     <thead>
                                         <tr>
-                                            <!-- <th>No</th> -->
                                             <th>ID_Mesin</th>
                                             <th>Pin</th>
                                             <th>Type</th>
@@ -386,7 +386,6 @@ try{
                                     </thead>
                                     <tfoot>
                                         <tr>
-                                            <!-- <th>No</th> -->
                                             <th>ID_Mesin</th>
                                             <th>Pin</th>
                                             <th>Type</th>
@@ -408,7 +407,8 @@ try{
                                                 <td><?php echo htmlspecialchars($rows["nilai_analog"])?></td>
                                                 <td><?php echo htmlspecialchars($rows["tegangan_terukur"])?></td>
                                                 <td><?php echo htmlspecialchars(round($result,3));?></td>
-                                                <td><a href="hapus.php?id_mesin=<?php echo $rows['id_mesin']?>" class="rounded-pill btn btn-outline-danger mb-3 lift disabled">Hapus</a></td>
+                                                <td><a href="hapus.php?id=<?php echo $rows["id"]?>" class="rounded-pill btn btn-outline-danger mb-3 lift">Hapus</a>
+                                                <a href="edit.php?id=<?php echo $rows["id"]?>" class="rounded-pill btn btn-outline-info mb-3 lift">Edit</a></td>
                                             </tr>
                                         <?php endwhile; ?>
                                     </tbody>
