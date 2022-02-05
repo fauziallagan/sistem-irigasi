@@ -408,7 +408,8 @@ try{
                                                 <td><?php echo htmlspecialchars($rows["tegangan_terukur"])?></td>
                                                 <td><?php echo htmlspecialchars(round($result,3));?></td>
                                                 <td><a href="hapus.php?id=<?php echo $rows["id"]?>" class="rounded-pill btn btn-outline-danger mb-3 lift">Hapus</a>
-                                                <a href="edit.php?id=<?php echo $rows["id"]?>" class="rounded-pill btn btn-outline-info mb-3 lift">Edit</a></td>
+                                                
+                                                </td>
                                             </tr>
                                         <?php endwhile; ?>
                                     </tbody>
