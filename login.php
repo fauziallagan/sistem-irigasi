@@ -60,12 +60,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   
   if ($e_tot == 0) {
 	try {
-		$conn = new PDO("mysql:host=$servername;dbname=$dbname", $usernamedb, $passworddb);
-		// set the PDO error mode to exception
-		$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
 		// prepare sql and bind parameters
-		$stmt = $conn->prepare("SELECT kategori, username, paswd, nama, email FROM pengguna 
+		$stmt = $connection->prepare("SELECT kategori, username, paswd, nama, email FROM pengguna 
 		WHERE username=:username");
 		$stmt->bindValue(':username', $username);
 
@@ -179,12 +175,12 @@ $conn = null;
                                             <!-- Form Group (email address)-->
                                             <div class="mb-3">
                                                 <label class="small mb-1" for="inputEmailAddress">Username</label>
-                                                <input class="form-control" id="inputEmailAddress" type="text" placeholder="Enter Username" name="username" required/>
+                                                <input class="form-control" id="inputEmailAddress" type="text" placeholder="Enter Username" name="username" required autocomplete="off"/>
                                             </div>
                                             <!-- Form Group (password)-->
                                             <div class="mb-3">
                                                 <label class="small mb-1" for="inputPassword">Password</label>
-                                                <input class="form-control" id="inputPassword" type="password" placeholder="Enter password" name="password"required />
+                                                <input class="form-control" id="inputPassword" type="password" placeholder="Enter password" name="password"required autocomplete="off"/>
                                             </div>
                                             <!-- Form Group (remember password checkbox)-->
                                             <div class="mb-3">
