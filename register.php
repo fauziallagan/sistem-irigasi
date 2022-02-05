@@ -88,12 +88,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   
   if ($e_tot == 0) {
 	try {
-		$conn = new PDO("mysql:host=$servername;dbname=$dbname", $usernamedb, $passworddb);
-		// set the PDO error mode to exception
-		$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
 		// prepare sql and bind parameters
-		$stmt = $conn->prepare("INSERT INTO pengguna (kategori, username, paswd, email, nama)
+		$stmt = $connection->prepare("INSERT INTO pengguna (kategori, username, paswd, email, nama)
 		VALUES (:kategori, :username, :paswd, :email, :nama)");
 		$stmt->bindValue(':kategori', $adminRole);
 		$stmt->bindValue(':username', $username);
@@ -194,7 +190,7 @@ $conn = null;
                                                     <!-- Form Group (first name)-->
                                                     <div class="mb-12">
                                                         <label class="small mb-1" for="nama">Name</label>
-                                                        <input class="form-control" name = "nama" id="name" type="text" placeholder="Enter first name" required/>
+                                                        <input class="form-control" name = "nama" id="name" type="text" placeholder="Enter first name" required autocomplete="off"/>
                                                     </div>
                                                 </div>
                                             </div>
@@ -204,7 +200,7 @@ $conn = null;
                                                     <!-- Form Group (first name)-->
                                                     <div class="mb-12">
                                                         <label class="small mb-1" for="username">Username</label>
-                                                        <input class="form-control" name="username" id="username" type="text" placeholder="Enter first name" required/>
+                                                        <input class="form-control" name="username" id="username" type="text" placeholder="Enter first name" required autocomplete="off"/>
                                                     </div>
                                                 </div>
                                             </div>
@@ -212,7 +208,7 @@ $conn = null;
                                             <!-- Form Group (email address)            -->
                                             <div class="mb-3">
                                                 <label class="small mb-1" for="email">Email</label>
-                                                <input class="form-control" name="email" id="inputEmailAddress" type="email" aria-describedby="emailHelp" placeholder="Enter email address" required />
+                                                <input class="form-control" name="email" id="inputEmailAddress" type="email" aria-describedby="emailHelp" placeholder="Enter email address" required autocomplete="off"/>
                                             </div>
                                             <br>
                                             <!-- Form Row    -->
@@ -221,14 +217,14 @@ $conn = null;
                                                     <!-- Form Group (password)-->
                                                     <div class="mb-3">
                                                         <label class="small mb-1" for="password">Password</label>
-                                                        <input class="form-control" name = "password" id="inputPassword" type="password" placeholder="Enter password" required/>
+                                                        <input class="form-control" name = "password" id="inputPassword" type="password" placeholder="Enter password" required autocomplete="off"/>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <!-- Form Group (confirm password)-->
                                                     <div class="mb-3">
                                                         <label class="small mb-1" for="password2">Confirm Password</label>
-                                                        <input class="form-control" name="password2" id="inputConfirmPassword" type="password" placeholder="Confirm password" required/>
+                                                        <input class="form-control" name="password2" id="inputConfirmPassword" type="password" placeholder="Confirm password" required autocomplete="off"/>
                                                     </div>
                                                 </div>
                                             </div>
