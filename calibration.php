@@ -407,7 +407,7 @@ try{
                                                 <td><?php echo htmlspecialchars($rows["nilai_analog"])?></td>
                                                 <td><?php echo htmlspecialchars($rows["tegangan_terukur"])?></td>
                                                 <td><?php echo htmlspecialchars(round($result,3));?></td>
-                                                <td><a href="hapus.php?id=<?php echo $rows["id"]?>" class="rounded-pill btn btn-outline-danger mb-3 lift">Hapus</a>
+                                                <td><a href="hapus.php?id=<?php echo $rows["id"]?>" class="rounded-pill btn btn-outline-danger mb-3 lift disabled" >Hapus</a>  <!-- if feature is on. delete "disabled" --->
                                                 
                                                 </td>
                                             </tr>
