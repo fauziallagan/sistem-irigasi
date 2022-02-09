@@ -1,7 +1,8 @@
-<?php
-session_start();
-require_once "data.php";
+<?php 
 require_once "connection.php";
+require_once "data.php";
+session_start();
+// include "formcalibration.php";
 
 if (empty($_SESSION["role"])) {
 	$_SESSION["info"] = "Anda harus login terlebih dahulu.";
@@ -37,50 +38,30 @@ else {
 		$_SESSION["success"] = "";
 	}
 }
-
-$e_tot = 0;
-
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-
-    $tipe = saring($_POST['tipe']);
-    $tegangan_terukur = saring($_POST["tegangan_terukur"]);
-    $id_mesin = saring($_POST["id_mesin"]);
-    $nilai_analog = saring($_POST["nilai_analog"]);
-    $pin = saring($_POST["pin"]);
-    $tegangan_max = saring($_POST["tegangan_max"]);
-
-  if ($e_tot == 0) {
-	try {
-
-		// prepare sql and bind parameters
-        $stmt = $connection->prepare("INSERT INTO kalibrasi (id, id_mesin, pin, tegangan_max, nilai_analog, tegangan_terukur, tipe)
-		VALUES (:id, :id_mesin, :pin, :tegangan_max, :nilai_analog, :tegangan_terukur, :tipe)");
-        $stmt->bindValue(':id', $id);
-		$stmt->bindValue(':id_mesin', $id_mesin);
-		$stmt->bindValue(':pin', $pin);
-		$stmt->bindValue(':tegangan_max', $tegangan_max);
-		$stmt->bindValue(':nilai_analog', $nilai_analog);
-		$stmt->bindValue(':tegangan_terukur', $tegangan_terukur);
-        $stmt->bindValue(':tipe', $tipe);
-		$stmt->execute();
-
-		$s_success = "\n Data Berhasil Di Masukkan.";
-        
-	}
-	catch(PDOException $e) {
-		$s_error = "\n " . $e->getMessage();
-	}
-    
-  }
-} 
-// Koneksi ke database kalibrasi
 try{
-    $sql = 'SELECT * FROM kalibrasi'; 
-    $row = $connection->query($sql);
-    $row->setFetchMode(PDO::FETCH_ASSOC);
-} catch(PDOException $e){
+    $id = $_GET["id"];
+    $sql_select = "SELECT * FROM kalibrasi WHERE id = $id";
+    $stmt_select = $connection->query($sql_select);
+    $stmt_select->setFetchMode(PDO::FETCH_ASSOC);
+    if($stmt_select){
+        // header("Location calibration.php");
+        $s_success = "\n Data Berhasil Di Masukkan.";
+    }else{
+        header("Location error.php");
+    }
+    foreach($stmt_select as $row_select){
+        $id_mesin = $row_select['id_mesin'];
+        $pin = $row_select['pin'];
+        $tipe = $row_select['tipe'];
+        $tegangan_max = $row_select['tegangan_max'];
+        $nilai_analog = $row_select['nilai_analog'];
+        $tegangan_terukur = $row_select['tegangan_terukur'];
+    }
+}catch(PDOException $e){
     die("Connection to Database Failed!. Please Check Database Connection!!" . $e->getMessage());
 }
+
+   
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -98,6 +79,52 @@ try{
         <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.28.0/feather.min.js" crossorigin="anonymous"></script>
     </head>
     <body class="nav-fixed">
+        <!-- SVG Alert -->
+        <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+        <symbol id="check-circle-fill" fill="currentColor" viewBox="0 0 16 16">
+        <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/>
+        </symbol>
+        <symbol id="info-fill" fill="currentColor" viewBox="0 0 16 16">
+        <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm.93-9.412-1 4.705c-.07.34.029.533.304.533.194 0 .487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703 0-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381 2.29-.287zM8 5.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"/>
+        </symbol>
+        <symbol id="exclamation-triangle-fill" fill="currentColor" viewBox="0 0 16 16">
+        <path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
+        </symbol>
+        </svg>
+        <!-- End -->
+         <!-- Alert -->
+      <?php 
+      if ($s_success !== "") { ?>
+        <div class="alert-success alert-redirect d-flex align-items-center" role="alert" id="alert">
+          <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Success:"><use xlink:href="#check-circle-fill"/></svg>
+          <div>
+            <?php echo $s_success; ?>
+            
+            </div>
+          </div>
+          <?php }
+          if ($s_info !== "") { ?>
+          <div class="alert alert-warning alert-notif alert-dismissible fade show" role="alert"id="alert">
+            <?php echo $s_info; ?>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
+        </div>
+        <?php } if ($s_warning !== "") { ?>
+          <div class="alert alert-warning alert-notif d-flex align-items-center" role="alert"id="alert">
+          <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Warning:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+          <div>
+            <?php echo $s_warning; ?>
+          </div>
+        </div>
+          <?php } if ($s_error !== "") { ?>
+            <div class="alert alert-danger  alert-notif d-flex align-items-center" role="alert"id="alert">
+              <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+              <div>
+                 <?php 
+                   echo $s_error; ?>
+                </div>
+            </div>
+            <?php }?>
     <nav class="topnav navbar navbar-expand shadow justify-content-between justify-content-sm-start navbar-light bg-white" id="sidenavAccordion">              
             <!-- Sidenav Toggle Button-->
             <button class="btn btn-icon btn-transparent-dark order-1 order-lg-0 me-2 ms-lg-2 me-lg-0" id="sidebarToggle"><i data-feather="menu"></i></button>
@@ -114,27 +141,12 @@ try{
                     <div class="input-group-text"><i data-feather="search"></i></div>
                 </div>
             </form>
-      <!-- SVG Alert -->
-      <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
-        <symbol id="check-circle-fill" fill="currentColor" viewBox="0 0 16 16">
-        <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/>
-        </symbol>
-        <symbol id="info-fill" fill="currentColor" viewBox="0 0 16 16">
-        <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm.93-9.412-1 4.705c-.07.34.029.533.304.533.194 0 .487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703 0-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381 2.29-.287zM8 5.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"/>
-        </symbol>
-        <symbol id="exclamation-triangle-fill" fill="currentColor" viewBox="0 0 16 16">
-        <path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
-        </symbol>
-        </svg>
-        <!-- End -->
-         <!-- Alert -->
-      <?php 
+            <?php 
       if ($s_success !== "") { ?>
-        <div class=" alert alert-success alert-notif d-flex align-items-center" role="alert" id="alert">
+        <div class="alert-success d-flex align-items-center" role="alert" id="alert">
           <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Success:"><use xlink:href="#check-circle-fill"/></svg>
           <div>
             <?php echo $s_success; ?>
-            
             </div>
           </div>
           <?php }
@@ -279,7 +291,7 @@ try{
                                 Dashboards
                             
                             </a>
-                            <a class="nav-link" href="tables.php"><div class="nav-link-icon"><i class="fas fa-chart-line"></i></div>
+                            <a class="nav-link" href="./tables.php"><div class="nav-link-icon"><i class="fas fa-chart-line"></i></div>
                                 Log Data 
                             </a>
                       
@@ -323,9 +335,10 @@ try{
                                                 <div class="nav-link-icon"><i class="fas fa-user-plus"></i></div>Add User</a>
                                             <a class="nav-link" href="user-management-groups-list.php">
                                                 <div class="nav-link-icon"><i class="fas fa-user-friends"></i></div>Groups List</a>
+                                         
                                         </nav>
                                     </div>
-                                    <a class="nav-link" href="calibration.php"><div class="nav-link-icon"><i class="fas fa-compass"></i></div>
+                                    <a class="nav-link" href="./calibration.php"><div class="nav-link-icon"><i class="fas fa-compass"></i></div>
                                     Calibration </a>
                     <!-- Sidenav Footer-->
                     <div class="sidenav-footer">
@@ -337,7 +350,6 @@ try{
                 </nav>
             </div>
             <div id="layoutSidenav_content">
-                
                 <main>
                     <header class="page-header page-header-dark bg-gradient-primary-to-secondary pb-10">
                         <div class="container-xl px-4">
@@ -348,15 +360,7 @@ try{
                                             <div class="page-header-icon"><i class="fas fa-compass"></i></div>
                                             Calibration
                                         </h1>
-                                        <div class="page-header-subtitle"><?php echo $calibration_content; ?><br><br>
-                                          <div class="container">
-                                              <div class="row">
-                                                  <div class="col-md-1 offset-md-11">
-                                                  <a href="formCalibration.php" class="btn rounded-pill btn-success btn-lg lift">Calibrasi</a>
-                                                  </div>
-                                              </div>
-                                          </div>
-                                        </div>
+                                        <div class="page-header-subtitle"><?php echo $calibration_content;?></div>
                                     </div>
                                 </div>
                             </div>
@@ -364,59 +368,74 @@ try{
                     </header>
                     <!-- Main page content-->
                     <div class="container-xl px-4 mt-n10">
-                        <div class="card lg-4">
-                            <div class="col-lg-12">
-                                <div class="card-header lg-6">Table Calibration
-                                </div>
-                            
-                                    <div class="card-body">
-                            
-                                    <table id="datatablesSimple">
-                                    <thead>
-                                        <tr>
-                                            <th>ID_Mesin</th>
-                                            <th>Pin</th>
-                                            <th>Type</th>
-                                            <th>Tegangan Maksimal</th>
-                                            <th>Nilai Analog</th>
-                                            <th>Tegangan Terukur</th>
-                                            <th>Faktor Kalibrasi</th>
-                                            <th>Action</th>
-                                        </tr>
-                                    </thead>
-                                    <tfoot>
-                                        <tr>
-                                            <th>ID_Mesin</th>
-                                            <th>Pin</th>
-                                            <th>Type</th>
-                                            <th>Tegangan Maksimal</th>
-                                            <th>Nilai Analog</th>
-                                            <th>Tegangan Terukur</th>
-                                            <th>Faktor Kalibrasi</th>
-                                            <th>Action</th>
-                                        </tr>
-                                    </tfoot>
-                                    <tbody>
-                                        <?php while($rows = $row->fetch()):?>
-                                            <?php $result = $rows["tegangan_terukur"] / $rows["nilai_analog"] ?>
-                                            <tr>
-                                                <td><?php echo htmlspecialchars(strtoupper($rows["id_mesin"]))?></td>
-                                                <td><?php echo htmlspecialchars(strtoupper($rows["pin"]))?></td>
-                                                <td><?php echo htmlspecialchars(strtoupper($rows["tipe"]))?></td>
-                                                <td><?php echo htmlspecialchars($rows["tegangan_max"])?></td>
-                                                <td><?php echo htmlspecialchars($rows["nilai_analog"])?></td>
-                                                <td><?php echo htmlspecialchars($rows["tegangan_terukur"])?></td>
-                                                <td><?php echo htmlspecialchars(round($result,3));?></td>
-                                                <td>
-                                                <a class="btn btn-datatable btn-icon btn-transparent-dark me-2 disabled" href="hapus.php?id=<?php echo $rows["id"]?>" onclick="return confirm('yakin?');"><i data-feather="trash-2"></i></a>
-                                                <a class="btn btn-datatable btn-icon btn-transparent-dark" data-toggle="tooltip" title="Edit" href="edit.php?id=<?php echo $rows["id"]?>"><i data-feather="edit"></i></a>
-                                                </td>
-                                            </tr>
-                                        <?php endwhile; ?>
-                                    </tbody>
-                                </table>
+                        <div class="card mb-4">
+                            <div class="card-header">Table Calibration</div>
+                            <div class="card-body">
+                            <form action="update.php" method="post">
+                                          <!-- hidden input -->
+                                          <input type="hidden" name="id" value="<?php echo $id; ?>">
+                                            <!-- Form Row-->
+                                            <div class="row gx-3">
+                                                <div class="col-md-6">
+                                                    <!-- Section 1 -->
+                                                    <div class="mb-6">
+                                                        <label class="small mb-1" for="nama">ID_Mesin</label>
+                                                        <input class="form-control" name = "id_mesin" id="id_mesin" type="text" value="<?php echo $id_mesin;?>" readonly = "readonly"/>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-6">
+                                                    <div class="mb-6">
+                                                        <label class="small mb-1" for="pin">Pin</label>
+                                                        <input class="form-control" name="pin" id="pin" type="text"value="<?php echo $pin;?>" placeholder="Masukkan Pin!. Example : A1" required autocomplete="off"/>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <br>
+                                               <!-- Section 2 -->
+                                            <div class="row gx-3">
+                                                <div class="col-md-6">
+                                                    <label class="small mb-1" for="tipe">Type</label>
+                                                        <select class="form-select" aria-label="Default select example" name="tipe">
+                                                            <option selected>Silahkan Pilih Tipe :</option>
+                                                            <option value="digital">Digital</option>
+                                                            <option value="analog">Analog</option>
+                                                        </select>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="mb-3">
+                                                        <label class="small mb-1" for="email">Tegangan Maksimal</label>
+                                                        <input class="form-control" name="tegangan_max" id="tegangan_max" type="text" value="<?php echo $tegangan_max;?>" placeholder="Masukkan Tegangan Maksimal!. Example : 24" required autocomplete="off"/>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <br>
+                                                 <!-- Section 3 -->
+                                            <div class="row gx-3">
+                                                <div class="col-md-6">
+                                                    <div class="mb-3">
+                                                        <label class="small mb-1" for="nilai_analog">Nilai Analog</label>
+                                                        <input class="form-control" name = "nilai_analog" id="nilai_analog" type="text" value="<?php echo $nilai_analog;?>" placeholder="Masukkan Nilai Analog!. Example : 1023" required autocomplete="off"/>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                  
+                                                    <div class="mb-3">
+                                                        <label class="small mb-1" for="tegangan Terukur">Tegangan Terukur</label>
+                                                        <input class="form-control" name="tegangan_terukur" id="tegangan_terukur" type="text" value="<?php echo $tegangan_terukur;?>" placeholder="Masukkan Tegangan Terukur!. Example : 20.5" required autocomplete="off"/>
+                                                    </div>
+                                                </div>
+                                                
+                                            </div>
+                                            <br>
+                                            <!-- Form Group (create account submit)-->
+                                            <button class="btn btn-blue btn-block lift rounded-pill " name="update" type="submit">Update</button>
+                                            <button class="btn btn-danger btn-block lift rounded-pill " name = "cancel" type="batal" onclick="history.back()">Batal</button>
+                                        </form>
                             </div>
                         </div>
+                      
+                    </div>
                 </main>
                 <footer class="footer-admin mt-auto footer-light">
                     <div class="container-xl px-4">
@@ -437,6 +456,6 @@ try{
         <script src="js/scripts.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
         <script src="js/datatables/datatables-simple-demo.js"></script>
-        <script src="https://code.jquery.com/jquery-latest.js" type="text/javascript" charset="utf-8"></script>
     </body>
 </html>
+
