@@ -71,7 +71,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   }
 }
 
-$conn = null;
+$connection = null;
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -79,8 +79,8 @@ $conn = null;
         <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-        <meta name="description" content="" />
-        <meta name="author" content="" />
+        <meta name="description" content="Predictive Maintenance (PdM)"/>
+        <meta name="author" content="Sari Technology"/>
         <title>Log Data PdM</title>
         <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
         <link href="css/styles.css" rel="stylesheet" />
