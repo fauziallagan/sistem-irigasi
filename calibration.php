@@ -40,7 +40,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 } 
 // Koneksi ke database kalibrasi
 try{
-    $sql = 'SELECT * FROM kalibrasi WHERE is_deleted = false'; // Edited! Where is_deleted = false (soft deleted)
+    $sql = "SELECT * FROM kalibrasi WHERE is_deleted = 0"; // Edited! Where is_deleted = false (soft deleted)
     $row = $connection->query($sql);
     $row->setFetchMode(PDO::FETCH_ASSOC);
 } catch(PDOException $e){
