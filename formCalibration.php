@@ -1,43 +1,7 @@
 <?php
-
-session_start();
 require_once "data.php";
-require_once "connection.php";
+require "session.php";
 
-if (empty($_SESSION["role"])) {
-	$_SESSION["info"] = "Perhatian! : Anda harus login terlebih dahulu.";
-	header("Location: login.php"); 
-	exit();
-}
-else {
-    $role = $_SESSION["role"];
-	$nama = $_SESSION["nama"];
-    $email = $_SESSION["email"];
-	if (empty($_SESSION["error"])) {
-		$s_error = "";
-	} else {
-		$s_error = $_SESSION["error"];
-		$_SESSION["error"] = "";
-	}
-	if (empty($_SESSION["warning"])) {
-		$s_warning = "";
-	} else {
-		$s_warning = $_SESSION["warning"];
-		$_SESSION["warning"] = "";
-	}
-	if (empty($_SESSION["info"])) {
-		$s_info = "";
-	} else {
-		$s_info = $_SESSION["info"];
-		$_SESSION["info"] = "";
-	}
-	if (empty($_SESSION["success"])) {
-		$s_success = "";
-	} else {
-		$s_success = $_SESSION["success"];
-		$_SESSION["success"] = "";
-	}
-}
 $e_tot = 0;
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -348,7 +312,7 @@ $connection = null;
                                          
                                         </nav>
                                     </div>
-                                    <a class="nav-link" href="./calibration.php"><div class="nav-link-icon"><i class="fas fa-compass"></i></div>
+                                    <a class="nav-link" href="calibration.php"><div class="nav-link-icon"><i class="fas fa-compass"></i></div>
                                     Calibration </a>
                     <!-- Sidenav Footer-->
                     <div class="sidenav-footer">

@@ -1,43 +1,6 @@
 <?php
 require_once "data.php";
-session_start();
-require_once "connection.php";
-
-
-if (empty($_SESSION["role"])) {
-	$_SESSION["info"] = "Anda harus login terlebih dahulu.";
-	header("Location: login.php"); 
-	exit();
-}
-else {
-    $role = $_SESSION["role"];
-	$nama = $_SESSION["nama"];
-    $email = $_SESSION["email"];
-	if (empty($_SESSION["error"])) {
-		$s_error = "";
-	} else {
-		$s_error = $_SESSION["error"];
-		$_SESSION["error"] = "";
-	}
-	if (empty($_SESSION["warning"])) {
-		$s_warning = "";
-	} else {
-		$s_warning = $_SESSION["warning"];
-		$_SESSION["warning"] = "";
-	}
-	if (empty($_SESSION["info"])) {
-		$s_info = "";
-	} else {
-		$s_info = $_SESSION["info"];
-		$_SESSION["info"] = "";
-	}
-	if (empty($_SESSION["success"])) {
-		$s_success = "";
-	} else {
-		$s_success = $_SESSION["success"];
-		$_SESSION["success"] = "";
-	}
-}
+require "session.php";
 
 // Eksperimen Gauge
 try{
@@ -119,15 +82,8 @@ while($temperature_rows = $row_temperature->fetch()){
             <!-- * * Tip * * You can use text or an image for your navbar brand.-->
             <!-- * * * * * * When using an image, we recommend the SVG format.-->
             <!-- * * * * * * Dimensions: Maximum height: 32px, maximum width: 240px-->
-            <a class="navbar-brand pe-3 ps-4 ps-lg-2" href="./index.php">PdM</a>
+            <a class="navbar-brand pe-3 ps-4 ps-lg-2" href="index.php">PdM</a>
             <!-- Navbar Search Input-->
-            <!-- * * Note: * * Visible only on and above the lg breakpoint-->
-            <form class="form-inline me-auto d-none d-lg-block me-3">
-                <div class="input-group input-group-joined input-group-solid">
-                    <input class="form-control pe-0" type="search" placeholder="Search" aria-label="Search" />
-                    <div class="input-group-text"><i data-feather="search"></i></div>
-                </div>
-            </form>
             <!-- Navbar Items-->
             <ul class="navbar-nav align-items-center ms-auto">
               
