@@ -1,10 +1,8 @@
 <?php 
-
-include "connection.php";
-
+require_once "connection.php";
 try{
     $id = saring($_GET['id']);
-    $sql = "DELETE FROM kalibrasi WHERE id=:id";
+    $sql = "UPDATE  kalibrasi SET is_deleted = true WHERE id=:id"; // Edited! Where is_deleted = true (soft deleted)
     $stmt = $connection->prepare($sql);
     $stmt->execute([':id'=>$id]);
     if($stmt){
@@ -12,8 +10,6 @@ try{
     }else{
         header("Location: error.php"); 
     }
-
-
 }catch(PDOException $e){
     echo $e->getMessage();
 }
