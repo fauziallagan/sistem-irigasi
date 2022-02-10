@@ -1,42 +1,7 @@
 <?php
-session_start();
 require_once "data.php";
-require_once "connection.php";
 
-if (empty($_SESSION["role"])) {
-	$_SESSION["info"] = "Anda harus login terlebih dahulu.";
-	header("Location: login.php"); 
-	exit();
-}
-else {
-    $role = $_SESSION["role"];
-	$nama = $_SESSION["nama"];
-    $email = $_SESSION["email"];
-	if (empty($_SESSION["error"])) {
-		$s_error = "";
-	} else {
-		$s_error = $_SESSION["error"];
-		$_SESSION["error"] = "";
-	}
-	if (empty($_SESSION["warning"])) {
-		$s_warning = "";
-	} else {
-		$s_warning = $_SESSION["warning"];
-		$_SESSION["warning"] = "";
-	}
-	if (empty($_SESSION["info"])) {
-		$s_info = "";
-	} else {
-		$s_info = $_SESSION["info"];
-		$_SESSION["info"] = "";
-	}
-	if (empty($_SESSION["success"])) {
-		$s_success = "";
-	} else {
-		$s_success = $_SESSION["success"];
-		$_SESSION["success"] = "";
-	}
-}
+require "session.php";
 
 $e_tot = 0;
 
@@ -75,7 +40,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 } 
 // Koneksi ke database kalibrasi
 try{
-    $sql = 'SELECT * FROM kalibrasi'; 
+    $sql = 'SELECT * FROM kalibrasi WHERE is_deleted = false'; // Edited! Where is_deleted = false (soft deleted)
     $row = $connection->query($sql);
     $row->setFetchMode(PDO::FETCH_ASSOC);
 } catch(PDOException $e){
@@ -408,8 +373,13 @@ try{
                                                 <td><?php echo htmlspecialchars($rows["tegangan_terukur"])?></td>
                                                 <td><?php echo htmlspecialchars(round($result,3));?></td>
                                                 <td>
-                                                <a class="btn btn-datatable btn-icon btn-transparent-dark me-2 disabled" href="hapus.php?id=<?php echo $rows["id"]?>" onclick="return confirm('yakin?');"><i data-feather="trash-2"></i></a>
-                                                <a class="btn btn-datatable btn-icon btn-transparent-dark" data-toggle="tooltip" title="Edit" href="edit.php?id=<?php echo $rows["id"]?>"><i data-feather="edit"></i></a>
+                                                    <a class="btn btn-datatable btn-icon btn-transparent-dark me-2" href="hapus.php?id=<?php echo $rows["id"]?>" onclick="return confirm('Data Akan Dihapus. Yakin?');" data-toggle="tooltip" title="Hapus Data"><i data-feather="trash-2"></i></a> 
+                                                    
+                                                    <a class="btn btn-datatable btn-icon btn-transparent-dark" data-toggle="tooltip" 
+                                                    title="Update Data" href="update.php?id=<?php echo $rows["id"]?>"><i data-feather="edit"></i></a>
+
+                                                    <a class="btn btn-datatable btn-icon btn-transparent-dark" data-toggle="tooltip" 
+                                                    title="View Data" href="view.php?id=<?php echo $rows["id"]?>"><i data-feather="eye"></i></a>
                                                 </td>
                                             </tr>
                                         <?php endwhile; ?>
