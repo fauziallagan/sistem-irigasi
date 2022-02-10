@@ -40,9 +40,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 } 
 // Koneksi ke database kalibrasi
 try{
-    $sql = "SELECT * FROM kalibrasi WHERE is_deleted = 0"; // Edited! Where is_deleted = false (soft deleted)
-    $row = $connection->query($sql);
+    $sql = "SELECT * FROM kalibrasi WHERE is_deleted = false"; // Edited! Where is_deleted = false (soft deleted)
+    $row = $connection->prepare($sql);
     $row->setFetchMode(PDO::FETCH_ASSOC);
+    $row->execute();
 } catch(PDOException $e){
     die("Connection to Database Failed!. Please Check Database Connection!!" . $e->getMessage());
 }
@@ -375,7 +376,7 @@ try{
                                                 <td>
                                                     <a class="btn btn-datatable btn-icon btn-transparent-dark me-2" href="hapus.php?id=<?php echo $rows["id"]?>" onclick="return confirm('Data Akan Dihapus. Yakin?');" data-toggle="tooltip" title="Hapus Data"><i data-feather="trash-2"></i></a> 
                                                     
-                                                    <a class="btn btn-datatable btn-icon btn-transparent-dark" data-toggle="tooltip" 
+                                                    <a class="btn btn-datatable btn-icon btn-transparent-dark me-2" data-toggle="tooltip" 
                                                     title="Update Data" href="update.php?id=<?php echo $rows["id"]?>"><i data-feather="edit"></i></a>
 
                                                     <a class="btn btn-datatable btn-icon btn-transparent-dark" data-toggle="tooltip" 

@@ -2,7 +2,7 @@
 require_once "connection.php";
 try{
     $id = saring($_GET['id']);
-    $sql = "UPDATE  kalibrasi SET is_deleted = 1 WHERE id=:id"; // Edited! Where is_deleted = true (soft deleted)
+    $sql = "UPDATE  kalibrasi SET is_deleted = true WHERE id=:id"; // Edited! Where is_deleted = true (soft deleted)
     $stmt = $connection->prepare($sql);
     $stmt->execute([':id'=>$id]);
     if($stmt){
