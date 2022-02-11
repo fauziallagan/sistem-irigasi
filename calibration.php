@@ -17,9 +17,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	try {
 
 		// prepare sql and bind parameters
-        $stmt = $connection->prepare("INSERT INTO kalibrasi (id, id_mesin, pin, tegangan_max, nilai_analog, tegangan_terukur, tipe)
-		VALUES (:id, :id_mesin, :pin, :tegangan_max, :nilai_analog, :tegangan_terukur, :tipe)");
-        $stmt->bindValue(':id', $id);
+        $stmt = $connection->prepare("INSERT INTO kalibrasi (id_mesin, pin, tegangan_max, nilai_analog, tegangan_terukur, tipe)
+		VALUES ( :id_mesin, :pin, :tegangan_max, :nilai_analog, :tegangan_terukur, :tipe)");
+        // $stmt->bindValue(':id', $id);
 		$stmt->bindValue(':id_mesin', $id_mesin);
 		$stmt->bindValue(':pin', $pin);
 		$stmt->bindValue(':tegangan_max', $tegangan_max);
@@ -388,18 +388,7 @@ try{
                             </div>
                         </div>
                 </main>
-                <footer class="footer-admin mt-auto footer-light">
-                    <div class="container-xl px-4">
-                        <div class="row">
-                            <div class="col-md-6 small">Copyright &copy; PT SARI TEKNOLOGI 2022</div>
-                            <div class="col-md-6 text-md-end small">
-                                <a href="#!">Privacy Policy</a>
-                                &middot;
-                                <a href="#!">Terms &amp; Conditions</a>
-                            </div>
-                        </div>
-                    </div>
-                </footer>
+               <?php include "footer.php";?>
             </div>
         </div>
         <script src="js/index.js" ></script>
