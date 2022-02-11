@@ -4,7 +4,8 @@ require "session.php";
 
 // Eksperimen Gauge
 try{
-    $sql = 'SELECT nilai_analog, tegangan_terukur, id_mesin FROM kalibrasi'; 
+    $id = saring($_GET['id']);
+    $sql = "SELECT nilai_analog, tegangan_terukur, id_mesin FROM kalibrasi WHERE id=$id"; 
     $row = $connection->query($sql);
     $row->setFetchMode(PDO::FETCH_ASSOC);
 } catch(PDOException $e){
