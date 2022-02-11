@@ -1,5 +1,14 @@
 <?php 
 require "session.php";
+try {
+$sql_user = 'SELECT * FROM pengguna';
+$row = $connection->query($sql_user);
+$row->setFetchMode(PDO::FETCH_ASSOC);
+$row->execute();
+}catch(PDOException $e){
+    $s_error = "\n " . $e->getMessage();
+
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">

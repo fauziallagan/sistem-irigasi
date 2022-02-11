@@ -1,6 +1,5 @@
 <?php
 require_once "data.php";
-
 require "session.php";
 
 $e_tot = 0;
