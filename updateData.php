@@ -12,11 +12,11 @@ if (isset($_POST['update'])){
 	try {
         // $id = $_GET["id"];
 		// prepare sql and bind parameters
-        $sql_update = "UPDATE kalibrasi SET id_mesin ='$id_mesin', pin ='$pin', tipe='$tipe', tegangan_max =$tegangan_max,nilai_analog =$nilai_analog, tegangan_terukur = $tegangan_terukur WHERE id_mesin = $id";
+        $sql_update = "UPDATE kalibrasi SET id_mesin ='$id_mesin', pin ='$pin', tipe='$tipe', tegangan_max =$tegangan_max,nilai_analog =$nilai_analog, tegangan_terukur = $tegangan_terukur WHERE id_mesin = '$id'";
 		$stmt = $connection->prepare($sql_update);
 		
-        if($stmt->execute()){header("Location:calibration.php");
-		    // $s_success = "\n Data Berhasil Di Masukkan.";
+        if($stmt->execute()){
+            header("Location:calibration.php");
         }else{
             $s_error = "\n Data <h1> Gagal </h1> diperbaharui!";
         }
@@ -25,7 +25,7 @@ if (isset($_POST['update'])){
 		$s_error = "\n " . $e->getMessage();
 	}
 }else{
-    header("Location:calibration.php");
+	header("Location:calibration.php");
 }
 
 ?>

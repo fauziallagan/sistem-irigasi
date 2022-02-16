@@ -6,11 +6,7 @@ try{
     $sql_select = "SELECT * FROM kalibrasi WHERE id_mesin = '$id'";
     $stmt_select = $connection->query($sql_select);
     $stmt_select->setFetchMode(PDO::FETCH_ASSOC);
-    if($stmt_select){
-        header("Location calibration.php");
-    }else{
-        header("Location error.php");
-    }
+
     foreach($stmt_select as $row_select){
         $id_mesin = $row_select['id_mesin'];
         $pin = $row_select['pin'];

@@ -25,9 +25,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 		$stmt->bindValue(':tegangan_max', $tegangan_max);
 		$stmt->bindValue(':nilai_analog', $nilai_analog);
 		$stmt->bindValue(':tegangan_terukur', $tegangan_terukur);
-		$stmt->execute();
+		if($stmt->execute()){
+            $s_success = "\n Data Berhasil Di Masukkan.";
+            header("Location : calibration.php");
+        }else{
+            header("Location: error.php");
+        }
 
-		$s_success = "\n Data Berhasil Di Masukkan.";
 	}
 	catch(PDOException $e) {
 		$s_error = "\n " . $e->getMessage();
