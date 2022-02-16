@@ -2,8 +2,8 @@
 require_once "data.php";
 require "session.php";
 try{
-    $id = $_GET["id"];
-    $sql_select = "SELECT * FROM kalibrasi WHERE id = $id";
+    $id = $_GET["id_mesin"]; // edited
+    $sql_select = "SELECT * FROM kalibrasi WHERE id_mesin = '$id'";
     $stmt_select = $connection->query($sql_select);
     $stmt_select->setFetchMode(PDO::FETCH_ASSOC);
     if($stmt_select){
@@ -392,7 +392,7 @@ try{
                                             <br>
                                             <!-- Form Group (create account submit)-->
                                             <button class="btn btn-blue btn-block lift rounded-pill " name="update" type="submit">Update</button>
-                                            <!-- <button class="btn btn-danger btn-block lift rounded-pill " name = "cancel" type="batal" href="calibration.php">Batal</button> -->
+                                            <button class="btn btn-danger btn-block lift rounded-pill " type="submit" href="calibration.php">Batal</button>
                                         </form>
                             </div>
                         </div>

@@ -373,13 +373,13 @@ try{
                                                 <td><?php echo htmlspecialchars($rows["tegangan_terukur"])?></td>
                                                 <td><?php echo htmlspecialchars(round($result,3));?></td>
                                                 <td>
-                                                    <a class="btn btn-datatable btn-icon btn-transparent-dark me-2" href="hapus.php?id=<?php echo $rows["id"]?>" onclick="return confirm('Data Akan Dihapus. Yakin?');" data-toggle="tooltip" title="Hapus Data"><i data-feather="trash-2"></i></a> 
+                                                    <a class="btn btn-datatable btn-icon btn-transparent-dark me-2" href="hapus.php?id_mesin=<?php echo $rows["id_mesin"]?>" onclick="return confirm('Data Akan Dihapus. Yakin?');" data-toggle="tooltip" title="Hapus Data"><i data-feather="trash-2"></i></a> 
                                                     
                                                     <a class="btn btn-datatable btn-icon btn-transparent-dark me-2" data-toggle="tooltip" 
-                                                    title="Update Data" href="update.php?id=<?php echo $rows["id"]?>"><i data-feather="edit"></i></a>
+                                                    title="Update Data" href="update.php?id_mesin=<?php echo $rows["id_mesin"]?>"><i data-feather="edit"></i></a>
 
                                                     <a class="btn btn-datatable btn-icon btn-transparent-dark" data-toggle="tooltip" 
-                                                    title="View Data" href="view.php?id=<?php echo $rows["id"]?>"><i data-feather="eye"></i></a>
+                                                    title="View Data" href="view.php?id_mesin=<?php echo $rows["id_mesin"]?>"><i data-feather="eye"></i></a>
                                                 </td>
                                             </tr>
                                         <?php endwhile; ?>

@@ -1,10 +1,10 @@
 <?php 
 require_once "connection.php";
 try{
-    $id = saring($_GET['id']);
-    $sql = "UPDATE  kalibrasi SET is_deleted = true WHERE id=:id"; // Edited! Where is_deleted = true (soft deleted)
+    $id = saring($_GET['id_mesin']);
+    $sql = "UPDATE  kalibrasi SET is_deleted = true WHERE id_mesin=:id_mesin"; // Edited! Where is_deleted = true (soft deleted)
     $stmt = $connection->prepare($sql);
-    $stmt->execute([':id'=>$id]);
+    $stmt->execute([':id_mesin'=>$id]);
     if($stmt){
         header("Location:calibration.php");
     }else{

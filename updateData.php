@@ -1,7 +1,7 @@
 <?php 
 require_once "connection.php";
 if (isset($_POST['update'])){
-    $id = saring($_POST["id"]);
+    $id = saring($_POST["id_mesin"]);
     $tipe = saring($_POST["tipe"]);
     $id_mesin = saring($_POST["id_mesin"]);
     $pin = saring($_POST["pin"]);
@@ -12,7 +12,7 @@ if (isset($_POST['update'])){
 	try {
         // $id = $_GET["id"];
 		// prepare sql and bind parameters
-        $sql_update = "UPDATE kalibrasi SET id_mesin ='$id_mesin', pin ='$pin', tipe='$tipe', tegangan_max =$tegangan_max,nilai_analog =$nilai_analog, tegangan_terukur = $tegangan_terukur WHERE id = $id";
+        $sql_update = "UPDATE kalibrasi SET id_mesin ='$id_mesin', pin ='$pin', tipe='$tipe', tegangan_max =$tegangan_max,nilai_analog =$nilai_analog, tegangan_terukur = $tegangan_terukur WHERE id_mesin = $id";
 		$stmt = $connection->prepare($sql_update);
 		
         if($stmt->execute()){header("Location:calibration.php");
@@ -24,6 +24,8 @@ if (isset($_POST['update'])){
 	catch(PDOException $e) {
 		$s_error = "\n " . $e->getMessage();
 	}
+}else{
+    header("Location:calibration.php");
 }
 
 ?>

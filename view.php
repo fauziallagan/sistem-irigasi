@@ -4,8 +4,8 @@ require "session.php";
 
 // Eksperimen Gauge
 try{
-    $id = saring($_GET['id']);
-    $sql = "SELECT nilai_analog, tegangan_terukur, id_mesin FROM kalibrasi WHERE id=$id"; 
+    $id = saring($_GET['id_mesin']);
+    $sql = "SELECT nilai_analog, tegangan_terukur, id_mesin FROM kalibrasi WHERE id_mesin='$id'"; 
     $row = $connection->query($sql);
     $row->setFetchMode(PDO::FETCH_ASSOC);
 } catch(PDOException $e){
@@ -374,8 +374,16 @@ while($temperature_rows = $row_temperature->fetch()){
         <script>
 $(document).ready(function() {
   $('#tegangan').simpleGauge({
-    value:  <?php $tegangan = $digital * $analog6; //edited
-            echo round($tegangan,1)?>,
+    value:  <?php $tegangan = $digital * $analog6;
+            $min = 20;
+            $max = 30; //edited $digital * $analog6
+            if($tegangan < $min){
+                echo $min;
+            }elseif($tegangan > $max){
+                echo $max;
+            }else{
+                echo round($tegangan,1);
+                }?>,
     min:    20,
     max:    30,
 
@@ -436,8 +444,16 @@ $(document).ready(function() {
 });
 $(document).ready(function() {
   $('#aki').simpleGauge({
-    value:  <?php $aki = $digital * $analog2; //edited
-            echo round($aki,1);?>,
+    value:  <?php $tegangan = $digital * $analog2;
+            $min = 16;
+            $max = 26;
+            if($tegangan < $min){
+                echo $min;
+            }elseif($tegangan > $max){
+                echo $max;
+            }else{
+                echo round($tegangan,1);
+                }?>,
     min:    16,
     max:    26,
 
@@ -497,8 +513,16 @@ $(document).ready(function() {
 });
 $(document).ready(function() {
   $('#regulator').simpleGauge({
-    value:  <?php $result = $digital * $analog1; //edited
-        echo round($result, 1);?>,
+    value: <?php $tegangan = $digital * $analog1;
+            $min = 6;
+            $max = 16; //edited $digital * $analog1
+            if($tegangan < $min){
+                echo $min;
+            }elseif($tegangan > $max){
+                echo $max;
+            }else{
+                echo round($tegangan,1);
+                }?>,
     min:    6,
     max:    16,
 
