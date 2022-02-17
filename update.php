@@ -325,13 +325,13 @@ try{
                         </div>
                     </header>
                     <!-- Main page content-->
-                    <div class="container-xl px-4 mt-n10">
-                        <div class="card mb-4">
-                            <div class="card-header">Table Calibration</div>
-                            <div class="card-body">
-                            <form action="updateData.php" method="post">
+                        <div class="container-xl px-4 mt-n10">
+                            <div class="card mb-4">
+                                <div class="card-header">Table Calibration</div>
+                                    <div class="card-body">
+                                        <form action="updateData.php" method="post">
                                           <!-- hidden input -->
-                                          <input type="hidden" name="id" value="<?php echo $id; ?>">
+                                          <!-- <input type="hidden" name="id" value="<?php echo $id; ?>"> -->
                                             <!-- Form Row-->
                                             <div class="row gx-3">
                                                 <div class="col-md-6">
@@ -376,24 +376,21 @@ try{
                                                         <input class="form-control" name = "nilai_analog" id="nilai_analog" type="text" value="<?php echo $nilai_analog;?>" placeholder="Masukkan Nilai Analog!. Example : 1023" required autocomplete="off"/>
                                                     </div>
                                                 </div>
-                                                <div class="col-md-6">
-                                                  
+                                                <div class="col-md-6">  
                                                     <div class="mb-3">
                                                         <label class="small mb-1" for="tegangan Terukur">Tegangan Terukur</label>
                                                         <input class="form-control" name="tegangan_terukur" id="tegangan_terukur" type="text" value="<?php echo $tegangan_terukur;?>" placeholder="Masukkan Tegangan Terukur!. Example : 20.5" required autocomplete="off"/>
                                                     </div>
                                                 </div>
-                                                
                                             </div>
                                             <br>
                                             <!-- Form Group (create account submit)-->
                                             <button class="btn btn-blue btn-block lift rounded-pill " name="update" type="submit">Update</button>
                                             <button class="btn btn-danger btn-block lift rounded-pill " type="submit" href="calibration.php">Batal</button>
                                         </form>
-                            </div>
+                                    </div>
+                                </div>
                         </div>
-                      
-                    </div>
                 </main>
                 <footer class="footer-admin mt-auto footer-light">
                     <div class="container-xl px-4">
@@ -409,7 +406,7 @@ try{
                 </footer>
             </div>
         </div>
-        <script src="js/index.js" ></script>
+        <script type="text/javascript" src="js/index.js" ></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
         <script src="js/scripts.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
