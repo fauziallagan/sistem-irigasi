@@ -353,7 +353,7 @@ while($temperature_rows = $row_temperature->fetch()){
         </div>
         <script src="assets/demo/jquery.min.js"></script>
         <script src="assets/demo/jquery.js"></script>
-        <script src="js/index.js"></script>
+        <script type="text/javascript" src="js/index.js" ></script>
         <!-- jQuery Knob -->
         <!-- <script src="assets/demo/jquery.knob.min.js"></script> -->
         <script src="https://code.jquery.com/jquery-latest.js" type="text/javascript" charset="utf-8"></script>
@@ -397,8 +397,8 @@ $(document).ready(function() {
       style:  'color: #555; font-size: 20px; padding: 10px;'
     },
     digital: {
-      text:   '{value.3}', // value with number of decimals
-      style:  'color: auto; font-size: 35px;'
+        text:  <?php if($tegangan < $min){?> 'Min' <?php }elseif($tegangan > $max){?> 'Max' <?php }else{?> '{value.3}'<?php }?>, // edited
+        style:  'color: auto; font-size: 30px;'
     },
     analog: {
       minAngle:   -150,
@@ -467,8 +467,8 @@ $(document).ready(function() {
       style:  'color: #555; font-size: 20px; padding: 10px;'
     },
     digital: {
-      text:   '{value.3}', // value with number of decimals
-      style:  'color: auto; font-size: 35px;'
+        text:  <?php if($tegangan < $min){?> 'Min' <?php }elseif($tegangan > $max){?> 'Max' <?php }else{?> '{value.3}'<?php }?>, // edited
+        style:  'color: auto; font-size: 30px;'
     },
     analog: {
       minAngle:   -150,
@@ -513,7 +513,7 @@ $(document).ready(function() {
 });
 $(document).ready(function() {
   $('#regulator').simpleGauge({
-    value: <?php $tegangan = $digital * $analog1;
+    value: <?php $tegangan = $digital * $analog6;
             $min = 6;
             $max = 16; //edited $digital * $analog1
             if($tegangan < $min){
@@ -536,8 +536,8 @@ $(document).ready(function() {
       style:  'color: #555; font-size: 20px; padding: 10px;'
     },
     digital: {
-      text:   '{value.3}', // value with number of decimals
-      style:  'color: auto; font-size: 35px;'
+        text:  <?php if($tegangan < $min){?> 'Min' <?php }elseif($tegangan > $max){?> 'Max' <?php }else{?> '{value.3}'<?php }?>, // edited
+        style:  'color: auto; font-size: 30px;'
     },
     analog: {
       minAngle:-150,

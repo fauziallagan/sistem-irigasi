@@ -15,7 +15,7 @@ while($rows = $row->fetch()){
 }
 
 try{
-    $sql_input = 'SELECT a1, a2, a3, a4, a5, a6, a7, a8  FROM input'; 
+    $sql_input = 'SELECT *  FROM input'; 
     $row_input = $connection->query($sql_input);
     $row_input->setFetchMode(PDO::FETCH_ASSOC);
 } catch(PDOException $e){
@@ -31,18 +31,7 @@ while($rows_input = $row_input->fetch()){
    $analog6 = $rows_input['a6'];
    $analog7 = $rows_input['a7'];
    $analog8 = $rows_input['a8'];
-}
-
-// Eksperiment temperature
-try{
-    $sql_temperature = 'SELECT temp FROM input';
-    $row_temperature = $connection->query($sql_temperature);
-    $row_temperature->setFetchMode(PDO::FETCH_ASSOC);
-}catch(PDOException $e){
-    die("Database Failed!. Check Database Connection!!". $e->getMessage());
-}
-while($temperature_rows = $row_temperature->fetch()){
-    $temperature = $temperature_rows['temp'];
+   $temperature = $rows_input['temp'];
 }
 ?> 
 <?php include "header.php"?>
@@ -371,12 +360,12 @@ while($temperature_rows = $row_temperature->fetch()){
         <script>
 $(document).ready(function() {
   $('#tegangan').simpleGauge({
-    value:  <?php $tegangan = $digital * $analog6;
+    value:  <?php $tegangan =$digital * $analog6;
             $min = 20;
             $max = 30; //edited $digital * $analog6
-            if($tegangan < $min){
+            if($tegangan <= $min){
                 echo $min;
-            }elseif($tegangan > $max){
+            }elseif($tegangan >= $max){
                 echo $max;
             }else{
                 echo round($tegangan,1);
@@ -394,8 +383,8 @@ $(document).ready(function() {
       style:  'color: #555; font-size: 20px; padding: 10px;'
     },
     digital: {
-      text: '{value.3}', // value with number of decimals
-      style:  'color: auto; font-size: 35px;'
+    text:  <?php if($tegangan < $min){?> 'Min' <?php }elseif($tegangan > $max){?> 'Max' <?php }else{?> '{value.3}'<?php }?>, // value with number of decimals
+      style:  'color: auto; font-size: 30px;'
     },
     analog: {
       minAngle:   -150,
@@ -444,9 +433,9 @@ $(document).ready(function() {
     value:  <?php $tegangan = $digital * $analog2;
             $min = 16;
             $max = 26;
-            if($tegangan < $min){
+            if($tegangan <= $min){
                 echo $min;
-            }elseif($tegangan > $max){
+            }elseif($tegangan >= $max){
                 echo $max;
             }else{
                 echo round($tegangan,1);
@@ -464,8 +453,8 @@ $(document).ready(function() {
       style:  'color: #555; font-size: 20px; padding: 10px;'
     },
     digital: {
-      text:   '{value.3}', // value with number of decimals
-      style:  'color: auto; font-size: 35px;'
+        text:  <?php if($tegangan < $min){?> 'Min' <?php }elseif($tegangan > $max){?> 'Max' <?php }else{?> '{value.3}'<?php }?>, // edited
+        style:  'color: auto; font-size: 30px;'
     },
     analog: {
       minAngle:   -150,
@@ -510,7 +499,7 @@ $(document).ready(function() {
 });
 $(document).ready(function() {
   $('#regulator').simpleGauge({
-    value:   <?php $tegangan = $digital * $analog1;
+    value:   <?php $tegangan =$digital * $analog1;
             $min = 6;
             $max = 16; //edited $digital * $analog1
             if($tegangan < $min){
@@ -533,8 +522,8 @@ $(document).ready(function() {
       style:  'color: #555; font-size: 20px; padding: 10px;'
     },
     digital: {
-      text:   '{value.3}', // value with number of decimals
-      style:  'color: auto; font-size: 35px;'
+      text:  <?php if($tegangan < $min){?> 'Min' <?php }elseif($tegangan > $max){?> 'Max' <?php }else{?> '{value.3}'<?php }?>, // value with number of decimals
+      style:  'color: auto; font-size: 30px;'
     },
     analog: {
       minAngle:-150,
