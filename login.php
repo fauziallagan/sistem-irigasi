@@ -81,6 +81,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 				$_SESSION["role"] = $data_kategori;
 				$_SESSION["nama"] = $data_nama;
         $_SESSION["email"] = $data_email;
+        $_SESSION["username"] = $data_username; //edited
 				header("Location: index.php");
         die(); 
 				$conn = null;
@@ -183,12 +184,12 @@ $conn = null;
                                                 <input class="form-control" id="inputPassword" type="password" placeholder="Enter password" name="password"required autocomplete="off"/>
                                             </div>
                                             <!-- Form Group (remember password checkbox)-->
-                                            <div class="mb-3">
+                                            <!-- <div class="mb-3">
                                                 <div class="form-check">
                                                     <input class="form-check-input" id="rememberPasswordCheck" type="checkbox" value=""  />
                                                     <label class="form-check-label" for="rememberPasswordCheck">Remember password</label>
                                                 </div>
-                                            </div>
+                                            </div> -->
                                             <!-- Form Group (login box)-->
                                             <div class="d-flex align-items-center justify-content-between mt-4 mb-0">
                                                 <a class="small" href="forgot.php">Forgot Password?</a>
