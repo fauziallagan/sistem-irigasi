@@ -385,7 +385,7 @@ try{
                                             </div>
                                             <br>
                                             <!-- Form Group (create account submit)-->
-                                            <button class="btn btn-blue btn-block lift rounded-pill " name="update" type="submit">Update</button>
+                                            <button class="btn btn-blue btn-block lift rounded-pill " name="updateCalibration" type="submit">Update</button>
                                             <button class="btn btn-danger btn-block lift rounded-pill " type="submit" href="calibration.php">Batal</button>
                                         </form>
                                     </div>
