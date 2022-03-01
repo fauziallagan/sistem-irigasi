@@ -10,6 +10,7 @@ else {
     $role = $_SESSION["role"];
 	$nama = $_SESSION["nama"];
     $email = $_SESSION["email"];
+	$username = $_SESSION["username"];
 	if (empty($_SESSION["error"])) {
 		$s_error = "";
 	} else {
