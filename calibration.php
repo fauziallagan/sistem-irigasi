@@ -94,7 +94,6 @@ try{
           <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Success:"><use xlink:href="#check-circle-fill"/></svg>
           <div>
             <?php echo $s_success; ?>
-            
             </div>
           </div>
           <?php }
@@ -121,12 +120,7 @@ try{
             </div>
             <?php }?>
             <!-- Navbar Items-->
-            <ul class="navbar-nav align-items-center ms-auto">
-                <!-- Documentation Dropdown-->
-              
-                <!-- Navbar Search Dropdown-->
-                <!-- * * Note: * * Visible only below the lg breakpoint-->
-               
+            <ul class="navbar-nav align-items-center ms-auto">  
                 <!-- Alerts Dropdown-->
                 <li class="nav-item dropdown no-caret d-none d-sm-block me-3 dropdown-notifications">
                     <a class="btn btn-icon btn-transparent-dark dropdown-toggle" id="navbarDropdownAlerts" href="javascript:void(0);" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i data-feather="bell"></i></a>
@@ -181,7 +175,6 @@ try{
                             <div class="dropdown-user-details">
                                 <div class="dropdown-user-details-name"><?php echo $nama;?></div>
                                 <div class="dropdown-user-details-email"><?php echo $email; ?></div>
-                                
                             </div>
                         </h6>
                         <div class="dropdown-divider"></div>
