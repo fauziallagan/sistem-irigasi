@@ -152,16 +152,14 @@ $conn = null;
                                    <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Success:"><use xlink:href="#check-circle-fill"/></svg>
                                    <div>
                                      <?php echo $s_success; ?>
-                                     
                                      </div>
                                    </div>
                                    <?php }
                                    if ($s_info !== "") { ?>
-                                   <div class="alert alert-warning alert-notif alert-dismissible fade show" role="alert"id="alert">
-                                     <?php echo $s_info; ?>
-                                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                   <div class="alert alert-info alert-notif d-flex align-items-center" role="alert"id="alert">
+                                      <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Info:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+                                        <?php echo $s_info; ?>
                                    </div>
-                                 </div>
                                  <?php } if ($s_warning !== "") { ?>
                                    <div class="alert alert-warning alert-notif d-flex align-items-center" role="alert"id="alert">
                                    <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Warning:"><use xlink:href="#exclamation-triangle-fill"/></svg>
