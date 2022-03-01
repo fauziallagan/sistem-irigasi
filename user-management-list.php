@@ -137,8 +137,6 @@ $row->execute();
                                             <th>User</th>
                                             <th>Email</th>
                                             <th>Role</th>
-                                            <!-- <th>Groups</th>
-                                            <th>Joined Date</th> -->
                                             <th>Actions</th>
                                         </tr>
                                     </thead>
@@ -147,8 +145,6 @@ $row->execute();
                                             <th>User</th>
                                             <th>Email</th>
                                             <th>Role</th>
-                                            <!-- <th>Groups</th>
-                                            <th>Joined Date</th> -->
                                             <th>Actions</th>
                                         </tr>
                                     </tfoot>
@@ -164,8 +160,8 @@ $row->execute();
                                             <td><?php echo htmlspecialchars($rows["email"]); ?></td>
                                             <td><?php echo htmlspecialchars($rows["kategori"]); ?></td>
                                             <td>
-                                                <a class="btn btn-datatable btn-icon btn-transparent-dark me-2 disabled" href="user-management-edit-user.php"><i data-feather="edit"></i></a>
-                                                <a class="btn btn-datatable btn-icon btn-transparent-dark disabled" href="#!"><i data-feather="trash-2"></i></a>
+                                                <button class="btn btn-datatable btn-icon btn-transparent-dark me-2 disabled" href="user-management-edit-user.php"><i data-feather="edit"></i></button>
+                                                <button class="btn btn-datatable btn-icon btn-transparent-dark disabled" href="#!"><i data-feather="trash-2"></i></button>
                                             </td>
                                         </tr>
                                         <?php endwhile; ?>
