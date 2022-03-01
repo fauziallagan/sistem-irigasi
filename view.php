@@ -175,7 +175,7 @@ while($temperature_rows = $row_temperature->fetch()){
                                         </div>
 				                	    <br>
                                         <div class="input-group input-group-joined border-0" style="width: 16.5rem">
-                                        <button class="btn btn-info" onclick="dateTime()" type="submit">Update</button>
+                                        <button class="btn btn-info disabled" onclick="dateTime()" type="submit">Update</button>
                                         </div>
 									</form>
                                 </div>
@@ -187,7 +187,7 @@ while($temperature_rows = $row_temperature->fetch()){
                     <div class="container-xl px-4 mt-n10">
                         <div class="rows">
                             <div class="card card-collapsable">
-                                <a class="card-header" href="#collapseCardExample" data-bs-toggle="collapse" role="button" aria-expanded="true" aria-controls="collapseCardExample">Pantauan
+                                <a class="card-header" href="#collapseCardExample" data-bs-toggle="collapse" role="button" aria-expanded="true" aria-controls="collapseCardExample">Monitoring
                                     <div class="card-collapsable-arrow">
                                         <i class="fas fa-chevron-down"></i>
                                     </div>
@@ -254,7 +254,7 @@ while($temperature_rows = $row_temperature->fetch()){
                                                         <div class="d-flex justify-content-between align-items-center">
                                                             <div class="me-3">
                                                                 <div class="text-white-75 small">Output Digital</div>
-                                                                <div class="text-lg fw-bold">Status : LOW</div>
+                                                                <div class="text-lg fw-bold">Status : OFF</div>
                                                             </div>
                                                             <i class="feather-xl text-white-50" data-feather="cpu"></i>
                                                         </div>
@@ -265,6 +265,7 @@ while($temperature_rows = $row_temperature->fetch()){
                                                     </div>
                                                 </div>
                                             </div>
+                                            <div class="card-footer small text-muted">Updated  : <span id="date2"></span> </div>
                                     </div>
                                 </div>
                             </div>
