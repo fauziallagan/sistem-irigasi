@@ -78,7 +78,7 @@ while($rows_input = $row_input->fetch()){
                                 Dashboards
                             
                             </a>
-                            <a class="nav-link" href="./tables.php"><div class="nav-link-icon"><i class="fas fa-chart-line"></i></div>
+                            <a class="nav-link" href="tables.php"><div class="nav-link-icon"><i class="fas fa-chart-line"></i></div>
                                 Log Data 
                             </a>
                       
