@@ -2,9 +2,9 @@
 require_once "../connection.php";
 
 // ambil data input dari file json
-// $raw = json_decode(file_get_contents('php://input'),true);
+$raw = json_decode(file_get_contents('php://input'),true);
 
-$raw = json_decode(file_get_contents('input.json'), true); //Testing
+// $raw = json_decode(file_get_contents('input.json'), true); //Testing
 
 // testing json file
 // print_r($raw);
