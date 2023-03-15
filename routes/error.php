@@ -1,6 +1,4 @@
-<?php 
-require "session.php";
-?>
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -9,9 +7,9 @@ require "session.php";
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="Predictive Maintenance (PdM)"/>
         <meta name="author" content="Sari Technology"/>
-        <title>404 Error - PdM</title>
-        <link href="css/styles.css" rel="stylesheet" />
-        <link rel="icon" type="image/x-icon" href="assets/img/favicon.png" />
+        <title>404 Error - IRIGASI TETES</title>
+        <link href="../css/styles.css" rel="stylesheet" />
+        <link rel="icon" type="image/x-icon" href="/assets/img/favicon.png" />
         <script data-search-pseudo-elements defer src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/js/all.min.js" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.24.1/feather.min.js" crossorigin="anonymous"></script>
     </head>
@@ -178,7 +176,7 @@ require "session.php";
                             <div class="row gx-5 justify-content-center">
                                 <div class="col-lg-6">
                                     <div class="text-center mt-4">
-                                        <img class="img-fluid p-4" src="assets/img/illustrations/404-error.svg" alt="..." />
+                                        <img class="img-fluid p-4" src="../assets/img/illustrations/404-error.svg" alt="..." />
                                         <p class="lead">This requested URL was not found on this server.</p>
                                         <a class="text-arrow-icon" href="index.php">
                                             <i class="ms-0 me-1" data-feather="arrow-left"></i>
