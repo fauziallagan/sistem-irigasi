@@ -20,7 +20,7 @@
             <div id="layoutDefault_content">
                 <main>
                     <!-- Navbar-->
-                    <nav class="navbar navbar-marketing navbar-expand-lg bg-transparent navbar-dark fixed-top">
+                    <nav class="navbar navbar-marketing navbar-expand-lg bg-blue navbar-dark fixed-top">
                         <div class="container px-5">
                             <a class="navbar-brand text-white" href="index.php">IRIGASI TETES</a>
                             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><i data-feather="menu"></i></button>
