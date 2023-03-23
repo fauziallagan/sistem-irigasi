@@ -47,9 +47,9 @@
                                 <div class="row gx-5 align-items-center">
                                     <div class="col-lg-6" data-aos="fade-up">
                                         <h1 class="page-header-ui-title">IRIGASI TETES</h1>
-                                        <p class="page-header-ui-text mb-5 land-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia animi, quidem accusantium sunt nihil id modi dolore ipsam quia eius dolores molestiae autem ipsa corporis, soluta alias consequatur libero quos rem ab repellat asperiores obcaecati, esse rerum. Nemo eaque repudiandae odio reprehenderit, rerum culpa animi aspernatur aut fugit obcaecati quam ducimus excepturi molestiae incidunt voluptatibus recusandae sequi vel doloremque quos adipisci enim. Saepe suscipit adipisci magnam deserunt repudiandae esse voluptatem alias, unde animi repellat. Enim dolore doloremque vel autem voluptate harum quos veritatis. Culpa mollitia repudiandae aperiam animi laborum eligendi illo assumenda velit repellendus, ex earum, nihil itaque veritatis eius..</p>
+                                        <p class="page-header-ui-text mb-5 land-text">Aplikasi Pengendali  Sistem Irigasi Tetes Dan Pemantau Npk, Soil Moisture , Ph adalah sebuah system yang dapat memantau keadaan tanah, kelembaban dan tingkat keasaman menggunakan beberapa sensor sekaligus melakukan pengendalian irigasi dengan menggunakan sensor kelembaban sebagai media </p>
                                         <a class="btn btn-teal fw-500 me-2" href="#about">
-                                            Get Started
+                                            Explore
                                             <i class="ms-2" data-feather="arrow-right"></i>
                                         </a>
                                         
@@ -62,11 +62,9 @@
                             <!-- Rounded SVG Border-->
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 144.54 17.34" preserveAspectRatio="none" fill="currentColor"><path d="M144.54,17.34H0V0H144.54ZM0,0S32.36,17.34,72.27,17.34,144.54,0,144.54,0"></path></svg>
                         </div>
-                    </header>
-                    
+                    </header>                 
                     </section>
-                   
-                   
+
                     <!-- Costume -->
                     <br id="about">
                       <!-- Page Header-->
@@ -82,9 +80,9 @@
                                 </div>
                                 <div class="col-lg-6 order-0 order-lg-1 mb-5 mb-lg-0" data-aos="fade-left">
                                     <div class="mb-5">
-                                        <h2 class="text-center">What is drip irigasion</h2>
+                                        <h2 class="text-center"></h2>
                                         <hr>
-                                        <p class="lead">Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque atque, ipsa odio quibusdam corporis commodi dolorum enim iusto explicabo aliquam ipsum ullam quas facere sunt error dicta eligendi fugiat est aut? Maxime, ipsum aut iure modi animi ab culpa dolorum alias dolores repellendus, eveniet dolore eaque amet nulla tempore quod vitae dicta consequuntur voluptatibus. Nostrum cum modi quae voluptate sapiente.</p>
+                                        <p class="lead">Aplikasi Pengendali  Sistem Irigasi Tetes Dan Pemantau Npk, Soil Moisture , Ph adalah sebuah system yang dapat memantau keadaan tanah, kelembaban dan tingkat keasaman menggunakan beberapa sensor sekaligus melakukan pengendalian irigasi dengan menggunakan sensor kelembaban sebagai media </p>
                                     </div>
                                 </div>
                             </div>
@@ -98,90 +96,9 @@
                                 <div class="col-lg-6" data-aos="fade-right" data-aos-delay="100">
                                     
                                     <div class="mb-5">
-                                        <h2>"irigasi tetes"</h2>
-                                        <p class="lead">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Natus, unde. Adipisci praesentium quaerat repudiandae quam dolorem provident maxime earum iure quos facilis dicta omnis porro ullam est, iste sed illo?</p>
-                                        <div class="row gx-5">
-                                            <div class="col-lg-3 col-md-6 mb-5">
-                                                <a class="card lift border-top-0 border-start-0 border-end-0 border-bottom-lg border-red" href="#!">
-                                                    <div class="card-body text-center">
-                                                        <div class="icon-stack icon-stack-xl bg-red text-white mb-2"><i class="fas fa-utensils"></i></div>
-                                                        <div class="small text-gray-600">Restaurants</div>
-                                                    </div>
-                                                </a>
-                                            </div>
-                                            <div class="col-lg-3 col-md-6 mb-5">
-                                                <a class="card lift border-top-0 border-start-0 border-end-0 border-bottom-lg border-orange" href="#!">
-                                                    <div class="card-body text-center">
-                                                        <div class="icon-stack icon-stack-xl bg-orange text-white mb-2"><i class="fas fa-hotel"></i></div>
-                                                        <div class="small text-gray-600">Hotels</div>
-                                                    </div>
-                                                </a>
-                                            </div>
-                                            <div class="col-lg-3 col-md-6 mb-5">
-                                                <a class="card lift border-top-0 border-start-0 border-end-0 border-bottom-lg border-yellow" href="#!">
-                                                    <div class="card-body text-center">
-                                                        <div class="icon-stack icon-stack-xl bg-yellow text-white mb-2"><i class="fas fa-hospital"></i></div>
-                                                        <div class="small text-gray-600">Hospitals</div>
-                                                    </div>
-                                                </a>
-                                            </div>
-                                            <div class="col-lg-3 col-md-6 mb-5">
-                                                <a class="card lift border-top-0 border-start-0 border-end-0 border-bottom-lg border-green" href="#!">
-                                                    <div class="card-body text-center">
-                                                        <div class="icon-stack icon-stack-xl bg-green text-white mb-2"><i class="fas fa-coffee"></i></div>
-                                                        <div class="small text-gray-600">Canteen</div>
-                                                    </div>
-                                                </a>
-                                            </div>
-                                            <div class="col-lg-3 col-md-6 mb-5 mb-lg-0">
-                                                <a class="card lift border-top-0 border-start-0 border-end-0 border-bottom-lg border-cyan" href="#!">
-                                                    <div class="card-body text-center">
-                                                        <div class="icon-stack icon-stack-xl bg-cyan text-white mb-2"><i class="fas fa-store"></i></div>
-                                                        <div class="small text-gray-600">Shopping Malls</div>
-                                                    </div>
-                                                </a>
-                                            </div>
-                                            <div class="col-lg-3 col-md-6 mb-5 mb-lg-0">
-                                                <a class="card lift border-top-0 border-start-0 border-end-0 border-bottom-lg border-blue" href="#!">
-                                                    <div class="card-body text-center">
-                                                        <div class="icon-stack icon-stack-xl bg-blue text-white mb-2"><i class="fas fa-building"></i></div>
-                                                        <div class="small text-gray-600">Hall and office</div>
-                                                    </div>
-                                                </a>
-                                            </div>
-                                            <div class="col-lg-3 col-md-6 mb-5 mb-lg-0">
-                                                <a class="card lift border-top-0 border-start-0 border-end-0 border-bottom-lg border-purple" href="#!">
-                                                    <div class="card-body text-center">
-                                                        <div class="icon-stack icon-stack-xl bg-purple text-white mb-2"><i class="fas fa-house-user"></i></div>
-                                                        <div class="small text-gray-600">Nursing home</div>
-                                                    </div>
-                                                </a>
-                                            </div>
-                                            <div class="col-lg-3 col-md-6">
-                                                <a class="card lift border-top-0 border-start-0 border-end-0 border-bottom-lg border-pink" href="#!">
-                                                    <div class="card-body text-center">
-                                                        <div class="icon-stack icon-stack-xl bg-pink text-white mb-2"><i class="fas fa-other"></i></div>
-                                                        <div class="small text-gray-600">And Many More</div>
-                                                    </div>
-                                                </a>
-                                            </div>
-                                        </div>
-                                            <!-- <ul>
-                                                <li>Restaurants</li>
-                                               <li> Hotels </li>
-                                               <li> Hospitals</li>
-                                                <li>Canteen</li>
-                                                <li>Shopping Malls</li>
-                                                <li>Hall</li>
-                                                <li>Nursing home and office buildings.</li>
-                                            </ul> -->
-                                    </div>
-                                    <div class="mb-5">
-                                        <h2>Development</h2>
-                                        <p class="lead">
-                                            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Reprehenderit, maiores sint. Laborum deserunt delectus pariatur, necessitatibus dolore dicta tempore in cumque nemo dolor recusandae libero vero odit incidunt ex saepe! Quisquam, earum eaque beatae eos cum laborum pariatur ad dolore blanditiis enim ea ab fuga quo sapiente, iste non quidem?</p>
-                                            <p class="lead">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Amet, eos. Qui dolorum perspiciatis velit repellat sunt quibusdam nesciunt, earum et consectetur aspernatur modi quis sapiente ab natus tenetur laudantium nobis numquam expedita recusandae illum pariatur hic ducimus deserunt id! Voluptatem magni culpa porro deleniti recusandae sunt incidunt, neque est sint.
-                                        </p>
+                                        <h2>"Sistem Monitoring Lahan Pertanian PPU"</h2>
+                                        <p class="lead">sebuah sistem yang dapat memonitoring keadaan tanah dan juga mengatur tingkat keperluan air dari lahan sehingga lahan tidak kekeringan. Sistem ini juga dibuat sebagai bahan acuan terhadap tingkat nutrisi yang diberikan ke tanaman berdasarkan hasil baca yang dihasilkan sensor. Nilai baca sensor sendiri dihasilkan dari masing-masing client yang ada pada beberapa blok lahan yang kemudian hasil nilai baca oleh sensor yang dihasilkan diteruskan oleh client menuju server sehingga dapat ditampilkan di halaman web</p>
+                                      
                                     </div>
                                 </div>
                                 <div class="col-md-9 col-lg-6" data-aos="slide-left">
@@ -192,9 +109,6 @@
                             </div>
                         </div>
                     </section>
-                    <!--  -->
-          
-                     
                         </div>
                     </section>
                     
