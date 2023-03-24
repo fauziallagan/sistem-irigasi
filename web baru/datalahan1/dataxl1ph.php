@@ -1,12 +1,6 @@
 <?php
 require 'connection.php';
 
-$pdo = "mysql:host=$servername; dbname=$dbname";
-$connection = new PDO($pdo, 'root', '');
-
-if (!$connection) {
-    die("Fatal Error: Connection Failed!");
-}
 
 $sql = "SELECT sensor_ph FROM coba WHERE nama = 'Lora 0'  ORDER BY id DESC LIMIT 10";
 $result = $connection->query($sql);

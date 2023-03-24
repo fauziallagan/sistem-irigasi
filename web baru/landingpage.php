@@ -31,11 +31,11 @@
                                         <li class="nav-item"><a class="nav-link" href="#feature">Feature</a></li>
                                         <!-- <li class="nav-item"><a class="nav-link" href="index.html">How to Use</a></li> -->
                                 </ul>
-                                <button class="btn btn-info">
                                 <a href="index.php">
+                                <button class="btn btn-info rounded-pill">
                                     Dashboard
+                                  </button>
                                 </a>
-                                </button>
 
                             </div>
                         </div>
@@ -47,9 +47,9 @@
                                 <div class="row gx-5 align-items-center">
                                     <div class="col-lg-6" data-aos="fade-up">
                                         <h1 class="page-header-ui-title">IRIGASI TETES</h1>
-                                        <p class="page-header-ui-text mb-5 land-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia animi, quidem accusantium sunt nihil id modi dolore ipsam quia eius dolores molestiae autem ipsa corporis, soluta alias consequatur libero quos rem ab repellat asperiores obcaecati, esse rerum. Nemo eaque repudiandae odio reprehenderit, rerum culpa animi aspernatur aut fugit obcaecati quam ducimus excepturi molestiae incidunt voluptatibus recusandae sequi vel doloremque quos adipisci enim. Saepe suscipit adipisci magnam deserunt repudiandae esse voluptatem alias, unde animi repellat. Enim dolore doloremque vel autem voluptate harum quos veritatis. Culpa mollitia repudiandae aperiam animi laborum eligendi illo assumenda velit repellendus, ex earum, nihil itaque veritatis eius..</p>
+                                        <p class="page-header-ui-text mb-5 land-text">Aplikasi Pengendali  Sistem Irigasi Tetes Dan Pemantau Npk, Soil Moisture , Ph adalah sebuah system yang dapat memantau keadaan tanah, kelembaban dan tingkat keasaman menggunakan beberapa sensor sekaligus melakukan pengendalian irigasi dengan menggunakan sensor kelembaban sebagai media</p>
                                         <a class="btn btn-teal fw-500 me-2" href="#about">
-                                            Get Started
+                                            Telusuri Lebih lanjut
                                             <i class="ms-2" data-feather="arrow-right"></i>
                                         </a>
                                         
@@ -82,7 +82,7 @@
                                 </div>
                                 <div class="col-lg-6 order-0 order-lg-1 mb-5 mb-lg-0" data-aos="fade-left">
                                     <div class="mb-5">
-                                        <h2 class="text-center">What is drip irigasion</h2>
+                                        <h2 class="text-center">apa itu Irigasi Tetes?</h2>
                                         <hr>
                                         <p class="lead">Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque atque, ipsa odio quibusdam corporis commodi dolorum enim iusto explicabo aliquam ipsum ullam quas facere sunt error dicta eligendi fugiat est aut? Maxime, ipsum aut iure modi animi ab culpa dolorum alias dolores repellendus, eveniet dolore eaque amet nulla tempore quod vitae dicta consequuntur voluptatibus. Nostrum cum modi quae voluptate sapiente.</p>
                                     </div>

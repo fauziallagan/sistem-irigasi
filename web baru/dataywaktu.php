@@ -1,13 +1,6 @@
 <?php
 require 'connection.php';
 
-$pdo = "mysql:host=$servername; dbname=$dbname";
-$connection = new PDO($pdo, 'root', '');
-
-if (!$connection) {
-    die("Fatal Error: Connection Failed!");
-}
-
 $sql2 = "SELECT timestamp FROM coba WHERE nama = 'Lora 1'  ORDER BY id DESC LIMIT 10";
 $result = $connection->query($sql2);
 
