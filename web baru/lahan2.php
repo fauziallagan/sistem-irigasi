@@ -7,45 +7,11 @@ require 'datalahan2/dataxl2kalium.php';
 require 'datalahan2/dataxl2potasium.php';
 // $page = $_SERVER['PHP_SELF'];
 // $timer = "1";
-$pdo = "mysql:host=$servername; dbname=$dbname";
-$connection = new PDO( "mysql:host=$servername;dbname=$dbname", 'root', '');
-if(!$connection){
-	die("Fatal Error: Connection Failed!");
-}
-// Eksperimen Gauge
-try {
-  $sql = 'SELECT * FROM coba';
-  $row = $connection->query($sql);
-  $row->setFetchMode(PDO::FETCH_ASSOC);
-} catch (PDOException $e) {
-  die("Connection to Database Failed!. Please Check Database Connection!!" . $e->getMessage());
-}
-while ($rows = $row->fetch()) {
-  // $nama = $rows["nama"];
-  // $sensor_kelembaban = $rows["sensor_kelembaban"];
-  // $sensor_n = $rows["sensor_n"];
-  // $sensor_p = $rows["sensor_p"];
-  // $sensor_k = $rows["sensor_k"];
-  // $sensor_ph = $rows["sensor_ph"];
-  // $timestamps = $sensor_data["timestamp"];
-  $sensor_data[] = $rows;
-}
-$nama = json_encode(array_reverse(array_column($sensor_data, 'nama')), JSON_NUMERIC_CHECK);
-$sensor_kelembaban = json_encode(array_reverse(array_column($sensor_data, 'sensor_kelembaban')), JSON_NUMERIC_CHECK);
-$sensor_n = json_encode(array_reverse(array_column($sensor_data, 'sensor_n')), JSON_NUMERIC_CHECK);
-$sensor_p = json_encode(array_reverse(array_column($sensor_data, 'sensor_p')), JSON_NUMERIC_CHECK);
-$sensor_k = json_encode(array_reverse(array_column($sensor_data, 'sensor_k')), JSON_NUMERIC_CHECK);
-$sensor_ph = json_encode(array_reverse(array_column($sensor_data, 'sensor_ph')), JSON_NUMERIC_CHECK);
-$timestamp = json_encode(array_reverse($sensor_data, 'timestamp'), JSON_NUMERIC_CHECK);
 
-// echo $nama;
-// echo $sensor_kelembaban;
-// echo $sensor_n;
-// echo $sensor_p;
-// echo $sensor_k;
-// echo $sensor_ph;
-// echo $timestamp;
 
+// Time
+date_default_timezone_set('Asia/Jakarta');
+$timeZone = date('h:i:s');
 ?>
 <?php include "header.php"?>
 <!DOCTYPE html>
@@ -121,7 +87,7 @@ $timestamp = json_encode(array_reverse($sensor_data, 'timestamp'), JSON_NUMERIC_
                       <div class="chart-area"><canvas id="updateKelembaban" width="100%" height="40"></canvas>
                       </div>
                     </div>
-                    <div class="card-footer large text-muted">Updated today at
+                      <div class="card-footer large text-muted">Updated today at : <?=$timeZone;?>
                      
                     </div>
                   </div>
@@ -144,7 +110,7 @@ $timestamp = json_encode(array_reverse($sensor_data, 'timestamp'), JSON_NUMERIC_
                       <div class="chart-area"><canvas id="updateNitrogen" width="100%" height="40"></canvas>
                       </div>
                     </div>
-                    <div class="card-footer large text-muted">Updated today at
+                        <div class="card-footer large text-muted">Updated today at : <?=$timeZone;?>
                      
                     </div>
                   </div>
@@ -169,7 +135,7 @@ $timestamp = json_encode(array_reverse($sensor_data, 'timestamp'), JSON_NUMERIC_
                       <div class="chart-area"><canvas id="updatePotasium" width="100%" height="40"></canvas>
                       </div>
                     </div>
-                    <div class="card-footer large text-muted">Updated today at
+                      <div class="card-footer large text-muted">Updated today at : <?=$timeZone;?>
                     </div>
                   </div>
                 </div>
@@ -191,7 +157,7 @@ $timestamp = json_encode(array_reverse($sensor_data, 'timestamp'), JSON_NUMERIC_
                       <div class="chart-area"><canvas id="updateKalium" width="100%" height="40"></canvas>
                       </div>
                     </div>
-                    <div class="card-footer large text-muted">Updated today at
+                      <div class="card-footer large text-muted">Updated today at : <?=$timeZone;?>
                     </div>
                   </div>
                 </div>
@@ -200,20 +166,20 @@ $timestamp = json_encode(array_reverse($sensor_data, 'timestamp'), JSON_NUMERIC_
           </div>
           <div class="col-xl-6 mb-4">
             <div class="card card-collapsable">
-              <a class="card-header" href="#collapseCardExampleGyroZ" data-bs-toggle="collapse" role="button"
-                aria-expanded="true" aria-controls="collapseCardExampleGyroZ">Sensor Ph
+              <a class="card-header" href="#collapseCardExamplePH" data-bs-toggle="collapse" role="button"
+                aria-expanded="true" aria-controls="collapseCardExamplePH">Sensor Ph
                 <div class="card-collapsable-arrow">
                   <i class="fas fa-chevron-down"></i>
                 </div>
               </a>
-              <div class="collapse show" id="collapseCardExampleGyroZ">
+              <div class="collapse show" id="collapseCardExamplePH">
                 <div class="container-fuild">
                   <div class="row">
                     <div class="card-body">
                       <div class="chart-area"><canvas id="updatePh" width="100%" height="40"></canvas>
                       </div>
                     </div>
-                    <div class="card-footer large text-muted">Updated today at 
+                     <div class="card-footer large text-muted">Updated today at : <?=$timeZone;?>
                     </div>
                   </div>
                 </div>
@@ -233,17 +199,7 @@ $timestamp = json_encode(array_reverse($sensor_data, 'timestamp'), JSON_NUMERIC_
 
 <!-- Javascript  -->
 <script>
-  let kelembaban = <?php echo $sensor_kelembaban; ?>;
-  let n = <?php echo $sensor_n; ?>;
-  let p = <?php echo $sensor_p; ?>;
-  let k = <?php echo $sensor_k; ?>;
-  let ph = <?php echo $sensor_ph; ?>;
-  let time = <?php echo $timestamp ?>;
 
-// get data menggunakan jquery
-  $.getJSON('http://localhost/API/tes.php', function(response){
-console.log(response);
-})
 
 
 
