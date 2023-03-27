@@ -1,3 +1,23 @@
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+
+$(document).ready(function(){
+    setInterval(function(){
+      $.ajax({
+        url: "dataupdate.php",
+        dataType: "json",
+        success: function(result){
+          // Update data pada halaman
+          $("#kelembaban").text(result.sensor_kelembaban + " %");
+          $("#sensor_n").text(result.sensor_n + " ");
+          $("#sensor_p").text(result.sensor_p + " ");
+          $("#sensor_k").text(result.sensor_k + " ");
+          $("#sensor_ph").text(result.sensor_ph + " ");
+        }
+      });
+    }, 1000); // Mengupdate data setiap 5 detik
+  });
+</script>
 <?php include "header.php"?>
             <div id="layoutSidenav_content">
                 <main>
@@ -35,7 +55,7 @@
                                                         <div class="d-flex justify-content-between align-items-center">
                                                             <div class="me-3">
                                                                 <div class="text-white-75 lager">Kelembaban</div>
-                                                                <div class="text-lg fw-bold">0%</div>
+                                                                <div class="text-lg fw-bold" id="kelembaban">&nbsp;</div>
                                                             </div>
                                                             <i class="fas fa-wind fa-2xl"></i>
                                                         </div>
@@ -52,7 +72,7 @@
                                                         <div class="d-flex justify-content-between align-items-center">
                                                             <div class="me-3">
                                                                 <div class="text-white-75 lager">Natrium</div>
-                                                                <div class="text-lg fw-bold">0%</div>
+                                                                <div class="text-lg fw-bold" id="sensor_n"></div>
                                                             </div>
                                                              <i class="fas fa-leaf fa-2xl"></i>
                                                         </div>
@@ -70,7 +90,7 @@
                                                         <div class="d-flex justify-content-between align-items-center">
                                                             <div class="me-3">
                                                                 <div class="text-white-75 large">Phosphat</div>
-                                                                <div class="text-lg fw-bold">0%</div>
+                                                                <div class="text-lg fw-bold" id="sensor_p"></div>
                                                             </div>
                                                               <i class="fas fa-leaf fa-2xl"></i>
                                                         </div>
@@ -87,7 +107,7 @@
                                                         <div class="d-flex justify-content-between align-items-center">
                                                             <div class="me-3">
                                                                 <div class="text-white-75 small">Kalium</div>
-                                                                <div class="text-lg fw-bold">0%</div>
+                                                                <div class="text-lg fw-bold" id="sensor_k"></div>
                                                             </div>
                                                                <i class="fas fa-leaf fa-2xl"></i>
                                                         </div>
@@ -106,7 +126,7 @@
                                                         <div class="d-flex justify-content-between align-items-center">
                                                             <div class="me-3">
                                                                 <div class="text-white-75 lager">pH</div>
-                                                                <div class="text-lg fw-bold">0%</div>
+                                                                <div class="text-lg fw-bold" id="sensor_ph"></div>
                                                             </div>
                                                               <i class="fas fa-tree fa-2xl"></i>
                                                         </div>
