@@ -1,7 +1,12 @@
 <?php
 require 'connection.php';
-
-$sql = "SELECT sensor_k FROM coba WHERE nama = 'Lora 0'  ORDER BY id DESC LIMIT 10";
+// query mysql 
+$sql = "SELECT AVG(sensor_k) 
+FROM coba 
+WHERE nama = 'Lora 0' 
+GROUP BY DATE(timestamp) 
+ORDER BY id DESC 
+LIMIT 7";
 $result = $connection->query($sql);
 
 // Buat array kosong untuk menampung data
