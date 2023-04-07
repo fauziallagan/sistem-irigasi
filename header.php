@@ -1,4 +1,9 @@
 <!DOCTYPE html>
+<style>
+    header nav ul li:first-child a {
+      font-weight: bold;
+    }
+  </style>
 <html lang="en">
     <head>
         <meta charset="utf-8" />

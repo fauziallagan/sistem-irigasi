@@ -1,48 +1,21 @@
 <?php
 require 'connection.php';
+require 'datalahan1/dataxlahan1kelembapan.php'; //a> memasukan memnaggil fungsi
+require 'dataywaktu.php'; //a> memasukan memnaggil fungsi
+require 'datalahan1/dataxl1ph.php';
+require 'datalahan1/dataxl1kalium.php';
+require 'datalahan1/dataxl1potasium.php';
 // $page = $_SERVER['PHP_SELF'];
 // $timer = "1";
-$pdo = "mysql:host=$servername; dbname=$dbname";
-$connection = new PDO( "mysql:host=$servername;dbname=$dbname", 'root', '');
-if(!$connection){
-	die("Fatal Error: Connection Failed!");
-}
-// Eksperimen Gauge
-try {
-  $sql = 'SELECT * FROM testing';
-  $row = $connection->query($sql);
-  $row->setFetchMode(PDO::FETCH_ASSOC);
-} catch (PDOException $e) {
-  die("Connection to Database Failed!. Please Check Database Connection!!" . $e->getMessage());
-}
-while ($rows = $row->fetch()) {
-  // $nama = $rows["nama"];
-  // $sensor_kelembaban = $rows["sensor_kelembaban"];
-  // $sensor_n = $rows["sensor_n"];
-  // $sensor_p = $rows["sensor_p"];
-  // $sensor_k = $rows["sensor_k"];
-  // $sensor_ph = $rows["sensor_ph"];
-  // $timestamps = $sensor_data["timestamp"];
-  $sensor_data[] = $rows;
-}
-$nama = json_encode(array_reverse(array_column($sensor_data, 'nama')), JSON_NUMERIC_CHECK);
-$sensor_kelembaban = json_encode(array_reverse(array_column($sensor_data, 'sensor_kelembaban')), JSON_NUMERIC_CHECK);
-$sensor_n = json_encode(array_reverse(array_column($sensor_data, 'sensor_n')), JSON_NUMERIC_CHECK);
-$sensor_p = json_encode(array_reverse(array_column($sensor_data, 'sensor_p')), JSON_NUMERIC_CHECK);
-$sensor_k = json_encode(array_reverse(array_column($sensor_data, 'sensor_k')), JSON_NUMERIC_CHECK);
-$sensor_ph = json_encode(array_reverse(array_column($sensor_data, 'sensor_ph')), JSON_NUMERIC_CHECK);
-$timestamp = json_encode(array_reverse($sensor_data, 'timestamp'), JSON_NUMERIC_CHECK);
 
-// echo $nama;
-// echo $sensor_kelembaban;
-// echo $sensor_n;
-// echo $sensor_p;
-// echo $sensor_k;
-// echo $sensor_ph;
-// echo $timestamp;
+
+// Time
+date_default_timezone_set('Asia/Jakarta');
+$timeZone = date('h:i:s');
+
 
 ?>
-<?php include "header.php"?>
+<?php include "header.php" ?>
 
   <head>
     <!-- CSS gauge -->
@@ -97,7 +70,7 @@ $timestamp = json_encode(array_reverse($sensor_data, 'timestamp'), JSON_NUMERIC_
                       <div class="chart-area"><canvas id="updateKelembaban" width="100%" height="40"></canvas>
                       </div>
                     </div>
-                    <div class="card-footer large text-muted">Updated today at
+                    <div class="card-footer large text-muted">Updated today at : <?= $timeZone; ?>
                      
                     </div>
                   </div>
@@ -120,7 +93,7 @@ $timestamp = json_encode(array_reverse($sensor_data, 'timestamp'), JSON_NUMERIC_
                       <div class="chart-area"><canvas id="updateNitrogen" width="100%" height="40"></canvas>
                       </div>
                     </div>
-                    <div class="card-footer large text-muted">Updated today at
+                       <div class="card-footer large text-muted">Updated today at : <?= $timeZone; ?>
                      
                     </div>
                   </div>
@@ -145,7 +118,7 @@ $timestamp = json_encode(array_reverse($sensor_data, 'timestamp'), JSON_NUMERIC_
                       <div class="chart-area"><canvas id="updatePotasium" width="100%" height="40"></canvas>
                       </div>
                     </div>
-                    <div class="card-footer large text-muted">Updated today at
+                       <div class="card-footer large text-muted">Updated today at : <?= $timeZone; ?>
                     </div>
                   </div>
                 </div>
@@ -167,7 +140,7 @@ $timestamp = json_encode(array_reverse($sensor_data, 'timestamp'), JSON_NUMERIC_
                       <div class="chart-area"><canvas id="updateKalium" width="100%" height="40"></canvas>
                       </div>
                     </div>
-                    <div class="card-footer large text-muted">Updated today at
+                    <div class="card-footer large text-muted">Updated today at : <?= $timeZone; ?>
                     </div>
                   </div>
                 </div>
@@ -176,20 +149,20 @@ $timestamp = json_encode(array_reverse($sensor_data, 'timestamp'), JSON_NUMERIC_
           </div>
           <div class="col-xl-6 mb-4">
             <div class="card card-collapsable">
-              <a class="card-header" href="#collapseCardExampleGyroZ" data-bs-toggle="collapse" role="button"
-                aria-expanded="true" aria-controls="collapseCardExampleGyroZ">Sensor Ph
+              <a class="card-header" href="#collapseCardExamplePH" data-bs-toggle="collapse" role="button"
+                aria-expanded="true" aria-controls="collapseCardExamplePH">Sensor Ph
                 <div class="card-collapsable-arrow">
                   <i class="fas fa-chevron-down"></i>
                 </div>
               </a>
-              <div class="collapse show" id="collapseCardExampleGyroZ">
+              <div class="collapse show" id="collapseCardExamplePH">
                 <div class="container-fuild">
                   <div class="row">
                     <div class="card-body">
                       <div class="chart-area"><canvas id="updatePh" width="100%" height="40"></canvas>
                       </div>
                     </div>
-                    <div class="card-footer large text-muted">Updated today at 
+                      <div class="card-footer large text-muted">Updated today at : <?= $timeZone; ?>
                     </div>
                   </div>
                 </div>
@@ -201,35 +174,27 @@ $timestamp = json_encode(array_reverse($sensor_data, 'timestamp'), JSON_NUMERIC_
     <br>
   </div>
   </div>
-       <?php include "footer.php"?>
+       <?php include "footer.php" ?>
   </body>
 
 </html>
 
 
 <script>
-  let kelembaban = <?php echo $sensor_kelembaban; ?>;
-  let n = <?php echo $sensor_n; ?>;
-  let p = <?php echo $sensor_p; ?>;
-  let k = <?php echo $sensor_k; ?>;
-  let ph = <?php echo $sensor_ph; ?>;
-  let time = <?php echo $timestamp ?>;
-
-// get data menggunakan jquery
-  $.getJSON('http://localhost/API/tes.php', function(response){
-console.log(response);
-})
 
 
-
+let labeData = "Data Sensor ";
 $(document).ready(function() {
 const ctx = document.getElementById('updateKelembaban').getContext('2d');
 const myChart = new Chart(ctx, {
     type: 'line',
     data: {
-        labels: [10,20,30,40,50,60,70,80,90,100],
+      labels: <?php echo $json_datawaktu; ?>,
         datasets: [{
-            label: "Update per minutes",
+            label: labeData,
+             borderColor: Utils.CHART_COLORS.red,
+      backgroundColor: Utils.transparentize(Utils.CHART_COLORS.red),
+      fill: false,
             lineTension: 0.3,
             backgroundColor: "rgba(0, 97, 242, 0.05)",
             borderColor: "rgba(0, 97, 242, 1)",
@@ -241,17 +206,17 @@ const myChart = new Chart(ctx, {
             pointHoverBorderColor: "rgba(0, 97, 242, 1)",
             pointHitRadius: 10,
             pointBorderWidth: 2,
-            data: [40,20,10,20,30,50,10,50,10,90 ]
+            data: <?php echo $json_data; ?>
         }]
     },
     options: {
         maintainAspectRatio: false,
         layout: {
             padding: {
-                left: 10,
-                right: 25,
-                top: 25,
-                bottom: 0
+                left: 20,
+                right: 30,
+                top: 30,
+                bottom: 10
             }
         },
         scales: {
@@ -282,8 +247,8 @@ const myChart = new Chart(ctx, {
             titleFontSize: 14,
             borderColor: "#dddfeb",
             borderWidth: 1,
-            xPadding: 15,
-            yPadding: 15,
+            xPadding: 20,
+            yPadding: 20,
             displayColors: false,
             intersect: false,
             mode: "index",
@@ -303,9 +268,9 @@ const nitro = document.getElementById('updateNitrogen').getContext('2d');
 const nitroChart = new Chart(nitro, {
     type: 'line',
     data: {
-        labels: [10,20,30,40,50,60,70,80,90,100],
+        labels: <?php echo $json_datawaktu; ?>,
         datasets: [{
-            label: "Update per minutes",
+            label: labeData,
             lineTension: 0.3,
             backgroundColor: "rgba(0, 97, 242, 0.05)",
             borderColor: "rgba(0, 97, 242, 1)",
@@ -380,9 +345,9 @@ const phos = document.getElementById('updatePotasium').getContext('2d');
 const potasiumChart = new Chart(phos, {
     type: 'line',
     data: {
-        labels: [10,20,30,40,50,60,70,80,90,100],
+        labels: <?php echo $json_datawaktu; ?>,
         datasets: [{
-            label: "Update per minutes",
+            label:labeData,
             lineTension: 0.3,
             backgroundColor: "rgba(0, 97, 242, 0.05)",
             borderColor: "rgba(0, 97, 242, 1)",
@@ -394,7 +359,7 @@ const potasiumChart = new Chart(phos, {
             pointHoverBorderColor: "rgba(0, 97, 242, 1)",
             pointHitRadius: 10,
             pointBorderWidth: 2,
-            data: [30,20,50,20,10,60,10,30,20,50 ]
+            data: <?php echo $json_datapotasium; ?>
         }]
     },
     options: {
@@ -457,9 +422,9 @@ const kal = document.getElementById('updateKalium').getContext('2d');
 const kalChart = new Chart(kal, {
     type: 'line',
     data: {
-        labels: [10,20,30,40,50,60,70,80,90,100],
+        labels: <?= $json_datawaktu; ?>,
         datasets: [{
-            label: "Update per minutes",
+            label: labeData,
             lineTension: 0.3,
             backgroundColor: "rgba(0, 97, 242, 0.05)",
             borderColor: "rgba(0, 97, 242, 1)",
@@ -471,7 +436,7 @@ const kalChart = new Chart(kal, {
             pointHoverBorderColor: "rgba(0, 97, 242, 1)",
             pointHitRadius: 10,
             pointBorderWidth: 2,
-            data: [30,20,50,20,10,60,10,30,20,50 ]
+            data: <?php echo $json_datakalium; ?>
         }]
     },
     options: {
@@ -533,9 +498,9 @@ const ph = document.getElementById('updatePh').getContext('2d');
 const phChart = new Chart(ph, {
     type: 'line',
     data: {
-        labels: [10,20,30,40,50,60,70,80,90,100],
+       labels: <?php echo $json_datawaktu; ?>,
         datasets: [{
-            label: "Update per minutes",
+            label: labeData,
             lineTension: 0.3,
             backgroundColor: "rgba(0, 97, 242, 0.05)",
             borderColor: "rgba(0, 97, 242, 1)",
@@ -547,7 +512,7 @@ const phChart = new Chart(ph, {
             pointHoverBorderColor: "rgba(0, 97, 242, 1)",
             pointHitRadius: 10,
             pointBorderWidth: 2,
-            data: [30,20,50,20,10,60,10,30,20,50 ]
+            data: <?php echo $json_dataph; ?>
         }]
     },
     options: {

@@ -1,10 +1,10 @@
 <?php
 require 'connection.php';
-require 'datalahan2/dataxl2kelembapan.php'; //a> memasukan memnaggil fungsi
+require 'datalahan4/dataxl4kelembapan.php'; //a> memasukan memnaggil fungsi
 require 'dataywaktu.php'; //a> memasukan memnaggil fungsi
-require 'datalahan2/dataxl2ph.php';
-require 'datalahan2/dataxl2kalium.php';
-require 'datalahan2/dataxl2potasium.php';
+require 'datalahan4/dataxl4ph.php';
+require 'datalahan4/dataxl4kalium.php';
+require 'datalahan4/dataxl4potasium.php';
 // $page = $_SERVER['PHP_SELF'];
 // $timer = "1";
 
@@ -87,8 +87,7 @@ $timeZone = date('h:i:s');
                       <div class="chart-area"><canvas id="updateKelembaban" width="100%" height="40"></canvas>
                       </div>
                     </div>
-                      <div class="card-footer large text-muted">Updated today at : <?=$timeZone;?>
-                     
+                  <div class="card-footer large text-muted">Updated today at : <?=$timeZone;?>
                     </div>
                   </div>
                 </div>
@@ -110,8 +109,7 @@ $timeZone = date('h:i:s');
                       <div class="chart-area"><canvas id="updateNitrogen" width="100%" height="40"></canvas>
                       </div>
                     </div>
-                        <div class="card-footer large text-muted">Updated today at : <?=$timeZone;?>
-                     
+                   <div class="card-footer large text-muted">Updated today at : <?=$timeZone;?>
                     </div>
                   </div>
                 </div>
@@ -135,7 +133,7 @@ $timeZone = date('h:i:s');
                       <div class="chart-area"><canvas id="updatePotasium" width="100%" height="40"></canvas>
                       </div>
                     </div>
-                      <div class="card-footer large text-muted">Updated today at : <?=$timeZone;?>
+                    <div class="card-footer large text-muted">Updated today at : <?=$timeZone;?>
                     </div>
                   </div>
                 </div>
@@ -157,7 +155,7 @@ $timeZone = date('h:i:s');
                       <div class="chart-area"><canvas id="updateKalium" width="100%" height="40"></canvas>
                       </div>
                     </div>
-                      <div class="card-footer large text-muted">Updated today at : <?=$timeZone;?>
+                     <div class="card-footer large text-muted">Updated today at : <?=$timeZone;?>
                     </div>
                   </div>
                 </div>
@@ -166,13 +164,13 @@ $timeZone = date('h:i:s');
           </div>
           <div class="col-xl-6 mb-4">
             <div class="card card-collapsable">
-              <a class="card-header" href="#collapseCardExamplePH" data-bs-toggle="collapse" role="button"
-                aria-expanded="true" aria-controls="collapseCardExamplePH">Sensor Ph
+              <a class="card-header" href="#collapseCardExampleGyroZ" data-bs-toggle="collapse" role="button"
+                aria-expanded="true" aria-controls="collapseCardExampleGyroZ">Sensor Ph
                 <div class="card-collapsable-arrow">
                   <i class="fas fa-chevron-down"></i>
                 </div>
               </a>
-              <div class="collapse show" id="collapseCardExamplePH">
+              <div class="collapse show" id="collapseCardExampleGyroZ">
                 <div class="container-fuild">
                   <div class="row">
                     <div class="card-body">

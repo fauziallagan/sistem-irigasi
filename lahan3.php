@@ -1,13 +1,12 @@
 <?php
 require 'connection.php';
-require 'datalahan2/dataxl2kelembapan.php'; //a> memasukan memnaggil fungsi
+require 'datalahan3/dataxl3kelembapan.php'; //a> memasukan memnaggil fungsi
 require 'dataywaktu.php'; //a> memasukan memnaggil fungsi
-require 'datalahan2/dataxl2ph.php';
-require 'datalahan2/dataxl2kalium.php';
-require 'datalahan2/dataxl2potasium.php';
+require 'datalahan3/dataxl3ph.php';
+require 'datalahan3/dataxl3kalium.php';
+require 'datalahan3/dataxl3potasium.php';
 // $page = $_SERVER['PHP_SELF'];
 // $timer = "1";
-
 
 // Time
 date_default_timezone_set('Asia/Jakarta');
@@ -87,7 +86,7 @@ $timeZone = date('h:i:s');
                       <div class="chart-area"><canvas id="updateKelembaban" width="100%" height="40"></canvas>
                       </div>
                     </div>
-                      <div class="card-footer large text-muted">Updated today at : <?=$timeZone;?>
+                    <div class="card-footer large text-muted">Updated today at : <?=$timeZone;?>
                      
                     </div>
                   </div>
@@ -110,8 +109,7 @@ $timeZone = date('h:i:s');
                       <div class="chart-area"><canvas id="updateNitrogen" width="100%" height="40"></canvas>
                       </div>
                     </div>
-                        <div class="card-footer large text-muted">Updated today at : <?=$timeZone;?>
-                     
+                     <div class="card-footer large text-muted">Updated today at : <?=$timeZone;?>
                     </div>
                   </div>
                 </div>
@@ -135,7 +133,7 @@ $timeZone = date('h:i:s');
                       <div class="chart-area"><canvas id="updatePotasium" width="100%" height="40"></canvas>
                       </div>
                     </div>
-                      <div class="card-footer large text-muted">Updated today at : <?=$timeZone;?>
+                    <div class="card-footer large text-muted">Updated today at : <?=$timeZone;?>
                     </div>
                   </div>
                 </div>
@@ -157,7 +155,7 @@ $timeZone = date('h:i:s');
                       <div class="chart-area"><canvas id="updateKalium" width="100%" height="40"></canvas>
                       </div>
                     </div>
-                      <div class="card-footer large text-muted">Updated today at : <?=$timeZone;?>
+                     <div class="card-footer large text-muted">Updated today at : <?=$timeZone;?>
                     </div>
                   </div>
                 </div>
@@ -179,7 +177,7 @@ $timeZone = date('h:i:s');
                       <div class="chart-area"><canvas id="updatePh" width="100%" height="40"></canvas>
                       </div>
                     </div>
-                     <div class="card-footer large text-muted">Updated today at : <?=$timeZone;?>
+                    <div class="card-footer large text-muted">Updated today at : <?=$timeZone;?>
                     </div>
                   </div>
                 </div>
@@ -199,7 +197,6 @@ $timeZone = date('h:i:s');
 
 <!-- Javascript  -->
 <script>
-
 
 
 
