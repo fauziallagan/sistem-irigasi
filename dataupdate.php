@@ -1,4 +1,4 @@
-<?php 
+<?php
 $servername = "localhost";
 $username = "root";
 $password = "";
@@ -8,8 +8,8 @@ $dbname = "sensortes";
 $conn = new mysqli($servername, $username, $password, $dbname);
 // Check connection
 if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-} 
+  die("Connection failed: " . $conn->connect_error);
+}
 
 $sql = "SELECT * FROM coba WHERE nama = 'Lora 0'  ORDER BY id DESC LIMIT 1";
 $result = $conn->query($sql);

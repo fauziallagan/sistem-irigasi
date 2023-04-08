@@ -1,7 +1,7 @@
 <?php
 require 'connection.php';
 
-$sql2 = "SELECT timestamp FROM coba WHERE nama = 'Lora 1'  ORDER BY id DESC LIMIT 10";
+$sql2 = "SELECT timestamp FROM coba  ORDER BY id DESC LIMIT 10";
 $result = $connection->query($sql2);
 
 // Buat array kosong untuk menampung data
@@ -9,10 +9,10 @@ $data2 = array();
 
 // Looping untuk mengambil data dari hasil query
 while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
-    // Konversi nilai timestamp ke dalam format waktu dengan string H:i:s
-    $waktu2 = date('H:i:s', strtotime($row['timestamp']));
-    // Tambahkan nilai ke dalam array dengan format yang diinginkan
-    $data2[] = "String('$waktu2')";
+  // Konversi nilai timestamp ke dalam format waktu dengan string H:i:s
+  $waktu2 = date('H:i:s', strtotime($row['timestamp']));
+  // Tambahkan nilai ke dalam array dengan format yang diinginkan
+  $data2[] = "String('$waktu2')";
 }
 
 // Balik urutan array agar data terbaru berada di indeks pertama
