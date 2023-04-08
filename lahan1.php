@@ -5,9 +5,9 @@ require 'dataywaktu.php'; //a> memasukan memnaggil fungsi
 require 'datalahan1/dataxl1ph.php';
 require 'datalahan1/dataxl1kalium.php';
 require 'datalahan1/dataxl1potasium.php';
+require 'datalahan1/dataxl1nitrogen.php';
 // $page = $_SERVER['PHP_SELF'];
 // $timer = "1";
-
 
 // Time
 date_default_timezone_set('Asia/Jakarta');
@@ -23,7 +23,6 @@ $timeZone = date('h:i:s');
 
     <!-- USE SCRIPT BELOW IF BROWSER REFRESH 10 SECONDS -->
     <!-- <meta http-equiv="refresh" content="10"> --> 
-
   </head>
  
   <div id="layoutSidenav_content">
@@ -55,7 +54,7 @@ $timeZone = date('h:i:s');
                         </div> -->
         <!-- Started -->
         <div class="row">
-          <div class="col-xl-6 mb-4">
+          <div class="col-xl-12 mb-4">
             <div class="card card-collapsable">
               <a class="card-header" href="#collapseCardExampleAccelZ" data-bs-toggle="collapse" role="button"
                 aria-expanded="true" aria-controls="collapseCardExampleAccelZ">Sensor Kelembaban
@@ -78,7 +77,7 @@ $timeZone = date('h:i:s');
               </div>
             </div>
           </div>
-          <div class="col-xl-6 mb-4">
+          <div class="col-xl-12 mb-4">
             <div class="card card-collapsable">
               <a class="card-header" href="#collapseCardExampleGyroX" data-bs-toggle="collapse" role="button"
                 aria-expanded="true" aria-controls="collapseCardExampleGyroX">Sensor Nitrogen
@@ -103,7 +102,7 @@ $timeZone = date('h:i:s');
           </div>
         </div>
         <div class="row">
-          <div class="col-xl-6 mb-4">
+          <div class="col-xl-12 mb-4">
             <div class="card card-collapsable">
               <a class="card-header" href="#collapseCardExampleGyroY" data-bs-toggle="collapse" role="button"
                 aria-expanded="true" aria-controls="collapseCardExampleGyroY">Sensor Potasium
@@ -125,7 +124,7 @@ $timeZone = date('h:i:s');
               </div>
             </div>
           </div>
-          <div class="col-xl-6 mb-4">
+          <div class="col-xl-12 mb-4">
             <div class="card card-collapsable">
               <a class="card-header" href="#collapseCardExampleGyroZ" data-bs-toggle="collapse" role="button"
                 aria-expanded="true" aria-controls="collapseCardExampleGyroZ">Sensor Kalium
@@ -147,7 +146,7 @@ $timeZone = date('h:i:s');
               </div>
             </div>
           </div>
-          <div class="col-xl-6 mb-4">
+          <div class="col-xl-12 mb-4">
             <div class="card card-collapsable">
               <a class="card-header" href="#collapseCardExamplePH" data-bs-toggle="collapse" role="button"
                 aria-expanded="true" aria-controls="collapseCardExamplePH">Sensor Ph
@@ -192,11 +191,8 @@ const myChart = new Chart(ctx, {
       labels: <?php echo $json_datawaktu; ?>,
         datasets: [{
             label: labeData,
-             borderColor: Utils.CHART_COLORS.red,
-      backgroundColor: Utils.transparentize(Utils.CHART_COLORS.red),
-      fill: false,
-            lineTension: 0.3,
-            backgroundColor: "rgba(0, 97, 242, 0.05)",
+            lineTension:0.2, //0.5
+            backgroundColor: "rgba(0, 97, 242, 0.5)", // 0.05
             borderColor: "rgba(0, 97, 242, 1)",
             pointRadius: 3,
             pointBackgroundColor: "rgba(0, 97, 242, 1)",
@@ -204,7 +200,7 @@ const myChart = new Chart(ctx, {
             pointHoverRadius: 3,
             pointHoverBackgroundColor: "rgba(0, 97, 242, 1)",
             pointHoverBorderColor: "rgba(0, 97, 242, 1)",
-            pointHitRadius: 10,
+            pointHitRadius: 20,
             pointBorderWidth: 2,
             data: <?php echo $json_data; ?>
         }]
@@ -215,7 +211,7 @@ const myChart = new Chart(ctx, {
             padding: {
                 left: 20,
                 right: 30,
-                top: 30,
+                top: 10,
                 bottom: 10
             }
         },
@@ -225,11 +221,11 @@ const myChart = new Chart(ctx, {
                     unit: "time"
                 },
                 gridLines: {
-                    display: false,
-                    drawBorder: false
+                    display: true,
+                    drawBorder: true
                 },
                 ticks: {
-                    maxTicksLimit: 10
+                    maxTicksLimit: 20
                 }
             }],
             y: {
@@ -237,7 +233,7 @@ const myChart = new Chart(ctx, {
             }
         },
         legend: {
-            display: true
+            display: false
         },
         tooltips: {
             backgroundColor: "rgb(255,255,255)",
@@ -247,12 +243,12 @@ const myChart = new Chart(ctx, {
             titleFontSize: 14,
             borderColor: "#dddfeb",
             borderWidth: 1,
-            xPadding: 20,
-            yPadding: 20,
+            xPadding: 15,
+            yPadding: 15,
             displayColors: false,
             intersect: false,
             mode: "index",
-            caretPadding: 10,
+            caretPadding: 20,
             callbacks: {
                 label: function(tooltipItem, chart) {
                     var datasetLabel =
@@ -282,7 +278,7 @@ const nitroChart = new Chart(nitro, {
             pointHoverBorderColor: "rgba(0, 97, 242, 1)",
             pointHitRadius: 10,
             pointBorderWidth: 2,
-            data: [30,20,50,20,10,60,10,30,20,50 ]
+            data: <?= $json_datanitrogen; ?>
         }]
     },
     options: {
@@ -301,15 +297,19 @@ const nitroChart = new Chart(nitro, {
                     unit: "time"
                 },
                 gridLines: {
-                    display: false,
-                    drawBorder: false
+                    display: false, 
+                    color: "rgb(234, 236, 244)",
+                    zeroLineColor: "rgb(234, 236, 244)",
+                    drawBorder: false,
+                    borderDash: [2],
+                    zeroLineBorderDash: [2]
                 },
                 ticks: {
                     maxTicksLimit: 10
                 }
             }],
             y: {
-                beginAtZero: true
+                beginAtZero: false
             }
         },
         legend: {
